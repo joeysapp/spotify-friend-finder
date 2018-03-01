@@ -1,0 +1,40 @@
+@font-face {
+	font-family: Inconsolata-Regular;
+	src: url(../../resources/data/Inconsolata-Regular.ttf);
+}
+
+body {
+	font-family: Inconsolata-Regular;
+	width: 80%;
+	margin-left: auto;
+	margin-top: 10%;
+	margin-right: auto;
+}
+
+input {
+	font-family: Inconsolata-Regular;
+	font-size: 1em;
+}
+
+#placed_users {
+	/*width: 50vw;*/
+	/*height: 50%;*/
+	margin-top: 1em;
+	border-color: 2px 2px black;
+	border-style: solid;
+	padding-bottom: 1em;
+}
+
+.placed_user {
+	/*width:50vw;*/
+
+}
+
+
+
+#title {
+	font-size: 2em;
+	padding-bottom:0.2em
+}
+
+
