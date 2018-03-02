@@ -117,35 +117,7 @@
 
 	function or_handler(e) {
 
-		// WHAT IF WE JUST ADDED 3D to 2D CARTESIAN
-		// ADDITIONS?? LIKE 360->PI to send to cos/sin
-		// then just add those to the acc!
-		var x = degrees(e.beta);
-		var y = degrees(e.gamma);
-		var z = degrees(e.alpha);
-
-		nodes.forEach(function(element){
-			element.x += x;
-			element.y += y;
-	  		// element.acc.y += map(beta_m, -0.1, 0.20, -0.1, 0.1);
-	  		element.acc.limit(0.25);
-	  	})
-	
-	}
-  </script>
-
-</head>
-
-<body>
-	<div id="main"></div>
-</body>
-
-
-
-</html>
-
-
-<!-- if (e.alpha == null){
+		if (e.alpha == null){
 			// browser, don't do this
 
 		} else {
@@ -173,4 +145,33 @@
 		  		element.acc.y += map(beta_m, -0.1, 0.20, -0.1, 0.1);
 		  		element.acc.limit(0.25);
 		  	})
-		} -->
+		}
+
+		// WHAT IF WE JUST ADDED 3D to 2D CARTESIAN
+		// ADDITIONS?? LIKE 360->PI to send to cos/sin
+		// then just add those to the acc!
+		// var x = degrees(e.beta);
+		// var y = degrees(e.gamma);
+		// var z = degrees(e.alpha);
+
+		// nodes.forEach(function(element){
+		// 	element.x += x;
+		// 	element.y += y;
+	 //  		// element.acc.y += map(beta_m, -0.1, 0.20, -0.1, 0.1);
+	 //  		element.acc.limit(0.25);
+	 //  	})
+	
+	}
+  </script>
+
+</head>
+
+<body>
+	<div id="main"></div>
+</body>
+
+
+
+</html>
+
+
