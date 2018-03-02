@@ -46,11 +46,13 @@
 
 	  		this.pos.add(this.vel);
 
-	  		if (this.pos.y < 2*this.w){
-	  			this.pos.y = windowHeight+2*this.w;
-	  		} else if (this.pos.y > windowHeight+2*this.w){
-	  			this.pos.y = -2*this.w;
+	  		if (this.pos.y < this.w*2 || this.pos.y > windowHeight-this.w*2){
+	  			// Hit the bottom or top! reee
+	  			this.acc.mult(-1);
+	  			this.vel.mult(-1);
 	  		}
+
+
 
 	  	}
 
