@@ -51,7 +51,6 @@
 		resizeCanvas(windowWidth, windowHeight);
 	}
 
-
 	function or_handler(e) {
 		// e.alpha: [0 - 360], loops
 		// ALSO CAN GO BACKWARDS
@@ -61,19 +60,19 @@
 		var b = map(e.beta, -360, 360, -1, 1);
 		var g = map(e.gamma, -360, 360, -1, 1);
 
-		h = 100 + 75*a + 75*b + 75*g;
+		h = a;
 		// e.beta: [0 - 360]
 		// ALSO CAN GO BACKWARDS
 		// This is its tip forward/backward degree.
 		// 90 degrees is |, looking at the screen. People
 		// typically hold their phones at around 60 degrees?
 
-		s = 255;
+		s = b;
 		// e.gamma: [0 - 360]
 		// ALSO CAN GO BACKWARDS
 		// typically 0. -90 to 90 is tilting from left to right.
 
-		b = 255;
+		b = g;
 	}
   </script>
 
