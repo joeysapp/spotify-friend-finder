@@ -3,6 +3,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>joeysapp.github.io.</title>
+	<link rel="shortcut icon" type="image/png" href="/favicon.ico"/>
+
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
@@ -20,12 +22,17 @@
   </style>
 
   <script>
-	window.onload = function() {
-		$('#main').html("HEY");
-	};
-
-
-</script>
+  	var canvas;
+  	function setup(){
+  		canvas = createCanvas(0, 0);
+  		canvas.size(350, 500);
+  		canvas.class("c");
+  		canvas.parent("main");
+  	}
+  	function draw(){
+  		background(random(200, 255), 120, 80);
+  	}
+  </script>
 
 </head>
 
