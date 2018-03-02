@@ -3,7 +3,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>joeysapp.github.io.</title>
-	<link rel="shortcut icon" type="image/png" href="/favicon.gif"/>
+	<link rel="shortcut icon" type="image/png" href="favicon.gif"/>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
@@ -21,16 +21,31 @@
   </style>
 
   <script>
+  	var h = 0;
+  	var s = 255;
+  	var b = 255;
   	var canvas;
   	function setup(){
   		canvas = createCanvas(0, 0);
+  		colorMode(HSB);
   		canvas.size(350, 500);
   		canvas.class("c");
   		canvas.parent("main");
+
+  		if (window.DeviceOrientationEvent) {
+			window.addEventListener('deviceorientation', or_handler);  
+  }
   	}
   	function draw(){
-  		background(random(200, 255), 120, 80);
+  		background(h,s,b);
   	}
+
+
+	function or_handler(e) {
+	  h = e.alpha;
+	  s = e.beta;
+	  b = e.gamma;
+	}
   </script>
 
 </head>
