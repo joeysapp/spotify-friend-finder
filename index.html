@@ -35,15 +35,28 @@
   		constructor(x, y){
 	  		this.pos = createVector(x,y);
 	  		this.vel = createVector(0,0);
+	  		this.acc = createVector(0,0);
+	  		this.w = 32;
 	  	}
 
 	  	update(){
+	  		this.vel.add(this.acc);
+
+	  		// this.vel.mult(0.95);
+
 	  		this.pos.add(this.vel);
+
+	  		if (this.pos.y < 2*this.w){
+	  			this.pos.y = windowHeight+2*this.w;
+	  		} else if (this.pos.y > windowHeight+2*this.w){
+	  			this.pos.y = -2*this.w;
+	  		}
+
 	  	}
 
   		display(){
   			fill(255, 0, 0);
-  			ellipse(this.pos.x, this.pos.y, 32, 32);
+  			ellipse(this.pos.x, this.pos.y, this.w/2, this.w/2);
   		}
   	}
 
@@ -59,12 +72,9 @@
   		// Is a mobile device
   		if (window.DeviceOrientationEvent) {
 			window.addEventListener('deviceorientation', or_handler);  
-		} else {
-		// Otherwise, do this thing!
-			console.log("you a silly browser!");
-
 		}
   	}
+
   	function draw(){
 
   		if (h != null){
@@ -97,36 +107,36 @@
 	}
 
 	function or_handler(e) {
-		// e.alpha: [0 - 360], loops
-		// ALSO CAN GO BACKWARDS
-		// This is the clockwise position of the device
-		// like a clock when placed flat.
-		var alpha_m = map(e.alpha, -360, 360, -1., 1.);
-		var beta_m = map(e.beta, -360, 360, -1., 1.);
-		var gamma_m = map(e.gamma, -360, 360, -1., 1.);
+		if (e.alpha == null){
+			// browser, don't do this
 
-		h = alpha_m;
-		// find what angle they're at (starting)
-		// then based on the rotation from that point
-		// do stuff
+		} else {
+			// e.alpha: [0 - 360], loops
+			// ALSO CAN GO BACKWARDS
+			// This is the clockwise position of the device
+			// like a clock when placed flat.
+			var alpha_m = map(e.alpha, -360, 360, -1., 1.);
+			var beta_m = map(e.beta, -360, 360, -1., 1.);
+			var gamma_m = map(e.gamma, -360, 360, -1., 1.);
 
-		s = beta_m;
-		// will typically be at [0, 0.20] if being held normally
+			h = alpha_m;
+			// find what angle they're at (starting)
+			// then based on the rotation from that point
+			// do stuff
 
-		b = gamma_m;
-		// will typically be [-0.15/25, 0.15/25] depends how
-		// it is being held.
+			s = beta_m;
+			// will typically be at [0, 0.20] if being held normally
 
-		nodes.forEach(function(element){
-	  		element.vel.y += map(beta_m, -0.1, 0.20, -1, 1);
-	  		element.vel.limit(10);
-	  		if (element.pos.y < 0){
-	  			element.pos.y = windowHeight;
-	  		} else if (element.pos.y > windowHeight){
-	  			element.pos.y = 0;
+			b = gamma_m;
+			// will typically be [-0.15/25, 0.15/25] depends how
+			// it is being held.
 
-	  		}
-	  	})
+			nodes.forEach(function(element){
+		  		element.acc.y += map(beta_m, -0.1, 0.20, -1, 1);
+		  		element.acc.limit(10);
+		  	})
+		}
+	
 	}
   </script>
 
