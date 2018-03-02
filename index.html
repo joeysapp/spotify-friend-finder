@@ -39,16 +39,18 @@
 	  		this.w = 32;
 	  	}
 
+	  	applyForce(PVector f){
+	  		var t_f = PVector.div(f,this.m);
+	  		this.acc.add(t_f);
+	  	}
+
 	  	update(){
 	  		this.vel.add(this.acc);
-
-	  		// this.vel.mult(0.95);
-
 	  		this.pos.add(this.vel);
+	  		this.acc.mult(0);
 
 	  		if (this.pos.y < this.w*2 || this.pos.y > windowHeight-this.w*2){
 	  			// Hit the bottom or top! reee
-	  			this.acc.mult(-1);
 	  			this.vel.mult(-1);
 	  		}
 
