@@ -40,10 +40,22 @@
   	function draw(){
   		if (h != null){
   		background(h,s,b);
-  		fill(255);
-  		text("H: "+h,0, 20);
-  		text("S: "+s,0, 40);
-  		text("B: "+b,0,60);
+  		fill(0);
+	for (let x = -1; x < 2; x++){
+	    text("H: "+h, 20+x,20);
+	    text("H: "+h, 20,20+x);
+
+	    text("S: "+s, 20+x,40);
+	    text("S: "+s, 20,40+x);
+
+	    text("B: "+b, 20+x,60);
+	    text("B: "+b, 20,60+x);
+
+	}
+		fill(255);
+  		text("H: "+h,20, 20);
+  		text("S: "+s,20, 40);
+  		text("B: "+b,20,60);		
   	}
   	}
 
