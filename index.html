@@ -6,6 +6,8 @@
 	<link rel="shortcut icon" type="image/png" href="favicon.gif"/>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.sound.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
 	<script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -47,11 +49,12 @@
 	  	update(){
 	  		this.vel.add(this.acc);
 	  		this.pos.add(this.vel);
-	  		this.acc.mult(0);
+	  		// this.acc.mult(0);
 
 	  		if (this.pos.y < this.w/2 || this.pos.y > windowHeight-this.w/2){
 	  			// Hit the bottom or top! reee
 	  			this.vel.mult(-1);
+	  			this.acc.mult(0);
 	  		}
 
 
@@ -64,7 +67,10 @@
   		}
   	}
 
+
   	function setup(){
+  		var mic = new p5.AudioIn();
+  		mic.start();
   		canvas = createCanvas(windowWidth, windowHeight);
 
   		textSize(24);
@@ -137,7 +143,7 @@
 
 			nodes.forEach(function(element){
 		  		element.acc.y += map(beta_m, -0.1, 0.20, -0.1, 0.1);
-		  		element.acc.mult(0.8);
+		  		// element.acc.mult(0.8);
 		  	})
 		}
 	
