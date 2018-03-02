@@ -69,8 +69,8 @@
 
 
   	function setup(){
-  		var mic = new p5.AudioIn();
-  		mic.start();
+  		// var mic = new p5.AudioIn();
+  		// mic.start();
   		canvas = createCanvas(windowWidth, windowHeight);
 
   		textSize(24);
@@ -143,7 +143,7 @@
 
 			nodes.forEach(function(element){
 		  		element.acc.y += map(beta_m, -0.1, 0.20, -0.1, 0.1);
-		  		element.acc.limit(3);
+		  		element.acc.limit(0.1);
 		  	})
 		}
 	
