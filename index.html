@@ -68,9 +68,9 @@
 		// ALSO CAN GO BACKWARDS
 		// This is the clockwise position of the device
 		// like a clock when placed flat.
-		var alpha_m = round(map(e.alpha, -360, 360, -1, 1),5);
-		var beta_m = round(map(e.beta, -360, 360, -1, 1),5);
-		var gamma_m = round(map(e.gamma, -360, 360, -1, 1),5);
+		var alpha_m = map(e.alpha, -360, 360, -1., 1.);
+		var beta_m = map(e.beta, -360, 360, -1., 1.);
+		var gamma_m = map(e.gamma, -360, 360, -1., 1.);
 
 		h = alpha_m;
 		// e.beta: [0 - 360]
