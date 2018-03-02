@@ -16,7 +16,8 @@
   	body {
   		font-family: Helvetica;
   		font-size: 2em;
-  		padding: 3em;
+  		margin: 0;
+  		/*padding: 3em;*/
   	}		
   </style>
 
@@ -28,23 +29,34 @@
   	function setup(){
   		canvas = createCanvas(0, 0);
   		colorMode(HSB);
-  		canvas.size(350, 500);
+  		textSize(24);
+  		canvas.size(windowWidth, windowHeight);
   		canvas.class("c");
-  		canvas.parent("main");
 
   		if (window.DeviceOrientationEvent) {
 			window.addEventListener('deviceorientation', or_handler);  
   }
   	}
   	function draw(){
+  		if (h != null){
   		background(h,s,b);
+  		fill(255);
+  		text("H: "+h,0, 20);
+  		text("S: "+s,0, 40);
+  		text("B: "+b,0,60);
   	}
+  	}
+
+  	function windowResized() {
+		resizeCanvas(windowWidth, windowHeight);
+	}
 
 
 	function or_handler(e) {
-	  h = e.alpha;
-	  s = e.beta;
-	  b = e.gamma;
+		h = e.alpha;
+		s = e.beta; 
+		b = e.gamma;
+		console.log(h,s,b);
 	}
   </script>
 
