@@ -39,7 +39,7 @@
   	}
   	function draw(){
   		if (h != null){
-  		background(h,s,b);
+  		background(h*512,s*512,b*512);
   		fill(0);
 	for (let x = -1; x < 2; x++){
 	    text("H: "+h, 20+x,20);
@@ -68,23 +68,22 @@
 		// ALSO CAN GO BACKWARDS
 		// This is the clockwise position of the device
 		// like a clock when placed flat.
-		var a = map(e.alpha, -360, 360, -1, 1);
-		var b = map(e.beta, -360, 360, -1, 1);
-		var g = map(e.gamma, -360, 360, -1, 1);
+		var alpha_m = map(e.alpha, -360, 360, -1, 1);
+		var beta_m = map(e.beta, -360, 360, -1, 1);
+		var gamma_m = map(e.gamma, -360, 360, -1, 1);
 
-		h = a;
+		h = alpha_;
 		// e.beta: [0 - 360]
 		// ALSO CAN GO BACKWARDS
 		// This is its tip forward/backward degree.
 		// 90 degrees is |, looking at the screen. People
 		// typically hold their phones at around 60 degrees?
 
-		s = b;
+		s = beta_m;
 		// e.gamma: [0 - 360]
 		// ALSO CAN GO BACKWARDS
 		// typically 0. -90 to 90 is tilting from left to right.
-
-		b = g;
+		b = gamma_m;
 	}
   </script>
 
