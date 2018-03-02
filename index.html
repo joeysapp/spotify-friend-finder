@@ -33,13 +33,17 @@
 
   	class Node {
   		constructor(x, y){
-	  		this.x = x;
-	  		this.y = y;
+	  		this.pos = createVector(x,y);
+	  		this.vel = createVector(0,0);
+	  	}
+
+	  	update(){
+	  		this.pos.add(this.vel);
 	  	}
 
   		display(){
   			fill(255, 0, 0);
-  			ellipse(this.x, this.y, 32, 32);
+  			ellipse(this.pos.x, this.pos.y, 32, 32);
   		}
   	}
 
@@ -113,12 +117,13 @@
 		// it is being held.
 
 		nodes.forEach(function(element){
-	  		element.y += map(beta_m, -0.1, 0.20, -1, 1);
-	  		if (element.y < 0){
-	  			element.y = windowHeight;
-	  		} else if (element.y > windowHeight){
-	  			element.y = 0;
-	  			
+	  		element.vel.y += map(beta_m, -0.1, 0.20, -1, 1);
+	  		element.vel.limit(10);
+	  		if (element.pos.y < 0){
+	  			element.pos.y = windowHeight;
+	  		} else if (element.pos.y > windowHeight){
+	  			element.pos.y = 0;
+
 	  		}
 	  	})
 	}
