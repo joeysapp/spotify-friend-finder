@@ -52,7 +52,6 @@
 	  		if (this.pos.y < this.w/2 || this.pos.y > windowHeight-this.w/2){
 	  			// Hit the bottom or top! reee
 	  			this.vel.mult(-1);
-	  			this.vel.mult(0.3);
 	  		}
 
 
@@ -120,9 +119,9 @@
 			// ALSO CAN GO BACKWARDS
 			// This is the clockwise position of the device
 			// like a clock when placed flat.
-			var alpha_m = map(e.alpha, -360, 360, -1., 1.);
-			var beta_m = map(e.beta, -360, 360, -1., 1.);
-			var gamma_m = map(e.gamma, -360, 360, -1., 1.);
+			var alpha_m = Math.round(map(e.alpha, -360, 360, -1., 1.)*100)/100;
+			var beta_m = Math.round(map(e.beta, -360, 360, -1., 1.)*100)/100;
+			var gamma_m = Math.round(map(e.gamma, -360, 360, -1., 1.)*100)/100;
 
 			h = alpha_m;
 			// find what angle they're at (starting)
@@ -138,7 +137,7 @@
 
 			nodes.forEach(function(element){
 		  		element.acc.y += map(beta_m, -0.1, 0.20, -1, 1);
-		  		element.acc.limit(10);
+		  		element.acc.mult(0.8);
 		  	})
 		}
 	
