@@ -6,8 +6,7 @@
 	<link rel="shortcut icon" type="image/png" href="favicon.gif"/>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.sound.min.js"></script>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.sound.min.js"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
 	<script
   src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -117,7 +116,36 @@
 	}
 
 	function or_handler(e) {
-		if (e.alpha == null){
+
+		// WHAT IF WE JUST ADDED 3D to 2D CARTESIAN
+		// ADDITIONS?? LIKE 360->PI to send to cos/sin
+		// then just add those to the acc!
+		var x = degrees(e.beta);
+		var y = degrees(e.gamma);
+		var z = degrees(e.alpha);
+
+		nodes.forEach(function(element){
+			element.x += x;
+			element.y += y;
+	  		// element.acc.y += map(beta_m, -0.1, 0.20, -0.1, 0.1);
+	  		element.acc.limit(0.25);
+	  	})
+	
+	}
+  </script>
+
+</head>
+
+<body>
+	<div id="main"></div>
+</body>
+
+
+
+</html>
+
+
+<!-- if (e.alpha == null){
 			// browser, don't do this
 
 		} else {
@@ -143,19 +171,6 @@
 
 			nodes.forEach(function(element){
 		  		element.acc.y += map(beta_m, -0.1, 0.20, -0.1, 0.1);
-		  		element.acc.limit(0.1);
+		  		element.acc.limit(0.25);
 		  	})
-		}
-	
-	}
-  </script>
-
-</head>
-
-<body>
-	<div id="main"></div>
-</body>
-
-
-
-</html>
+		} -->
