@@ -25,38 +25,66 @@
   	var h = 0;
   	var s = 255;
   	var b = 255;
+
   	var canvas;
+  	var nodes = [];
+
+  	var NODE_AMT = 1;
+
+  	class Node {
+  		constructor(x, y){
+	  		this.x = x;
+	  		this.y = y;
+	  	}
+
+  		display(){
+  			fill(255, 0, 0);
+  			ellipse(this.x, this.y, 32, 32);
+  		}
+  	}
+
   	function setup(){
-  		canvas = createCanvas(0, 0);
-  		colorMode(HSB);
+  		canvas = createCanvas(windowWidth, windowHeight);
+
   		textSize(24);
-  		canvas.size(windowWidth, windowHeight);
+
   		canvas.class("c");
 
+  		nodes.push(new Node(windowWidth/2, windowHeight/2));
+
+  		// Is a mobile device
   		if (window.DeviceOrientationEvent) {
 			window.addEventListener('deviceorientation', or_handler);  
-  }
+		} else {
+		// Otherwise, do this thing!
+			console.log("you a silly browser!");
+
+		}
   	}
   	function draw(){
+
   		if (h != null){
-  		background(h*512,s*512,b*512);
-  		fill(0);
-	for (let x = -1; x < 2; x++){
-	    text("H: "+h, 20+x,20);
-	    text("H: "+h, 20,20+x);
+	  		background(h*512,s*512,b*512);
+	  		fill(0);
+			for (let x = -1; x < 2; x++){
+			    text("H: "+h, 20+x,20);
+			    text("H: "+h, 20,20+x);
 
-	    text("S: "+s, 20+x,40);
-	    text("S: "+s, 20,40+x);
+			    text("S: "+s, 20+x,40);
+			    text("S: "+s, 20,40+x);
 
-	    text("B: "+b, 20+x,60);
-	    text("B: "+b, 20,60+x);
+			    text("B: "+b, 20+x,60);
+			    text("B: "+b, 20,60+x);
+			}
+			fill(255);
+	  		text("H: "+h,20, 20);
+	  		text("S: "+s,20, 40);
+	  		text("B: "+b,20,60);		
+	  	}
 
-	}
-		fill(255);
-  		text("H: "+h,20, 20);
-  		text("S: "+s,20, 40);
-  		text("B: "+b,20,60);		
-  	}
+	  	nodes.forEach(function(element){
+	  		element.display();
+	  	})
   	}
 
   	function windowResized() {
@@ -73,17 +101,26 @@
 		var gamma_m = map(e.gamma, -360, 360, -1., 1.);
 
 		h = alpha_m;
-		// e.beta: [0 - 360]
-		// ALSO CAN GO BACKWARDS
-		// This is its tip forward/backward degree.
-		// 90 degrees is |, looking at the screen. People
-		// typically hold their phones at around 60 degrees?
+		// find what angle they're at (starting)
+		// then based on the rotation from that point
+		// do stuff
 
 		s = beta_m;
-		// e.gamma: [0 - 360]
-		// ALSO CAN GO BACKWARDS
-		// typically 0. -90 to 90 is tilting from left to right.
+		// will typically be at [0, 0.20] if being held normally
+
 		b = gamma_m;
+		// will typically be [-0.15/25, 0.15/25] depends how
+		// it is being held.
+
+		nodes.forEach(function(element){
+	  		element.y += map(beta_m, -0.1, 0.20, -1, 1);
+	  		if (element.y < 0){
+	  			element.y = windowHeight;
+	  		} else if (element.y > windowHeight){
+	  			element.y = 0;
+	  			
+	  		}
+	  	})
 	}
   </script>
 
