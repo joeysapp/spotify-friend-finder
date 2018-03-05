@@ -2,7 +2,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>joeysapp.github.io.</title>
+	<title>joeysapp.github.io - p5 playground</title>
 	<link rel="shortcut icon" type="image/png" href="favicon.gif"/>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
@@ -18,134 +18,94 @@
   		font-family: Helvetica;
   		font-size: 2em;
   		margin: 0;
-  		/*padding: 3em;*/
   	}		
   </style>
 
   <script>
-  	var h = 0;
-  	var s = 255;
-  	var b = 255;
 
-  	var canvas;
-  	var nodes = [];
+  	var sketch = function(p){
+  		var canvas;
+  		var nodes = [];
 
-  	var NODE_AMT = 1;
+  		p.setup = function(){
+			this.canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+			this.canvas.parent('view');
+			this.canvas.position(0,0);
+		}
 
-  	class Node {
-  		constructor(x, y){
-	  		this.pos = createVector(x,y);
-	  		this.vel = createVector(0,0);
-	  		this.acc = createVector(0,0);
-	  		this.w = 32;
-	  	}
+		p.draw() = function(p){
+			p.background(255, 0, 0);
+			nodes.forEach(function(e,idx){
+				e.display();
+				e.update();
+			});
+		}
 
-	  	applyForce(f){
-	  		var t_f = PVector.div(f,this.m);
-	  		this.acc.add(t_f);
-	  	}
+		class Node {
+	  		constructor(x, y){
+		  		this.pos = createVector(x,y);
+		  		this.vel = createVector(0,0);
+		  		this.acc = createVector(0,0);
+		  		this.w = 32;
+		  	}
 
-	  	update(){
-	  		this.vel.add(this.acc);
-	  		this.pos.add(this.vel);
-	  		// this.acc.mult(0);
+		  	applyForce(f){
+		  		var t_f = PVector.div(f,this.m);
+		  		this.acc.add(t_f);
+		  	}
 
-	  		if (this.pos.y < this.w/2 || this.pos.y > windowHeight-this.w/2){
-	  			// Hit the bottom or top! reee
-	  			this.vel.mult(-1);
-	  			this.acc.mult(0);
+		  	update(){
+		  		this.vel.add(this.acc);
+		  		this.pos.add(this.vel);
+		  		// this.acc.mult(0);
+
+		  		if (this.pos.y < this.w/2 || this.pos.y > windowHeight-this.w/2){
+		  			// Hit the bottom or top! reee
+		  			this.vel.mult(-1);
+		  			this.acc.mult(0);
+		  		}
+		  	}
+
+	  		display(){
+	  			fill(255, 0, 0);
+	  			ellipse(this.pos.x, this.pos.y, this.w/2, this.w/2);
 	  		}
-
-
-
 	  	}
-
-  		display(){
-  			fill(255, 0, 0);
-  			ellipse(this.pos.x, this.pos.y, this.w/2, this.w/2);
-  		}
   	}
 
+  	var gamewindow = p5(sketch);
 
-  	function setup(){
-  		// var mic = new p5.AudioIn();
-  		// mic.start();
-  		canvas = createCanvas(windowWidth, windowHeight);
+	// function or_handler(e) {
 
-  		textSize(24);
+	// 	if (e.alpha == null){
+	// 		// browser, don't do this
 
-  		canvas.class("c");
+	// 	} else {
+	// 		// e.alpha: [0 - 360], loops
+	// 		// ALSO CAN GO BACKWARDS
+	// 		// This is the clockwise position of the device
+	// 		// like a clock when placed flat.
+	// 		var alpha_m = Math.round(map(e.alpha, -360, 360, -1., 1.)*100)/100;
+	// 		var beta_m = Math.round(map(e.beta, -360, 360, -1., 1.)*100)/100;
+	// 		var gamma_m = Math.round(map(e.gamma, -360, 360, -1., 1.)*100)/100;
 
-  		nodes.push(new Node(windowWidth/2, windowHeight/2));
+	// 		h = alpha_m;
+	// 		// find what angle they're at (starting)
+	// 		// then based on the rotation from that point
+	// 		// do stuff
 
-  		// Is a mobile device
-  		if (window.DeviceOrientationEvent) {
-			window.addEventListener('deviceorientation', or_handler);  
-		}
-  	}
+	// 		s = beta_m;
+	// 		// will typically be at [0, 0.20] if being held normally
 
-  	function draw(){
+	// 		b = gamma_m;
+	// 		// will typically be [-0.15/25, 0.15/25] depends how
+	// 		// it is being held.
 
-  		if (h != null){
-	  		background(h*512,s*512,b*512);
-	  		fill(0);
-			for (let x = -1; x < 2; x++){
-			    text("H: "+h, 20+x,20);
-			    text("H: "+h, 20,20+x);
-
-			    text("S: "+s, 20+x,40);
-			    text("S: "+s, 20,40+x);
-
-			    text("B: "+b, 20+x,60);
-			    text("B: "+b, 20,60+x);
-			}
-			fill(255);
-	  		text("H: "+h,20, 20);
-	  		text("S: "+s,20, 40);
-	  		text("B: "+b,20,60);		
-	  	}
-
-	  	nodes.forEach(function(element){
-	  		element.display();
-	  		element.update();
-	  	})
-  	}
-
-  	function windowResized() {
-		resizeCanvas(windowWidth, windowHeight);
-	}
-
-	function or_handler(e) {
-
-		if (e.alpha == null){
-			// browser, don't do this
-
-		} else {
-			// e.alpha: [0 - 360], loops
-			// ALSO CAN GO BACKWARDS
-			// This is the clockwise position of the device
-			// like a clock when placed flat.
-			var alpha_m = Math.round(map(e.alpha, -360, 360, -1., 1.)*100)/100;
-			var beta_m = Math.round(map(e.beta, -360, 360, -1., 1.)*100)/100;
-			var gamma_m = Math.round(map(e.gamma, -360, 360, -1., 1.)*100)/100;
-
-			h = alpha_m;
-			// find what angle they're at (starting)
-			// then based on the rotation from that point
-			// do stuff
-
-			s = beta_m;
-			// will typically be at [0, 0.20] if being held normally
-
-			b = gamma_m;
-			// will typically be [-0.15/25, 0.15/25] depends how
-			// it is being held.
-
-			nodes.forEach(function(element){
-		  		element.acc.y += map(beta_m, -0.1, 0.20, -0.1, 0.1);
-		  		element.acc.limit(0.25);
-		  	})
-		}
+	// 		nodes.forEach(function(element){
+	// 	  		element.acc.y += map(beta_m, -0.1, 0.20, -0.1, 0.1);
+	// 	  		element.acc.limit(0.25);
+	// 	  	})
+	// 	}
 
 		// WHAT IF WE JUST ADDED 3D to 2D CARTESIAN
 		// ADDITIONS?? LIKE 360->PI to send to cos/sin
@@ -161,13 +121,13 @@
 	 //  		element.acc.limit(0.25);
 	 //  	})
 	
-	}
+	// }
   </script>
 
 </head>
 
 <body>
-	<div id="main"></div>
+	<div id="view"></div>
 </body>
 
 
