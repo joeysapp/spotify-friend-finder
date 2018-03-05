@@ -23,6 +23,7 @@
 	  		var canvas;
 	  		var nodes = [];
 	  		var divs = [];
+	  		var new_w = 0;
 
 	  		p.setup = function(){
 				this.canvas = p.createCanvas(p.windowWidth, p.windowHeight);
@@ -43,12 +44,30 @@
 				});
 			}
 
-			p.mouseClicked = function(){
+			p.touchStarted = function(){
 				if (nodes.length == 0){
 					// console.log(divs);
 					divs[0].remove();
 				}
-				nodes.push(new Node(p.mouseX, p.mouseY));
+
+				new_w = p.frameCount;
+				// return false;
+			}
+
+			p.touchEnded = function(){
+
+				var w = (p.frameCount - new_w);
+				console.log("touches held for "+w);
+				if (p.touches.length == 0){
+					var tmp = new Node(p.mouseX, p.mouseY, p.constrain(w,0,100));
+					nodes.push(tmp);
+				}
+				p.touches.forEach(function(e,idx){
+					var tmp = new Node(e.x, e.y, p.constrain(w,0,100));
+					nodes.push(tmp);
+				});
+
+				console.log("bye");
 			}
 
 			class Node {
@@ -69,7 +88,8 @@
 			  		this.pos.add(this.vel);
 			  		// this.acc.mult(0);
 
-			  		if (this.pos.y < 0 || this.pos.y > p.windowHeight){
+			  		if (this.pos.y < 0 || this.pos.y > p.windowHeight
+			  			this.pos.x < 0 || this.pos.x > p.windowWidth){
 			  			// Hit the bottom or top! reee
 			  			this.vel.mult(-1);
 			  			this.acc.mult(0);
