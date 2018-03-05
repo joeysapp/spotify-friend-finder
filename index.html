@@ -8,130 +8,74 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/p5.min.js"></script>
 	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.sound.min.js"></script> -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.0/addons/p5.dom.min.js"></script>
-	<script
-  src="https://code.jquery.com/jquery-3.3.1.min.js"
-  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-  crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
-  <style>
-  	body {
-  		font-family: Helvetica;
-  		font-size: 2em;
-  		margin: 0;
-  	}		
-  </style>
+	<style>
+	  	body {
+	  		font-family: Helvetica;
+	  		font-size: 2em;
+	  		margin: 0;
+	  	}		
+	</style>
 
-  <script>
+	<script>
+	  	var sketch = function(p){
+	  		var canvas;
+	  		var nodes = [];
 
-  	var sketch = function(p){
-  		var canvas;
-  		var nodes = [];
+	  		p.setup = function(){
+				this.canvas = p.createCanvas(p.windowWidth, p.windowHeight);
+				this.canvas.parent('view');
+				this.canvas.position(0,0);
+			}
 
-  		p.setup = function(){
-			this.canvas = p.createCanvas(p.windowWidth, p.windowHeight);
-			this.canvas.parent('view');
-			this.canvas.position(0,0);
-		}
+			p.draw() = function(p){
+				p.background(255, 0, 0);
+				nodes.forEach(function(e,idx){
+					e.display();
+					e.update();
+				});
+			}
 
-		p.draw() = function(p){
-			p.background(255, 0, 0);
-			nodes.forEach(function(e,idx){
-				e.display();
-				e.update();
-			});
-		}
+			class Node {
+		  		constructor(x, y){
+			  		this.pos = createVector(x,y);
+			  		this.vel = createVector(0,0);
+			  		this.acc = createVector(0,0);
+			  		this.w = 32;
+			  	}
 
-		class Node {
-	  		constructor(x, y){
-		  		this.pos = createVector(x,y);
-		  		this.vel = createVector(0,0);
-		  		this.acc = createVector(0,0);
-		  		this.w = 32;
-		  	}
+			  	applyForce(f){
+			  		var t_f = PVector.div(f,this.m);
+			  		this.acc.add(t_f);
+			  	}
 
-		  	applyForce(f){
-		  		var t_f = PVector.div(f,this.m);
-		  		this.acc.add(t_f);
-		  	}
+			  	update(){
+			  		this.vel.add(this.acc);
+			  		this.pos.add(this.vel);
+			  		// this.acc.mult(0);
 
-		  	update(){
-		  		this.vel.add(this.acc);
-		  		this.pos.add(this.vel);
-		  		// this.acc.mult(0);
+			  		if (this.pos.y < this.w/2 || this.pos.y > windowHeight-this.w/2){
+			  			// Hit the bottom or top! reee
+			  			this.vel.mult(-1);
+			  			this.acc.mult(0);
+			  		}
+			  	}
 
-		  		if (this.pos.y < this.w/2 || this.pos.y > windowHeight-this.w/2){
-		  			// Hit the bottom or top! reee
-		  			this.vel.mult(-1);
-		  			this.acc.mult(0);
+		  		display(){
+		  			fill(255, 0, 0);
+		  			ellipse(this.pos.x, this.pos.y, this.w/2, this.w/2);
 		  		}
 		  	}
-
-	  		display(){
-	  			fill(255, 0, 0);
-	  			ellipse(this.pos.x, this.pos.y, this.w/2, this.w/2);
-	  		}
 	  	}
-  	}
 
-  	var gamewindow = p5(sketch);
-
-	// function or_handler(e) {
-
-	// 	if (e.alpha == null){
-	// 		// browser, don't do this
-
-	// 	} else {
-	// 		// e.alpha: [0 - 360], loops
-	// 		// ALSO CAN GO BACKWARDS
-	// 		// This is the clockwise position of the device
-	// 		// like a clock when placed flat.
-	// 		var alpha_m = Math.round(map(e.alpha, -360, 360, -1., 1.)*100)/100;
-	// 		var beta_m = Math.round(map(e.beta, -360, 360, -1., 1.)*100)/100;
-	// 		var gamma_m = Math.round(map(e.gamma, -360, 360, -1., 1.)*100)/100;
-
-	// 		h = alpha_m;
-	// 		// find what angle they're at (starting)
-	// 		// then based on the rotation from that point
-	// 		// do stuff
-
-	// 		s = beta_m;
-	// 		// will typically be at [0, 0.20] if being held normally
-
-	// 		b = gamma_m;
-	// 		// will typically be [-0.15/25, 0.15/25] depends how
-	// 		// it is being held.
-
-	// 		nodes.forEach(function(element){
-	// 	  		element.acc.y += map(beta_m, -0.1, 0.20, -0.1, 0.1);
-	// 	  		element.acc.limit(0.25);
-	// 	  	})
-	// 	}
-
-		// WHAT IF WE JUST ADDED 3D to 2D CARTESIAN
-		// ADDITIONS?? LIKE 360->PI to send to cos/sin
-		// then just add those to the acc!
-		// var x = degrees(e.beta);
-		// var y = degrees(e.gamma);
-		// var z = degrees(e.alpha);
-
-		// nodes.forEach(function(element){
-		// 	element.x += x;
-		// 	element.y += y;
-	 //  		// element.acc.y += map(beta_m, -0.1, 0.20, -0.1, 0.1);
-	 //  		element.acc.limit(0.25);
-	 //  	})
-	
-	// }
-  </script>
-
+		var gamewindow = p5(sketch);
+	</script>
 </head>
 
 <body>
 	<div id="view"></div>
 </body>
-
-
-
 </html>
 
 
