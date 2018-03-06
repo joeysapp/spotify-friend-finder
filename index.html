@@ -34,6 +34,7 @@
 				var tmp = p.createDiv(msg);
 				tmp.position(p.windowWidth/2 - (msg.length/2)*18, p.windowHeight/2);
 				divs.push(tmp);
+				console.log("Divs is of size", divs.length);
 			}
 
 			p.draw = function(){
@@ -58,17 +59,29 @@
 
 				var w = (p.frameCount - new_w);
 				console.log("touches held for "+w);
-				if (p.touches.length == 0){
+				if (divs.length > 1){
+					var x = divs[divs.length-1].x;
+					var y = divs[divs.length-1].y + 40;
+				} else {
+					var x = 24;
+					var y = p.windowHeight/2;
+				}
+				if (p.touches.length != 0){
+					// Mobile, user touches!
+					p.touches.forEach(function(e,idx){
+						divs.push(p.createDiv(e).position(50, p.windowHeight/2));
+						var tmp = new Node(e.x, e.y, p.constrain(w,0,100));
+						nodes.push(tmp);
+					});
+				} else {
+					var tmp = p.createDiv(p.mouseX+", "+p.mouseY).style('position',x,y);
+					divs.push(tmp);
+
 					var tmp = new Node(p.mouseX, p.mouseY, p.constrain(w,0,100));
 					nodes.push(tmp);
 				}
-				p.touches.forEach(function(e,idx){
-					var tmp = new Node(e.x, e.y, p.constrain(w,0,100));
-					nodes.push(tmp);
-				});
-
-				console.log("bye");
 			}
+			
 
 			class Node {
 		  		constructor(x, y){
