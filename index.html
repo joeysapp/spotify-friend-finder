@@ -16,7 +16,21 @@
 	  		font-size: 1em;
 	  		font-color: black;
 	  		margin: 0;
-	  	}		
+	  	}	
+
+	  	#greeting {
+	  		font-size:2em;
+			height: 100%;
+			width: 100%;
+			display: flex;
+			position: fixed;
+			align-items: center;
+			justify-content: center;
+			opacity: 1;
+			-webkit-transition: opacity 1000ms linear;
+			transition: opacity 1000ms linear;
+
+	  	}	
 
 	  	#view {
 	  		z-index: -1;
@@ -38,10 +52,6 @@
 
 				p.colorMode(p.HSB);
 
-				var msg = "Click me!";
-				var tmp = p.createDiv(msg);
-				tmp.position(p.windowWidth/2 - (msg.length/2)*18, p.windowHeight/2);
-				divs.push(tmp);
 				console.log("Divs is of size", divs.length);
 			}
 
@@ -54,10 +64,8 @@
 			}
 
 			p.touchStarted = function(){
-				if (nodes.length == 0){
-					// console.log(divs);
-					divs[0].remove();
-				}
+				$('#greeting').remove();
+
 				new_w = p.frameCount;
 
 				var amt = 20;
@@ -145,7 +153,9 @@
 </head>
 
 <body>
-	<div id="text"></div>
+	<div id="greeting">
+		Click me!
+	</div>
 	<div id="view"></div>
 </body>
 </html>
