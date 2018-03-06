@@ -63,6 +63,7 @@
 				p.colorMode(p.HSB);
 				// p.blendMode(p.DARKEST);
 				p.textSize(128);
+				p.textAlign(p.CENTER);
 				g = p.createVector(0, 0.5);
 				bg = p.color(0, 255, 255);
 				text_col = p.color(0);
@@ -73,7 +74,7 @@
 				p.background(bg);
 				p.fill(text_col);
 				p.stroke(text_col);
-				p.text("tap", p.windowWidth/2-100, 128);
+				p.text("tap", p.windowWidth/2, 128);
 				// so I think instead of forEach I should do mapping?
 				nodes.forEach(function(e,idx){
 					if (e.held){
