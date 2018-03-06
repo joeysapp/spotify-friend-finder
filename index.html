@@ -58,14 +58,14 @@
 				this.canvas.position(0,0);
 				p.ellipseMode(p.CENTER);
 				// p.blendMode(p.DARKEST);
-				p.textSize(24);
+				p.textSize(128);
 			}
 
 			p.draw = function(){
 				t += 0.1;
 				p.background(255);
 				p.fill(0);
-				p.text("Touch me!", p.windowWidth/2 - (6)*12, 24);
+				p.text("tap", p.windowWidth/2-100, 128);
 				// so I think instead of forEach I should do mapping?
 				nodes.forEach(function(e,idx){
 					if (e.held){
