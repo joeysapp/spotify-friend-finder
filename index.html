@@ -261,13 +261,11 @@
 				      this.pos.y = this.w/2+1;
 				    }
 			  	}
-		  		display(){
-		  			p.fill(this.col);
-		  			p.strokeWeight(1);
-		  			p.stroke(p.brightness(this.col)-24);
-
+		  		display(){		  			
 		  			p.push();
 		  			p.translate(this.pos.x,this.pos.y);
+			  		p.fill(this.col);
+		  			p.noStroke();
 		  			p.ellipse(0,0, this.w, this.w);
 
 		  			// Showing velocity!
