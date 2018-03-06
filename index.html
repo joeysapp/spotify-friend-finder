@@ -67,18 +67,16 @@
 				nodes.forEach(function(e,idx){
 					if (e.held){
 						// Adding more on holding! 
-						if (adder){
-
-						}
-
-						var vel = p.createVector(0, 0.01*e.w);
-						e.w += 1;
+						e.vel.x = (e.pos.x-p.pmouseX)/64;
+						e.vel.y = (e.pos.y-p.pmouseY)/64;
+						var vel = p.createVector(0,0);
+						e.w += 4;
 						// Dampening on our vel!
 						vel.mult(-1);
 						vel.normalize();
 						vel.mult(0.1);
 
-						var g = p.createVector(0, e.w*0.16);
+						var g = p.createVector(0, 0);
 
 
 					} else { 
@@ -123,8 +121,8 @@
 
 				new_w = p.frameCount;
 
-				var amt = 1
-				var div = 32;
+				var amt = p.floor(p.random(1,10));
+				var div = 1;
 				// Mobile, user touches!
 				if (p.touches.length > 1){
 					p.touches.forEach(function(e,idx){
@@ -141,33 +139,36 @@
 
 							var px = e.x;
 							var py = e.y;
-							var pn = p.noise(px/div,py/div);
+							var pn = p.noise(px/div,py/div,idx);
 
 							var vx = 0;
 							var vy = 0;
-							var tmp = new Node(p.createVector(px,py), p.createVector(vx,vy), 64, col);
+							var tmp = new Node(p.createVector(px,py), p.createVector(vx,vy), 16, col);
 
 							nodes.push(tmp);
 						}
 					});
 				} else {
 					for (var i = 0; i < amt; i++){
-							var c = p.random(1);
-							var col = 0;
-							if (c < 0.33){
-								var col = p.color(0, 255, 255, 80);
-							} else if (c < 0.66){
-								var col = p.color(255, 0, 255, 80);
-							} else {
-								var col = p.color(255, 255, 0.80);
-							}
+						var c = p.random(1);
+						var col = 0;
+						if (c < 0.33){
+							var col = p.color(0, 255, 255, 80);
+						} else if (c < 0.66){
+							var col = p.color(255, 0, 255, 80);
+						} else {
+							var col = p.color(255, 255, 0.80);
+						}
 						var px = p.mouseX;
 						var py = p.mouseY;
-						var pn = p.noise(px/div,py/div);
+						var pn = p.noise(px/div,py/div,i);
 
-						var vx = Math.random(1) > 0.5 ? -2 : 2;
+						// var vn = p.map(p.noise(i/2), 0, 1, -1, 1);
+						// var vx = 4*p.cos(vn/32);
+						// var vy = 4*p.sin(vn/32);
+						var vx = 0;
 						var vy = 0;
-						var tmp = new Node(p.createVector(px,py), p.createVector(vx,vy), 64, col);
+						var tmp = new Node(p.createVector(px,py), p.createVector(vx,vy), 16, col);
 						nodes.push(tmp);
 					}
 				}
@@ -277,7 +278,7 @@
 		  			p.strokeWeight(4);
 		  			p.stroke(0, 200);
 
-		  			p.line(0,0,((this.vel.x < 0) ? -Math.pow(this.vel.x,2)/8 : Math.pow(this.vel.x,2)/2),((this.vel.y < 0) ? -Math.pow(this.vel.y,2)/8 : Math.pow(this.vel.y,2)/2));
+		  			p.line(0,0,((this.vel.x < 0) ? -Math.pow(this.vel.x,2)/2 : Math.pow(this.vel.x,2)/2),((this.vel.y < 0) ? -Math.pow(this.vel.y,2)/2 : Math.pow(this.vel.y,2)/2));
 		  			// p.rect(0,0,this.vel.x+this.vel.y,this.vel.x+this.vel.y);
 		  			p.pop();
 		  		}
