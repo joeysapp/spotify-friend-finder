@@ -58,17 +58,22 @@
 				this.canvas.position(0,0);
 				p.ellipseMode(p.CENTER);
 				// p.blendMode(p.DARKEST);
+				p.textSize(24);
 			}
 
 			p.draw = function(){
 				t += 0.1;
 				p.background(255);
+				p.fill(0);
+				p.text("Touch me!", p.windowWidth/2 - (6)*12, 24);
 				// so I think instead of forEach I should do mapping?
 				nodes.forEach(function(e,idx){
 					if (e.held){
 						// Adding more on holding! 
-						e.vel.x = (e.pos.x-p.pmouseX)/64;
-						e.vel.y = (e.pos.y-p.pmouseY)/64;
+						e.vel.x = -(e.pos.x-p.mouseX)/8;
+						e.vel.y = -(e.pos.y-p.mouseY)/8;
+						e.vel.limit(32);
+
 						var vel = p.createVector(0,0);
 						e.w += 4;
 						// Dampening on our vel!
@@ -290,9 +295,9 @@
 </head>
 
 <body>
-	<div id="greeting">
+<!-- 	<div id="greeting">
 		Click me!
-	</div>
+	</div> -->
 	<div id="view"></div>
 </body>
 
