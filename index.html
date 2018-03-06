@@ -71,24 +71,22 @@
 
 				new_w = p.frameCount;
 
-				var amt = Math.floor(p.random(1,5));
+				var amt = Math.floor(p.random(1,6));
 				var div = 32;
-				var gp_mult = 3;
-				var gv_mult = 0.3;
 				// Mobile, user touches!
 				if (p.touches.length > 1){
 					p.touches.forEach(function(e,idx){
 						for (var i = 0; i < amt; i++){
 							var col = p.color(p.random(255), 250, 250);
 
-							var px = e.x + p.randomGaussian()*g_mult;
-							var py = e.y + p.randomGaussian()*g_mult;;
+							var px = e.x;
+							var py = e.y;
 							var pn = p.noise(px/div,py/div);
 
-							var vn = p.map(p.noise(px/div, py/div), 0, 1, -1, 1);
-							var vx = Math.cos(n) + p.randomGaussian()*gv_mult;
-							var vy = Math.sin(n) + p.randomGaussian()*gv_mult;
+							var vx = 0;
+							var vy = 0;
 							var tmp = new Node(p.createVector(px,py), p.createVector(vx,vy), 1, col);
+
 							nodes.push(tmp);
 						}
 					});
@@ -96,22 +94,19 @@
 					for (var i = 0; i < amt; i++){
 						var col = p.color(p.random(255), 250, 250);
 
-						var px = p.mouseX + p.randomGaussian()*gp_mult;
-						var py = p.mouseY + p.randomGaussian()*gp_mult;
+						var px = p.mouseX + p.randomGaussian()*g_mult;
+						var py = p.mouseY + p.randomGaussian()*g_mult;
 						var pn = p.noise(px/div,py/div);
 
-						var vn = p.map(p.noise(px/div, py/div), 0, 1, -1, 1);
-						var vx = Math.cos(vn) + p.randomGaussian()*gv_mult;
-						var vy = Math.sin(vn) + p.randomGaussian()*gv_mult;
+						var vx = 0;
+						var vy = 0;
 						var tmp = new Node(p.createVector(px,py), p.createVector(vx,vy), 1, col);
 						nodes.push(tmp);
-
 					}
-			}
+				}
 
-
-				//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
-				// So this is in-place!!
+				// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
+				// So this is in-place!! how cool@$!34
 				nodes.sort(function(a,b){
 					if (p.hue(a.col) < p.hue(b.col)){
 						return -1;
@@ -120,9 +115,9 @@
 					}
 					return 0;
 				});
-				
-				return false;
 
+				// told to do this for browser safety fyi
+				return false;
 			}
 
 			p.touchEnded = function(){
@@ -131,9 +126,11 @@
 						e.held = false;
 					}
 				});
+				// told to do this for browser safety fyi
 				return false;
 			}
-			
+
+			class NodeSystem {}
 
 			class Node {
 		  		constructor(pos, vel, w, col){
