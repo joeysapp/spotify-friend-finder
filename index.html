@@ -26,10 +26,13 @@
 	  		var divs = [];
 	  		var new_w = 0;
 	  		var t = 0;
+	  		var t2 = 0;
 	  		var adder = true;
 	  		var g;
 	  		var bg;
 	  		var text_col;
+	  		var text_pos;
+	  		var text_vel;
 	  		p.setup = function(){
 				this.canvas = p.createCanvas(p.windowWidth, p.windowHeight);
 				this.canvas.parent('view');
@@ -43,13 +46,30 @@
 				g = p.createVector(0, 0.3);
 				bg = p.color(0, 255, 255);
 				text_col = p.color(0);
+				text_pos = p.createVector(p.windowWidth/2, p.windowHeight/2);
 			}
 			p.draw = function(){
 				t += 1;
 				p.background(bg);
 				p.fill(text_col);
+				p.strokeWeight(8);
 				p.stroke(text_col);
-				p.text("tap", p.windowWidth/2, p.windowHeight/2);
+
+				for (var i = 0; i < 24; i++){
+					p.text("tap", text_pos.x-i, text_pos.y-i);
+				}
+				for (var i = 16; i < 32+32*p.cos(t/24) + 32+32*p.sin(t/32); i++){
+					p.text("tap", text_pos.x-i, text_pos.y-i);
+				}
+				var n = p.noise(text_pos.x/512,text_pos.y/512);
+				var x = p.cos(n*4);
+				var y = p.sin(n*4);
+
+				text_pos.add(p.createVector(x,y));
+
+				p.stroke(p.brightness(text_col) == 0 ? 255 : 0);
+				p.text("tap", text_pos.x, text_pos.y);
+
 				// so I think instead of forEach I should do mapping?
 				nodes.forEach(function(e,idx){
 					if (e.held){
@@ -179,6 +199,7 @@
 			  		this.held = true;
 			  		this.w = w;
 			  		this.col = col;
+			  		this.history = [];
 			  	}
 			  	collideWith(sx,sy,ex,ey,r1,r2){
 					return p.dist(sx,sy,ex,ey) <= (r1/4 - 2)+(r2/4 - 2);
@@ -194,6 +215,9 @@
 					this.vel.add(this.acc);
 					this.pos.add(this.vel);
 					this.acc.mult(0);
+					this.history.push(this.pos);
+					this.history = this.history.slice(1,3);
+					// console.log(this.history);
 			  	}
 			  	checkEdges(){
 					if (this.pos.x > p.windowWidth-this.w/2) {
@@ -212,12 +236,13 @@
 				    }
 			  	}
 		  		display(){		  			
-		  			p.push();
-		  			p.translate(this.pos.x,this.pos.y);
+		  			// p.push();
+		  			// p.translate(this.pos.x,this.pos.y);
 			  		p.fill(this.col);
+			  		p.noStroke();
 		  			// p.stroke(p.brightness(this.col) == 0 ? 255 : 0);
 		  			// p.strokeWeight(24);
-		  			p.ellipse(0,0, this.w, this.w);
+		  			p.ellipse(this.pos.x, this.pos.y, this.w, this.w);
 		  			// Showing velocity!
 		  			p.stroke(p.brightness(this.col) == 0 ? 0 : 255);
 		  			p.strokeWeight(this.w);
@@ -231,9 +256,8 @@
 		  			// var ey = sy + Math.pow(this.vel.y,2)/8;		
 		  			var ex = sx + ((this.vel.x < 0) ? -Math.pow(this.vel.x,2)/8 : Math.pow(this.vel.x,2)/2);
 		  			var ey = sy + ((this.vel.y < 0) ? -Math.pow(this.vel.y,2)/8 : Math.pow(this.vel.y,2)/2);
-		  			p.line(0,0,((this.vel.x < 0) ? -Math.pow(this.vel.x,2)/2 : Math.pow(this.vel.x,2)/2),((this.vel.y < 0) ? -Math.pow(this.vel.y,2)/2 : Math.pow(this.vel.y,2)/2));
+		  			p.line(sx,sy,sx+((this.vel.x < 0) ? -Math.pow(this.vel.x,2)/2 : Math.pow(this.vel.x,2)/2),sy+((this.vel.y < 0) ? -Math.pow(this.vel.y,2)/2 : Math.pow(this.vel.y,2)/2));
 		  			// p.rect(0,0,this.vel.x+this.vel.y,this.vel.x+this.vel.y);
-		  			p.pop();
 		  		}
 		  	}
 	  	}
