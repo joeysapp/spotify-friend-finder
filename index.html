@@ -70,9 +70,9 @@
 				nodes.forEach(function(e,idx){
 					if (e.held){
 						// Adding more on holding! 
-						e.vel.x = -(e.pos.x-p.mouseX)/8;
-						e.vel.y = -(e.pos.y-p.mouseY)/8;
-						e.vel.limit(32);
+						e.vel.x = -(e.pos.x-p.mouseX)/16;
+						e.vel.y = -(e.pos.y-p.mouseY)/16;
+						e.vel.limit(16);
 
 						var vel = p.createVector(0,0);
 						e.w += 4;
@@ -91,8 +91,8 @@
 						// Dampening on our vel!
 						vel.mult(-1);
 						vel.normalize();
-						vel.mult(0.22);
-						var g = p.createVector(0, 0.2*e.w).limit(32);
+						vel.mult(0.5);
+						var g = p.createVector(0, 0.5*e.w);
 					}
 					// velocity
 					e.applyForce(vel);
