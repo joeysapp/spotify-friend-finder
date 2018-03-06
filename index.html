@@ -69,18 +69,43 @@
 				new_w = p.frameCount;
 
 				var amt = 20;
+				var div = 256;
+				var gp_mult = 3;
+				var gv_mult = 0.3;
 				// Mobile, user touches!
-				p.touches.forEach(function(e,idx){
+				if (p.touches.length > 1){
+					p.touches.forEach(function(e,idx){
+						for (var i = 0; i < amt; i++){
+							var col = p.color(p.random(255), 250, 250);
+
+							var px = e.x + p.randomGaussian()*g_mult;
+							var py = e.y + p.randomGaussian()*g_mult;;
+							var pn = p.noise(px/div,py/div);
+
+							var vn = p.map(p.noise(px/div, py/div), 0, 1, -1, 1);
+							var vx = Math.cos(n) + p.randomGaussian()*gv_mult;
+							var vy = Math.sin(n) + p.randomGaussian()*gv_mult;
+							var tmp = new Node(p.createVector(px,py), p.createVector(vx,vy), 1, col);
+							nodes.push(tmp);
+						}
+					});
+				} else {
 					for (var i = 0; i < amt; i++){
 						var col = p.color(p.random(255), 250, 250);
-						var n = p.map(p.noise(e.x/32, e.y/32), 0, 1, -1, 1);
-						var x = Math.cos(n) + p.randomGaussian()*0.3;
-						var y = Math.sin(n) + p.randomGaussian()*0.3;
-						var tmp = new Node(p.createVector(e.x+p.randomGaussian()*5,e.y+p.randomGaussian()*5), p.createVector(x,y), 1, col);
+
+						var px = p.mouseX + p.randomGaussian()*gp_mult;
+						var py = p.mouseY + p.randomGaussian()*gp_mult;
+						var pn = p.noise(px/div,py/div);
+
+						var vn = p.map(p.noise(px/div, py/div), 0, 1, -1, 1);
+						var vx = Math.cos(vn) + p.randomGaussian()*gv_mult;
+						var vy = Math.sin(vn) + p.randomGaussian()*gv_mult;
+						var tmp = new Node(p.createVector(px,py), p.createVector(vx,vy), 1, col);
 						nodes.push(tmp);
-						// divs.push(p.createDiv(p.touches.length).parent('text'));
+
 					}
-				});
+			}
+
 
 				//https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
 				// So this is in-place!!
