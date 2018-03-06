@@ -58,8 +58,9 @@
 			p.draw = function(){
 				p.background(255);
 				nodes.forEach(function(e,idx){
-					e.display();
+					e.applyForce(p.createVector(0, 1));					
 					e.update();
+					e.display();
 				});
 			}
 
@@ -68,8 +69,8 @@
 
 				new_w = p.frameCount;
 
-				var amt = 20;
-				var div = 256;
+				var amt = Math.floor(p.random(1,5));
+				var div = 32;
 				var gp_mult = 3;
 				var gv_mult = 0.3;
 				// Mobile, user touches!
@@ -147,13 +148,19 @@
 			  		this.acc.add(t_f);
 			  	}
 
+			  	applyForce(f){
+			  		var f = f.copy();
+			  		f.div(this.w);
+			  		this.acc.add(f);
+			  	}
+
 			  	update(){
 			  		if (this.held){
 			  			this.w += p.random(1,3);
 			  		} else {
-				  		this.vel.add(this.acc);
+			  			this.vel.add(this.acc);
 				  		this.pos.add(this.vel);
-				  		// this.acc.mult(0);
+				  		this.acc.mult(0);
 
 				  		if (this.pos.y < 0 || this.pos.y > p.windowHeight ||
 				  			this.pos.x < 0 || this.pos.x > p.windowWidth){
