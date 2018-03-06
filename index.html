@@ -55,20 +55,20 @@
 				p.strokeWeight(8);
 				p.stroke(text_col);
 
-				for (var i = 0; i < 24; i++){
-					p.text("tap", text_pos.x-i, text_pos.y-i);
-				}
-				for (var i = 16; i < 32+32*p.cos(t/24) + 32+32*p.sin(t/32); i++){
-					p.text("tap", text_pos.x-i, text_pos.y-i);
-				}
-				var n = p.noise(text_pos.x/512,text_pos.y/512);
-				var x = p.cos(n*4);
-				var y = p.sin(n*4);
+				// for (var i = 0; i < 24; i++){
+				// 	p.text("tap", text_pos.x-i, text_pos.y-i);
+				// }
+				// for (var i = 16; i < 32+32*p.cos(t/24) + 32+32*p.sin(t/32); i++){
+				// 	p.text("tap", text_pos.x-i, text_pos.y-i);
+				// }
+				// var n = p.noise(text_pos.x/512,text_pos.y/512);
+				// var x = p.cos(n*4);
+				// var y = p.sin(n*4);
 
-				text_pos.add(p.createVector(x,y));
+				// text_pos.add(p.createVector(x,y));
 
 				p.stroke(p.brightness(text_col) == 0 ? 255 : 0);
-				p.text("tap", text_pos.x, text_pos.y);
+				p.text("tap", p.windowWidth/2, p.windowHeight/2);
 
 				// so I think instead of forEach I should do mapping?
 				nodes.forEach(function(e,idx){
