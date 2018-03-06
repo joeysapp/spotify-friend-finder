@@ -58,7 +58,8 @@
 						e.vel.y = -(e.pos.y-p.mouseY)/16;
 						e.vel.limit(16);
 						var vel = p.createVector(0,0);
-						e.w = p.constrain(e.w+2, 0, p.windowWidth/2);
+						e.w = p.constrain(e.w+2, 0, p.min(p.windowHeight/2, p.windowWidth/2));
+						// e.w += 1;
 						// Dampening on our vel!
 						vel.mult(-1);
 						vel.normalize();
