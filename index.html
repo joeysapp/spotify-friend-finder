@@ -13,9 +13,14 @@
 	<style>
 	  	body {
 	  		font-family: Helvetica;
-	  		font-size: 2em;
+	  		font-size: 1em;
+	  		font-color: black;
 	  		margin: 0;
 	  	}		
+
+	  	#view {
+	  		z-index: -1;
+	  	}
 	</style>
 
 	<script>
@@ -28,6 +33,7 @@
 	  		p.setup = function(){
 				this.canvas = p.createCanvas(p.windowWidth, p.windowHeight);
 				this.canvas.parent('view');
+				this.canvas.style('z-index:-1');
 				this.canvas.position(0,0);
 
 				var msg = "Click me!";
@@ -50,45 +56,41 @@
 					// console.log(divs);
 					divs[0].remove();
 				}
-
 				new_w = p.frameCount;
-				// return false;
-			}
 
-			p.touchEnded = function(){
-
-				var w = (p.frameCount - new_w);
-				console.log("touches held for "+w);
-				if (divs.length > 1){
-					var x = divs[divs.length-1].x;
-					var y = divs[divs.length-1].y + 40;
-				} else {
-					var x = 24;
-					var y = p.windowHeight/2;
-				}
 				if (p.touches.length != 0){
 					// Mobile, user touches!
 					p.touches.forEach(function(e,idx){
-						divs.push(p.createDiv(e).position(50, p.windowHeight/2));
-						var tmp = new Node(e.x, e.y, p.constrain(w,0,100));
+						var tmp = new Node(e.x, e.y, 1);
+						console.log(e);
 						nodes.push(tmp);
+						divs.push(p.createDiv(p.touches.length).parent('text'));
 					});
 				} else {
-					var tmp = p.createDiv(p.mouseX+", "+p.mouseY).style('position',x,y);
-					divs.push(tmp);
-
-					var tmp = new Node(p.mouseX, p.mouseY, p.constrain(w,0,100));
+					console.log("this never happens lol");
+					var tmp = new Node(p.mouseX, p.mouseY, 1);
 					nodes.push(tmp);
 				}
+				return false;
+			}
+
+			p.touchEnded = function(){
+				nodes.forEach(function(e){
+					if (e.held){
+						e.held = false;
+					}
+				});
+				return false;
 			}
 			
 
 			class Node {
-		  		constructor(x, y){
+		  		constructor(x, y, w){
 			  		this.pos = p.createVector(x,y);
 			  		this.vel = p.createVector(p.random(-1,1), p.random(-1,1));
 			  		this.acc = p.createVector(0,0);
-			  		this.w = 32;
+			  		this.held = true;
+			  		this.w = w;
 			  	}
 
 			  	applyForce(f){
@@ -97,16 +99,20 @@
 			  	}
 
 			  	update(){
-			  		this.vel.add(this.acc);
-			  		this.pos.add(this.vel);
-			  		// this.acc.mult(0);
+			  		if (this.held){
+			  			this.w += p.random(1,3);
+			  		} else {
+				  		this.vel.add(this.acc);
+				  		this.pos.add(this.vel);
+				  		// this.acc.mult(0);
 
-			  		if (this.pos.y < 0 || this.pos.y > p.windowHeight ||
-			  			this.pos.x < 0 || this.pos.x > p.windowWidth){
-			  			// Hit the bottom or top! reee
-			  			this.vel.mult(-1);
-			  			this.acc.mult(0);
-			  		}
+				  		if (this.pos.y < 0 || this.pos.y > p.windowHeight ||
+				  			this.pos.x < 0 || this.pos.x > p.windowWidth){
+				  			// Hit the bottom or top! reee
+				  			this.vel.mult(-1);
+				  			this.acc.mult(0);
+				  		}
+				  	}
 			  	}
 
 		  		display(){
@@ -121,6 +127,7 @@
 </head>
 
 <body>
+	<div id="text"></div>
 	<div id="view"></div>
 </body>
 </html>
