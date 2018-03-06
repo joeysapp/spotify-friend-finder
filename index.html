@@ -172,8 +172,8 @@
 
 			  	checkEdges(){
 					if (this.pos.x > p.windowWidth) {
-				      this.vel.x = p.windowWidth;
-				      this.pos.x *= -1;
+				      this.vel.x *= -1;
+				      this.pos.x = p.windowWidth;
 				    } else if (this.pos.x < 0) {
 				      this.vel.x *= -1;
 				      this.pos.x = 0;
