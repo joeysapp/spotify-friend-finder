@@ -36,7 +36,7 @@ $(document).ready(() => {
 		};
 
 		(function getAllVisitors() {
-			var all_keys = firebase.database().ref('visitors_seen_icons/').once('value').then(function(snapshot){
+			var all_keys = firebase.database().ref('visitors_seen/').once('value').then(function(snapshot){
 				snapshot.forEach(child => {
 					var snapshot_res = child.val();
 					var id = String(snapshot_res.result).substring(0,8)+'';
@@ -67,10 +67,10 @@ $(document).ready(() => {
 		})();
 
 		(function writeToDB(obj) {
-			var new_key = firebase.database().ref('visitors_seen_icons').push().key;
+			var new_key = firebase.database().ref('visitors_seen/').push().key;
 			var updates = {};
 			updates[res] = obj;
-			return firebase.database().ref('visitors_seen_icons/').update(updates);
+			return firebase.database().ref('visitors_seen/').update(updates);
 		})(new_obj);
 
 
