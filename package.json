@@ -1,0 +1,30 @@
+{
+  "name": "joeysapp.github.io",
+  "version": "1.0.0",
+  "description": "Experiments using Browserify and multiple packages such as lodash",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joeysapp/joeysapp.github.io.git"
+  },
+  "keywords": [
+    "browserify"
+  ],
+  "author": "Joey Sapp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joeysapp/joeysapp.github.io/issues"
+  },
+  "homepage": "https://github.com/joeysapp/joeysapp.github.io#readme",
+  "dependencies": {
+    "browserify": "^16.1.1",
+    "d3": "^5.0.0",
+    "d3-voronoi": "^1.1.2",
+    "p5": "^0.6.0",
+    "stringify-object": "^3.2.2",
+    "watchify": "^3.11.0"
+  }
+}
