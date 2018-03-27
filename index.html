@@ -2,9 +2,49 @@
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
 	<script src="index.js"></script>
     <title>joeysapp.github.io</title>
+    <style>
+    html,
+    body{
+    	height: 100%;
+    	margin: 0;
+    }
+    #main {
+    	display: flex;
+    	flex-flow: column;
+    	height: 100%;
+    }
+    #visitors {
+    	border-style: solid;
+    	border-width: 3vw;
+
+		align-items:flex-start;
+		align-content:flex-start;
+	}
+
+    .visitor {
+    	font-family: 'Courier';
+    	width: 25vw;
+    	height: 10vh;
+    	font-size: 1em;
+    }
+</style>
 </head>
 
 <body>
 	
-	<div id='text' style="word-wrap:break-word; font-size:1em; line-height:1em"></div>
+	<div id='main'>
+		<div id='header' style='margin-top:8vh; margin-left:6vh; font-size:6vh; font-family: Helvetica-Bold, Helvetica'>Joey Sapp</div>
+		<div id='toolbar' style='background-color:black; padding-left:6vh; height:6vh; line-height:6vh; font-size: 3vh; font-family: Courier'>
+			<a style='color:white;' href='https://github.com/joeysapp'>github</a>
+			<a style='color:white;' href='https://www.linkedin.com/in/joeysapp'>linkedin</a>
+			<a style='color:white;' href='https://www.instagram.com/joeysapp/'>instagram</a>
+		</div>
+		<div id='content-holder' style='font-size:3vh; margin-top:2vh; margin-left:6vh; margin-bottom:2vh; flex: auto 0 auto;'>
+			This is a demonstration of client fingerprinting, utilizing multiple elements such as canvas to give your browser a unique ID that lasts the lifetime of the device. Below is a list of unique IDs that have visited this page. Your ID is highlighted in a green border and you can hover this object to see details about your browser.
+
+		</div>
+		<div id='visitors' style='display:flex; flex-wrap: wrap; flex: 1 0 auto;'>
+
+		</div>
+	</div>
 </body>
