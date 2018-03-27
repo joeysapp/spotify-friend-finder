@@ -23,8 +23,12 @@
     "browserify": "^16.1.1",
     "d3": "^5.0.0",
     "d3-voronoi": "^1.1.2",
+    "fingerprintjs2": "^1.6.1",
+    "firebase": "^4.12.0",
     "p5": "^0.6.0",
     "stringify-object": "^3.2.2",
+    "ua-parser-js": "^0.7.17",
+    "uuid": "^3.2.1",
     "watchify": "^3.11.0"
   }
 }

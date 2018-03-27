@@ -29,11 +29,14 @@ $(document).ready(() => {
 			var all_keys = firebase.database().ref('visitors_seen/').once('value').then(function(snapshot){
 				snapshot.forEach(child => {
 					var snapshot_res = child.val();
-					var text = String(snapshot_res.result).substring(0,16)+'..';
+					var id = String(snapshot_res.result).substring(0,8)+'';
+					var text = '<p>'+snapshot_res.components[0].value+'</p>';
 					var fontcolor = snapshot_res.fontcolor;
+					if (id === String(res).substring(0,8)){
+						console.log(snapshot_res.components);
+					};
 					var bgcolor = snapshot_res.bgcolor;
-					console.log('text:'+text.result);
-					$('#visitors').append('<div id=\''+String(child.val().result)+'\' class=\'visitor\' style=\'background-color:'+bgcolor+'; color:'+fontcolor+';\'>'+text+'</div');
+					$('#visitors').append('<div id=\''+id+'\' class=\'visitor\' style=\'background-color:'+bgcolor+'; color:'+fontcolor+';\'>'+text+'</div');
 				});
 			});
 		})();
@@ -42,8 +45,9 @@ $(document).ready(() => {
 			console.log('writing client key to db..');
 			var new_key = firebase.database().ref('visitors_seen').push().key;
 			var updates = {};
+			var id = String(res).substring(0,8);
 			updates[res] = obj;
-			console.log('client key written to db!');
+			console.log(res);
 			return firebase.database().ref('visitors_seen/').update(updates);
 		})(new_obj);
 
