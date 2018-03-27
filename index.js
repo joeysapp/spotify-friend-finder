@@ -32,7 +32,7 @@ $(document).ready(() => {
 					var fontcolor = new_obj['fontcolor'];
 					var bgcolor = new_obj['bgcolor'];
 					console.log('text:'+text.result);
-					$('#visitors').append('<div class=\'visitor\' style=\'background-color:'+bgcolor+'; color:'+fontcolor+';\'>'+text+'</div');
+					$('#visitors').append('<div id=\''+String(child.val().result)+'\' class=\'visitor\' style=\'background-color:'+bgcolor+'; color:'+fontcolor+';\'>'+text+'</div');
 				});
 			});
 		})();
