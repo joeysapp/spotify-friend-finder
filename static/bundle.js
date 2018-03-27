@@ -59,7 +59,7 @@ $(document).ready(() => {
 					$('#'+id).css('background-color', bgcolor);
 					$('#'+id).css('background-position', 'center');
 					$('#'+id).css('background-repeat', 'no-repeat');
-					$('#'+id).css('background-size', '60px 60px');
+					$('#'+id).css('background-size', '15vw 15vw');
 					$('#'+id).css('background-image', 'url(\'static/icons/'+animaltype+'.png\')');
 					var tmp = '<div class=\'timestamp\'>'+snapshot_res.timestamp+'</div>';
 					$('#'+id).prepend(tmp);
