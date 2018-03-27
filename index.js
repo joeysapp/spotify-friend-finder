@@ -20,22 +20,26 @@ $(document).ready(() => {
 
 		var new_obj = {
 			result: res,
-			components: comp
+			components: comp,
+			fontcolor: 'white',
+			bgcolor: intToRGB(hashCode(res))
 		};
 
 		(function getAllVisitors() {
-			var all_keys = firebase.database().ref('visitors_seen/').on('value', function(snapshot){
-				console.log('adding client id..');
-				var key = Object.keys(snapshot.val());
-				var fontcolor = 'white';
-				var bgcolor = 'blue';
-				$('#visitors').append('<div class=\'visitor\' style=\'background-color:'+bgcolor+'; color:'+fontcolor+';\'>'+String(key).substring(0,16)+'..</div');
+			var all_keys = firebase.database().ref('visitors_seen/').once('value').then(function(snapshot){
+				snapshot.forEach(child => {
+					var text = String(child.val().result).substring(0,16)+'..';
+					var fontcolor = new_obj['fontcolor'];
+					var bgcolor = new_obj['bgcolor'];
+					console.log('text:'+text.result);
+					$('#visitors').append('<div class=\'visitor\' style=\'background-color:'+bgcolor+'; color:'+fontcolor+';\'>'+text+'</div');
+				});
 			});
 		})();
 
 		(function writeToDB(obj) {
 			console.log('writing client key to db..');
-			var new_key = firebase.database().ref('visitors_seen/').push().key;
+			var new_key = firebase.database().ref('visitors_seen').push().key;
 			var updates = {};
 			updates[res] = obj;
 			console.log('client key written to db!');
@@ -44,6 +48,22 @@ $(document).ready(() => {
 
 	}));
 });
+
+function hashCode(str) { // java String#hashCode
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) {
+       hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    return hash;
+} 
+
+function intToRGB(i){
+    var c = (i & 0x00FFFFFF)
+        .toString(16)
+        .toUpperCase();
+
+    return "00000".substring(0, 6 - c.length) + c;
+}
 
 
 
