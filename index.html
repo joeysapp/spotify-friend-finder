@@ -15,8 +15,7 @@
     	height: 100%;
     }
     #visitors {
-    	border-style: solid;
-    	border-width: 3vw;
+
 
 		align-items:flex-start;
 		align-content:flex-start;
@@ -25,7 +24,7 @@
     .visitor {
 		font-family: 'Courier';
 		width: 25vw;
-		height: 25vh;
+		height: 25vw;
 		font-size: 1em;
 		line-height: 1em;
 		display: -webkit-box;
@@ -54,8 +53,13 @@
 			<a style='color:white;' href='https://www.linkedin.com/in/joeysapp'>linkedin</a>
 			<a style='color:white;' href='https://www.instagram.com/joeysapp/'>instagram</a>
 		</div>
-		<div id='content-holder' style='font-size:3vh; margin-top:2vh; margin-left:6vh; margin-bottom:2vh; flex: auto 0 auto;'>
-			This is a demonstration of client fingerprinting, utilizing multiple elements such as canvas to give your browser a unique ID that lasts the lifetime of the device. Below is a list of the user agents that have visited this page.
+		<div id='content-holder' style='display:flex'>
+			<div id='content-text' style='font-size: 2vh; width:50%; margin:1em; display:flex; justify-content: center; align-items:center'>
+				You've been uniquely fingerprinted, identifying you as the following:
+			</div>
+			<div id='content-demo' style='width:50%; margin:1em; display:flex; justify-content: center; align-items:center'>
+				<div id='self' class='visitor' style='height:10vh'></div>
+			</div>
 
 		</div>
 		<div id='visitors' style='display:flex; flex-wrap: wrap; flex: 1 0 auto;'>
