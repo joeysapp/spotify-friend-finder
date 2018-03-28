@@ -1,36 +1,24 @@
 {
-  "name": "joeysapp.github.io",
+  "name": "js_fingerprint_1",
   "version": "1.0.0",
-  "description": "Experiments using Browserify and multiple packages such as lodash",
+  "description": "demo implementation of browser-fingerprint for browserify",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/joeysapp/joeysapp.github.io.git"
-  },
-  "keywords": [
-    "browserify"
-  ],
   "author": "Joey Sapp",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/joeysapp/joeysapp.github.io/issues"
-  },
-  "homepage": "https://github.com/joeysapp/joeysapp.github.io#readme",
   "dependencies": {
-    "browserify": "^16.1.1",
-    "d3": "^5.0.0",
-    "d3-voronoi": "^1.1.2",
-    "fingerprintjs2": "^1.6.1",
     "firebase": "^4.12.0",
-    "fs": "0.0.1-security",
+    "jquery": "^3.3.1",
     "moment-timezone": "^0.5.14",
-    "p5": "^0.6.0",
-    "stringify-object": "^3.2.2",
-    "ua-parser-js": "^0.7.17",
-    "uuid": "^3.2.1",
-    "watchify": "^3.11.0"
-  }
+    "node-emoji": "^1.8.1",
+    "random-name": "^0.1.2",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "browser-fingerprint"
+  ]
 }

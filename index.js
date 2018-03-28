@@ -1,82 +1,113 @@
-var uuid = require('uuid/v4');
-var parser = require('ua-parser-js');
-var firebase = require('firebase');
-var fp = require('fingerprintjs2');
-var so = require('stringify-object');
-var fs = require('fs');
-var moment = require('moment-timezone');
+var $ = require('jquery');
+// var cookie = require('cookie');
+const uuidv4 = require('uuid/v4');
+var emoji = require('node-emoji');
+var rn = require('random-name');
 
+// var so = require('stringify-object');
+// var moment = require('moment-timezone');
+var firebase = require('firebase');
 var config = {
   apiKey: "AIzaSyCEqXgSFuRFp0Gb9cGfozy6qBIJz563G4k",
   authDomain: "joeysappgithub.firebaseapp.com",
   databaseURL: "https://joeysappgithub.firebaseio.com",
 };
+
 firebase.initializeApp(config);
 var db = firebase.database();
 
+class Animal {
+	constructor(uuid, name, cookies){
+		this.uuid = uuid;
+		this.type = intToAvailableAnimals(hashCode(uuid));
+		this.bgcolor = intToRGB(hashCode(uuid));
+		this.name = name;
+		this.cookies = cookies;
+	}
+
+	getDiv() {
+		var tmp = '<div id=\''+this.uuid+'\' class=\'animal\' style=\'margin:0.5vmin; border: 4px solid black;\'>';
+		var stats = '<div class=\'animal stats\'>';
+		var name = '<div class=\'animal stats name\'>'+this.name+'</div>';
+		var type = '<div class=\'animal stats type\'>'+this.type+'</div>';
+		var food = '<div class=\'animal stats food\'>'+this.cookies+'</div>';
+		var portrait = '<div class=\'animal portrait\'style=\'background-image: url(\"static/icons/'+this.type+'.png\"); background-color:'+this.bgcolor+'\'></div>';
+		console.log('getDiv');
+		return tmp+stats+name+type+food+'</div>'+portrait+'</div>';
+	}
+}
+
+var uuid;
+var animal;
+var animal_dict = {};
+var dled = false;
+
 $(document).ready(() => {
-	new fp().get((res, comp) => {
+	// First, populate all animals!
+	// getAllAnimals((res) => {
+	// 	console.log('got all da animals');
+	// 	console.log(res);
 
-		var tmp_bgcolor = intToRGB(hashCode(res));
+	// });
+	// confirmAndDisplayAnimals();
 
-		var time = moment().tz('America/Rainy_River').format('MMMM Do YYYY, h:mm:ss a');
-		var tmp_animaltype = 'Sheep';
-		try {
-			tmp_animaltype = intToAvailableAnimals(hashCode(res));
-		} catch (err){
-		}
-
-		var new_obj = {
-			result: res,
-			components: comp,
-			fontcolor: 'white',
-			bgcolor: tmp_bgcolor,
-			animaltype: tmp_animaltype,
-			timestamp: time
-		};
-
-		(function getAllVisitors() {
-			var all_keys = firebase.database().ref('visitors_seen/').once('value').then(function(snapshot){
-				snapshot.forEach(child => {
-					var snapshot_res = child.val();
-					var id = String(snapshot_res.result).substring(0,8)+'';
-					var text = '';
-					// var text = '<p>'+snapshot_res.components[0].value+'</p>';
-					var fontcolor = snapshot_res.fontcolor;
-					var bgcolor = snapshot_res.bgcolor;
-					if (snapshot_res.animaltype && typeof snapshot_res.animaltype !== 'undefined'){
-						var animaltype = snapshot_res.animaltype;
-					} 
-					if (id === String(res).substring(0,8)){
-						$('#self').css('background-color', bgcolor);
-						$('#self').css('background-position', 'center');
-						$('#self').css('background-repeat', 'no-repeat');
-						$('#self').css('background-size', '60px 60px');
-						$('#self').css('background-image', 'url(\'static/icons/'+animaltype+'.png\')');
-					};
-					$('#visitors').append('<div id=\''+id+'\' class=\'visitor\'>'+text+'</div');
-					$('#'+id).css('background-color', bgcolor);
-					$('#'+id).css('background-position', 'center');
-					$('#'+id).css('background-repeat', 'no-repeat');
-					$('#'+id).css('background-size', '15vw 15vw');
-					$('#'+id).css('background-image', 'url(\'static/icons/'+animaltype+'.png\')');
-					var tmp = '<div class=\'timestamp\'>'+snapshot_res.timestamp+'</div>';
-					$('#'+id).prepend(tmp);
-				});
-			});
-		})();
-
-		(function writeToDB(obj) {
-			var new_key = firebase.database().ref('visitors_seen/').push().key;
-			var updates = {};
-			updates[res] = obj;
-			return firebase.database().ref('visitors_seen/').update(updates);
-		})(new_obj);
-
-
-
+	$('.feed').click(e => {
+		console.log('you fed ur pet a 🍪');
+		$('.feed').remove();
+		animal_dict[uuid].cookies += 1;
+		$('#self.animal .stats .food').text(Number($('#self.animal .stats .food').text())+1);
+		$('#'+uuid+'.animal .stats .food').text(Number($('#'+uuid+'.animal .stats .food').text()) + 1);
+		writeAnAnimal(animal_dict[uuid], uuid);
 	});
+	// var fingerprint = require('browser-fingerprint')();
+	if (!document.cookie.includes('uuidv4')){
+		console.log('Creating new animal');
+		uuid = uuidv4();
+		document.cookie = 'uuidv4='+uuid;
+		// new user. create uuid
+		// create animal!!
+		var name = rn.first();
+		while (name.length > 7){
+			name = rn.first();
+		}
+		animal = new Animal(uuid, name, 0);
+		animal_dict[uuid] = animal;
+		console.log('animal_dict: ');
+		console.log(animal_dict);
+		writeAnAnimal(animal, uuid);
+	} else {
+		console.log('Loading old animal');
+		// bring up their animal and highlight it on the grid
+		uuid = getCookie('uuidv4');
+		console.log('uuid: '+uuid);
+	}
+	getAllAnimals();
+	confirmAndDisplayAnimals();
 });
+
+function confirmAndDisplayAnimals(){
+	console.log('getting them...');
+	if (typeof animal_dict['blob'] !== 'undefined'){
+		// woo finally got dem
+		console.log('got all da danaimals');
+		for (var key in animal_dict){
+			if (key == 'blob'){ continue; }
+			var tmp_animal = new Animal(key, animal_dict[key].name, animal_dict[key].cookies);
+			if (key == uuid){
+				$('#self.animal .stats .name').html(tmp_animal.name);
+				$('#self.animal .stats .type').html(tmp_animal.type);
+				$('#self.animal .stats .food').html(tmp_animal.cookies);
+				$('#self.animal .portrait').css('background-color', tmp_animal.bgcolor);
+				$('#self.animal .portrait').css('background-image', 'url("static/icons/'+tmp_animal.type+'.png"');
+			}
+			$('#animals').append(tmp_animal.getDiv());
+
+		}
+	} else {
+		setTimeout(confirmAndDisplayAnimals, 250);
+	}
+}
+
 
 function hashCode(str) { // java String#hashCode
     var hash = 0;
@@ -87,9 +118,9 @@ function hashCode(str) { // java String#hashCode
 } 
 
 function intToAvailableAnimals(i, callback){
-	var animals = ['Alligator', 'Anteater', 'Armadillo', 'Auroch', 'Axolotl', 'Badger', 'Bat', 'Beaver', 'Buffalo', 'Camel', 'Capybara', 'Chameleon', 'Cheetah', 'Chinchilla', 'Chipmunk', 'Chupacabra', 'Cormorant', 'Coyote', 'Crow', 'Dingo', 'Dinosaur', 'Dolphin', 'Duck', 'Elephant', 'Ferret', 'Fox', 'Frog', 'Giraffe', 'Gopher', 'Grizzly', 'Hedgehog', 'Hippo', 'Hyena', 'Ibex', 'Ifrit', 'Iguana', 'Jackal', 'Kangaroo', 'Koala', 'Kraken', 'Lemur', 'Leopard', 'Liger', 'Llama', 'Manatee', 'Mink', 'Monkey', 'Moose', 'Narwhal', 'Orangutan', 'Otter', 'Panda', 'Penguin', 'Platypus', 'Pumpkin', 'Python', 'Quagga', 'Rabbit', 'Raccoon', 'Rhino', 'Sheep', 'Shrew', 'Squirrel', 'Tiger', 'Turtle', 'Walrus', 'Wolf', 'Wolverine', 'Wombat'];
-	var idx = Math.abs(i % animals.length);
-	return animals[idx];
+	var animal_list = ['Alligator', 'Anteater', 'Armadillo', 'Auroch', 'Axolotl', 'Badger', 'Bat', 'Beaver', 'Buffalo', 'Camel', 'Capybara', 'Chameleon', 'Cheetah', 'Chinchilla', 'Chipmunk', 'Chupacabra', 'Cormorant', 'Coyote', 'Crow', 'Dingo', 'Dinosaur', 'Dolphin', 'Duck', 'Elephant', 'Ferret', 'Fox', 'Frog', 'Giraffe', 'Gopher', 'Grizzly', 'Hedgehog', 'Hippo', 'Hyena', 'Ibex', 'Ifrit', 'Iguana', 'Jackal', 'Kangaroo', 'Koala', 'Kraken', 'Lemur', 'Leopard', 'Liger', 'Llama', 'Manatee', 'Mink', 'Monkey', 'Moose', 'Narwhal', 'Orangutan', 'Otter', 'Panda', 'Penguin', 'Platypus', 'Pumpkin', 'Python', 'Quagga', 'Rabbit', 'Raccoon', 'Rhino', 'Sheep', 'Shrew', 'Squirrel', 'Tiger', 'Turtle', 'Walrus', 'Wolf', 'Wolverine', 'Wombat'];
+	var idx = Math.abs(i % animal_list.length);
+	return animal_list[idx];
 }
 
 function intToRGB(i){
@@ -99,5 +130,32 @@ function intToRGB(i){
     return "00000".substring(0, 6 - c.length) + c;
 }
 
+function getAllAnimals(){
+	var all_keys = firebase.database().ref('animals/').once('value').then(function(snapshot){
+		snapshot.forEach(child => {
+			var snapshot_result = child.val();
+			var tmp_uuid = snapshot_result.uuid;
+			animal_dict[tmp_uuid] = snapshot_result;
+			animal_dict['blob'] = '1';
+			// console.log(snapshot_result);
+			// ^ this is now the animal!
+			// console.log('getAllAnimals()-> this.animal_dict:');
+		});
+		console.log('finished getting');
+	});
+}
 
+function writeAnAnimal(obj, key) {
+	var new_key = firebase.database().ref('animals/').push().key;
+	var updates = {};
+	updates[key] = obj;
+	console.log('written to firebase');
+	return firebase.database().ref('animals/').update(updates);
 
+}
+
+function getCookie(name) {
+  var value = "; " + document.cookie;
+  var parts = value.split("; " + name + "=");
+  if (parts.length == 2) return parts.pop().split(";").shift();
+}
