@@ -26,11 +26,13 @@ class Animal {
 	}
 
 	getDiv() {
+
 		var tmp = '<div id=\''+this.uuid+'\' class=\'animal\' style=\'margin:0.5vmin; border: 4px solid black;\'>';
 		var stats = '<div class=\'animal stats\'>';
 		var name = '<div class=\'animal stats name\'>'+this.name+'</div>';
-		var type = '<div class=\'animal stats type\'>'+this.type+'</div>';
-		var food = '<div class=\'animal stats food\'>'+this.cookies+'</div>';
+		var type = '<div class=\'animal stats type\'>the '+this.type+'</div>';
+		var weight = (this.cookies + 4)+' lbs'
+		var food = '<div class=\'animal stats food\'>'+weight+'</div>';
 		var portrait = '<div class=\'animal portrait\'style=\'background-image: url(\"static/icons/'+this.type+'.png\"); background-color:'+this.bgcolor+'\'></div>';
 		console.log('getDiv');
 		return tmp+stats+name+type+food+'</div>'+portrait+'</div>';
@@ -70,6 +72,7 @@ $(document).ready(() => {
 		while (name.length > 7){
 			name = rn.first();
 		}
+		var prounoun = 'the';
 		animal = new Animal(uuid, name, 0);
 		animal_dict[uuid] = animal;
 		writeAnAnimal(animal, uuid);
@@ -88,8 +91,9 @@ function confirmAndDisplayAnimals(){
 			if (key == 'blob'){ continue; }
 			var tmp_animal = new Animal(key, animal_dict[key].name, animal_dict[key].cookies);
 			if (key == uuid){
+				console.log('this is u');
 				$('#self.animal .stats .name').html(tmp_animal.name);
-				$('#self.animal .stats .type').html(tmp_animal.type);
+				$('#self.animal .stats .type').html('the '+tmp_animal.type);
 				$('#self.animal .stats .food').html(tmp_animal.cookies);
 				$('#self.animal .portrait').css('background-color', tmp_animal.bgcolor);
 				$('#self.animal .portrait').css('background-image', 'url("static/icons/'+tmp_animal.type+'.png"');
