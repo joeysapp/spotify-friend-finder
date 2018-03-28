@@ -73,24 +73,18 @@ $(document).ready(() => {
 		}
 		animal = new Animal(uuid, name, 0);
 		animal_dict[uuid] = animal;
-		console.log('animal_dict: ');
-		console.log(animal_dict);
 		writeAnAnimal(animal, uuid);
 	} else {
-		console.log('Loading old animal');
 		// bring up their animal and highlight it on the grid
 		uuid = getCookie('uuidv4');
-		console.log('uuid: '+uuid);
 	}
 	getAllAnimals();
 	confirmAndDisplayAnimals();
 });
 
 function confirmAndDisplayAnimals(){
-	console.log('getting them...');
 	if (typeof animal_dict['blob'] !== 'undefined'){
 		// woo finally got dem
-		console.log('got all da danaimals');
 		for (var key in animal_dict){
 			if (key == 'blob'){ continue; }
 			var tmp_animal = new Animal(key, animal_dict[key].name, animal_dict[key].cookies);
@@ -102,7 +96,6 @@ function confirmAndDisplayAnimals(){
 				$('#self.animal .portrait').css('background-image', 'url("static/icons/'+tmp_animal.type+'.png"');
 			}
 			$('#animals').append(tmp_animal.getDiv());
-
 		}
 	} else {
 		setTimeout(confirmAndDisplayAnimals, 250);
@@ -142,7 +135,6 @@ function getAllAnimals(){
 			// ^ this is now the animal!
 			// console.log('getAllAnimals()-> this.animal_dict:');
 		});
-		console.log('finished getting');
 	});
 }
 
@@ -150,7 +142,6 @@ function writeAnAnimal(obj, key) {
 	var new_key = firebase.database().ref('animals/').push().key;
 	var updates = {};
 	updates[key] = obj;
-	console.log('written to firebase');
 	return firebase.database().ref('animals/').update(updates);
 
 }
