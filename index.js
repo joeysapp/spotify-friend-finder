@@ -94,7 +94,7 @@ function confirmAndDisplayAnimals(){
 				console.log('this is u');
 				$('#self.animal .stats .name').html(tmp_animal.name);
 				$('#self.animal .stats .type').html('the '+tmp_animal.type);
-				$('#self.animal .stats .food').html(tmp_animal.cookies);
+				$('#self.animal .stats .food').html(tmp_animal.cookies+4+' lbs');
 				$('#self.animal .portrait').css('background-color', tmp_animal.bgcolor);
 				$('#self.animal .portrait').css('background-image', 'url("static/icons/'+tmp_animal.type+'.png"');
 			}
