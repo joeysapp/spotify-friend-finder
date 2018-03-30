@@ -44,7 +44,15 @@ var animal;
 var animal_dict = {};
 var dled = false;
 
+function placeFeed() {
+	$('.feed').show();
+}
+
+setInterval(placeFeed, 5000);
+
+
 $(document).ready(() => {
+
 	// First, populate all animals!
 	// getAllAnimals((res) => {
 	// 	console.log('got all da animals');
@@ -55,10 +63,11 @@ $(document).ready(() => {
 
 	$('.feed').click(e => {
 		console.log('you fed ur pet a 🍪');
-		$('.feed').remove();
+		$('.feed').hide();
 		animal_dict[uuid].cookies += 1;
-		$('#self.animal .stats .food').text(Number($('#self.animal .stats .food').text())+1);
-		$('#'+uuid+'.animal .stats .food').text(Number($('#'+uuid+'.animal .stats .food').text()) + 1);
+		var new_poundage = animal_dict[uuid].cookies+4+' lbs';
+		$('#self.animal .stats .food').text(new_poundage);
+		$('#'+uuid+'.animal .stats .food').text(new_poundage);
 		writeAnAnimal(animal_dict[uuid], uuid);
 	});
 	// var fingerprint = require('browser-fingerprint')();
