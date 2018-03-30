@@ -49,7 +49,7 @@ function placeFeed() {
 	$('.feed').show();
 }
 
-setInterval(placeFeed, 5000);
+setInterval(placeFeed, 1500);
 
 
 $(document).ready(() => {
