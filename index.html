@@ -49,10 +49,11 @@
 		width: 100vw;
 		height:90vh;
 		padding: 0;
+		display:inline-flex;
 	}
 	.spotifyUser {
 		border: 3px solid black;
-		width: 50vw;
+		width: 30vw;
 		height: 20vh;
 		margin: 1vh;
 		padding: 1vh;
@@ -99,13 +100,11 @@
 				avatar: props.avatar
 			}
 			this.uuid = props.uuid;
-			this.favorite_artists = [];
+			this.favorite_artists = props.favorite_artists;
 		}
 
 		render() {
-			var favorite_artists = ['Kanye West', 'Alt-J', 'Sufjan Stevens', 'LCD Soundsystem', 'Lord Huron']
-
-			var listOfArtists = favorite_artists.map((artist) => 
+			var listOfArtists = this.favorite_artists.map((artist) => 
 				<li>{artist}</li>
 			);
 			return (
@@ -124,10 +123,31 @@
 			)
 		}
 	}
+	class UsersContainer extends React.Component {
+		constructor(props){
+			super();
+			this.users = props.users;
+		}
+
+		render(){
+			var listOfArtists = this.users.map((user) => 
+				<div>{user}</div>
+			);
+			return <div className='spotifyUsersContainer' style={{display:'flex'}}>{listOfArtists}</div>;
+		}
+	}
+
 	var mount = document.querySelector('#spotifyUsers');
 	var tmp = 'public/avatars/joeysapp.jpeg';
-	var joey = <SpotifyUser uuid='1' username='joeysapp' avatar={tmp}/>;
-	ReactDOM.render(joey, mount);
+
+	var favorite_artists = ['Kanye West', 'Alt-J', 'Sufjan Stevens', 'LCD Soundsystem', 'Lord Huron']
+	var joey = <SpotifyUser uuid='1' username='joeysapp' avatar={tmp} favorite_artists={favorite_artists} />;
+	var steve = <SpotifyUser uuid='1' username='steve' avatar={tmp}favorite_artists={favorite_artists} />;
+
+	var users = [joey, steve];
+	ReactDOM.render(<UsersContainer users={users} />, mount);
+
+
 </script>
 </div>
 
