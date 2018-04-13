@@ -1,32 +1,101 @@
-<body class='View'>
+<!DOCTYPE html>
+<html>
 <head>
+	<meta charset='utf-8'>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
 	<title>joeysapp.github.io</title>
-	<style>
-		body {
-			margin: 0;
-		}
-    </style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.1/react-dom.min.js"></script>
+	<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
 </head>
+<style>
+	@font-face {
+		font-family: incons;
+		src: url(static/incons.ttf);
+	}
+	body {
+		font-family: incons;
+		font-size: 3vh;
+		margin: 0px;
+	}
+	#header {
+		position:relative;
+		height:6vh;
+	}
+	#self {
+		position:absolute;
+		bottom:1vh;
+		left:1vh;
+	}
+	a:link {
+		color:white;
+	}
+	a:visited {
+		color:white;
+	}
+	#navbar {
+		background: black;
+		width:100%;
+		height:4vh;
+		padding-left:1vh;
+	}
+	#spotifyusers {
+		margin: 0;
+		border: 3px solid black;
+		width: 100vw;
+		height:90vh;
+		padding: 1vw;
+	}
+	.spotifyuser {
+		border: 3px solid black;
+		width: 50vw;
+		height: 20vh;
+	}
 
-<div class='header'>
+</style>
+
+<body>
+<div id='header'>
 	<div id='self'>Joey Sapp</div>
 </div>
 
-<div class='navbar'>
+<div id='navbar'>
 	<div id='urls'>
 		<a href='https://github.com/joeysapp'>github</a>
 		<a href='https://linkedin.com/in/joeysapp'>linkedin</a>
 		<a href='https://lastfm.com/joeysapp'>lastfm</a>
 		<a href='https://instagram.com/joeysapp'>instagram</a>
-		<a href='https://strava.com/athletes/joeysapp'>strava</a>
 	</div>
 </div>
 
-<div class='content'>
+<div id='spotifyusers'>
+<script type='text/babel'>
+	class SpotifyUser extends React.Component {
+		constructor(props){
+			super();
+			this.uuid = props.uuid;
+			this.username = props.username;
+			this.favorite_artists = [];
+		}
 
+		render() {
+			var favorite_artists = ['Yeezus', 'Alt-J', 'My man Jeffery']
+			var listOfArtists = favorite_artists.map((artist) => 
+				<li>{artist}</li>
+			);
+			return (
+				<div className='spotifyuser'>
+					<div className='username'>{this.username}</div>
+					<div className='favorite_artists'>{listOfArtists}</div>
+				</div>
+			)
+		}
+	}
+	var mount = document.querySelector('#spotifyusers');
+	var joey = <SpotifyUser uuid='1' username='joeysapp' />;
+	ReactDOM.render(joey, mount);
+</script>
 </div>
 
 </div>
-<footer></footer>
 </body>
