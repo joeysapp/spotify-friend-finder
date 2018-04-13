@@ -1,185 +1,31 @@
 <body class='View'>
 <head>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
-	<!-- <script src="index.js"></script> -->
-	<script src="bundle.js"></script>
 	<title>joeysapp.github.io</title>
 	<style>
-	body {
-		margin: 0;
-	}
-
-	.header {
-		min-height:10vh;
-		min-width:100vw;
-		max-width:100vw;
-		position:relative;
-	}
-
-	.header #self {
-		position:absolute;
-		bottom:-1px;
-		left:8vmin;
-		font-size:6vmin;
-		font-family: Helvetica-Bold, Helvetica;
-	}
-
-	.navbar {
-		background-color: black;
-		padding-left:8vmin;
-		font-size:4vmin;
-		font-family: Courier-New, Courier;
-
-
-	}
-	.navbar a {
-		color:white;
-	}
-	.content {
-		min-height:20vh;
-		display: flex;
-		border: 2vmin solid black;
-	}
-
-	.content #description {
-		width: 50%;
-		margin: 0;
-		font-size: 3vmin;
-		justify-content: center;
-		align-items: center;
-	}
-
-	.content #demo {
-		width: 50%;
-		margin: 0;
-		justify-content: center;
-		align-items: center;
-		background-color:white;
-
-	}
-
-	.content .emoji {
-		font-size: 5vmin;
-		margin:0.2em;
-		vertical-align: middle;
-		line-height:2;
-	}
-
-	#animals {
-		display: flex;
-		flex-wrap: wrap;
-		align-items:center;
-		justify-content:center;
-		/*min-height: 100vh;*/
-	}
-
-	.animal {
-		display: flex;
-		flex-direction: row;
-		min-height: 16vmin;
-		min-width: 16vmin;
-		max-width: 32vmin;
-		align-items: center;
-		justify-content: flex-end;
-	}
-	.animal .stats {
-		border: 0;
-		background-color:white;
-		display:flex;
-		flex-direction:column;
-		justify-content: center;
-	}
-	.animal .stats .name {
-		border: 0;
-		font-size: 4vmin;
-		font-family: Helvetica-Neue, Helvetica;
-		min-height:0;
-	}
-	.animal .stats .type {
-		font-size: 1.8vmin;
-		font-style: italic;
-		font-family: Helvetica;
-		color:grey;
-		min-height:0;
-	}
-	.animal .stats .food {
-		font-family: Courier;
-		font-size: 2.4vmin;
-		line-height:2;
-		min-height:0;
-	}
-
-	.animal .portrait {
-		background-color:blue;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: 14vmin 14vmin;
-		position:relative;
-	}
-
-	.animal .activity {
-		background-color:white;
-	}
-
-	.feed {
-		font-size: 10vmin;
-		position:absolute;
-		align-items: right;
-		top:-5vmin;
-		right:-3vmin;
-		animation: pulse 1s infinite;
-		align-content: center;
-		justify-content: center;
-
-	}
-
-	@keyframes pulse {
-		0% {
-			font-size: 8vmin;
-			position: ;
+		body {
+			margin: 0;
 		}
-		50% {
-			font-size: 10vmin;
-		}
-		100% {
-			font-size: 8vmin;
-		}
-	}
-
     </style>
 </head>
+
 <div class='header'>
 	<div id='self'>Joey Sapp</div>
 </div>
+
 <div class='navbar'>
 	<div id='urls'>
 		<a href='https://github.com/joeysapp'>github</a>
 		<a href='https://linkedin.com/in/joeysapp'>linkedin</a>
-		<a href='https://instagram.com/joeysapp'>instagram</a>
 		<a href='https://lastfm.com/joeysapp'>lastfm</a>
+		<a href='https://instagram.com/joeysapp'>instagram</a>
+		<a href='https://strava.com/athletes/joeysapp'>strava</a>
 	</div>
 </div>
+
 <div class='content'>
-	<div class='content' id='description'>
-		Howdy! Here's a cookie! <span class='emoji'>🍪</span>
-	</div>
-	<div class='content' id='demo'>
-		<div id='self' class='animal'>
-			<div class='animal stats'>
-				<div class='animal stats name'></div>
-				<div class='animal stats type'></div>
-				<div class='animal stats food'></div>
-			</div>
-			<div class='animal portrait'>
-				<div class='feed'>🍪</div>
 
-			</div>
-
-		</div>
-	</div>
 </div>
-
-<div id='animals'>
 
 </div>
 <footer></footer>
