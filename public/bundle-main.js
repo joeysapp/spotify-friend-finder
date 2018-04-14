@@ -45124,9 +45124,7 @@ $(document).ready(() => {
 	});
 });
 
-// var listOfArtists = this.top_artists.map((artist) => 
-// 	<li key={artist}>{artist}</li>
-// );
+
 
 class SpotifyUser extends React.Component {
 	constructor(props){
