@@ -45138,7 +45138,10 @@ class TopArtists extends React.Component {
 
 	render() {
 		var listOfArtists = this.state.artists.map((artist) => 
-			React.createElement("div", {key: artist.name}, artist.name)
+			React.createElement("div", {key: artist.name, className: "spotifyArtist"}, 
+				React.createElement("img", {className: "spotifyArtistImage", src: artist.images[0].url, alt: artist.name}), 
+				React.createElement("div", {classname: "spotifyArtistName"}, artist.name)
+			)
 		);
 		return (
 			React.createElement("div", {style: {overflow: 'auto'}, className: "spotifyTopArtists"}, 
