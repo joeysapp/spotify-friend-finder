@@ -90,7 +90,7 @@ class UsersContainer extends React.Component {
 
 	render(){
 		var listOfUsers = this.state.users.map((user) => 
-			<div key={uuidv4()}>{user}</div>
+			<div key={user.props.uuid}>{user}</div>
 		);
 		return (
 		<div>

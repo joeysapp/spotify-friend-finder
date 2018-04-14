@@ -45175,7 +45175,7 @@ class UsersContainer extends React.Component {
 
 	render(){
 		var listOfUsers = this.state.users.map((user) => 
-			React.createElement("div", {key: uuidv4()}, user)
+			React.createElement("div", {key: user.props.uuid}, user)
 		);
 		return (
 		React.createElement("div", null, 
