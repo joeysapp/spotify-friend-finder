@@ -45262,7 +45262,7 @@ class UsersContainer extends React.Component {
 		);
 		var authButton;
 		if (this.state.authenticated === true){
-			authButton = '';
+			authButton = React.createElement("div", {className: "spotifySelfContainer", style: { height: '10vh'}}, this.state.self);
 		} else {
 			authButton = React.createElement("div", {className: "authenticateButton"}, 
 				React.createElement("a", {href: "http://50.24.61.224:8000/login", style: { display: 'hidden'}}, " Link Spotify Statistics")
@@ -45271,7 +45271,6 @@ class UsersContainer extends React.Component {
 		return (
 		React.createElement("div", null, 
 			authButton, 
-			React.createElement("div", {className: "spotifySelfContainer"}, this.state.self), 
 			React.createElement("div", {className: "spotifyUsersContainer", style: { flexWrap: 'wrap'}}, listOfUsers)
 		)
 		);
