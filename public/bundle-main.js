@@ -45121,9 +45121,9 @@ firebase.database().ref('users').on('value', (user_list) => {
 		if (uuid != GLOBAL_UUID){
 			users.push(tmp_user);
 		} else {
-			GLOBAL_SELF = tmp_user;
+			GLOBAL_SELF = React.createElement(SpotifyUser, {uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played});
 		}
-		user_container = React.createElement(UsersContainer, {self: GLOBAL_SELF, users: users})
+		user_container = React.createElement(UsersContainer, {self: GLOBAL_SELF, users: users, authenticated: (typeof GLOBAL_UUID !== 'undefined')})
 		ReactDOM.render(user_container, mount);
 
 	});
@@ -45274,8 +45274,8 @@ class UsersContainer extends React.Component {
 
 var mount = document.querySelector('#spotifyUsers');
 
-var user_container = React.createElement(UsersContainer, {self: GLOBAL_SELF, users: users, authenticated: (typeof GLOBAL_UUID !== 'undefined')})
-ReactDOM.render(user_container, mount);
+// var user_container = <UsersContainer self={GLOBAL_SELF} users={users} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
+// ReactDOM.render(user_container, mount);
 
 },{"firebase":175,"react":187,"react-dom":183,"uuid-v4":190}],192:[function(require,module,exports){
 // shim for using process in browser
