@@ -36,6 +36,7 @@ firebase.database().ref('users').on('value', (user_list) => {
 		} else {
 			console.log('saw u');
 			GLOBAL_SELF = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
+			user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
 			ReactDOM.render(user_container, mount);
 		}
 		user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
@@ -156,6 +157,7 @@ class UsersContainer extends React.Component {
 
 	componentDidMount() {
 		console.log('cpomonentn moutnetned!');
+		console.log(GLOBAL_SELF);
 		this.setState({self: GLOBAL_SELF});
 	}
 
