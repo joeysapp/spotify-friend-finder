@@ -45113,8 +45113,8 @@ firebase.database().ref('users').on('value', (user_list) => {
 			avatar = 'public/avatars/empty.png';
 		}
 		var artists = user.artists;
-		var now_playing = user.now_playing;
-		var tmp_user = React.createElement(SpotifyUser, {uuid: uuid, username: username, avatar: avatar, artists: artists, now_playing: now_playing});
+		var recently_played = user['recently-played'];
+		var tmp_user = React.createElement(SpotifyUser, {uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played});
 		users.push(tmp_user);
 		user_container = React.createElement(UsersContainer, {users: users})
 		ReactDOM.render(user_container, mount);
@@ -45185,7 +45185,7 @@ class SpotifyUser extends React.Component {
 		this.user = {
 			username: props.username,
 			avatar: props.avatar,
-			now_playing: props.now_playing
+			recently_played: props.recently_played
 		}
 		this.uuid = props.uuid;
 		this.key = props.uuid;
@@ -45193,13 +45193,12 @@ class SpotifyUser extends React.Component {
 	}
 
 	render() {
-		var now_playing;
+		var recently_played;
 		var href = '';
 
-		
-		if (typeof this.user['recently-played'] !== 'undefined'){
-			var track = this.user['recently-played'].items[0];
-			now_playing = track.name + ' - ' + track.artists[0].name;
+		if (typeof this.user.recently_played !== 'undefined'){
+			var track = this.user.recently_played.items[0];
+			last_played = track.name + ' - ' + track.artists[0].name;
 			href = track.external_urls.spotify;
 		}
 
@@ -45211,7 +45210,7 @@ class SpotifyUser extends React.Component {
 					React.createElement("div", {className: "spotifyUserContent", style: {display:'inline-block'}}, 
 						React.createElement("div", {className: "spotifyUsername"}, this.user.username), 
 						React.createElement("div", {className: "spotifyLastPlayed"}, 
-							"Last Played: ", React.createElement("a", {href: href}, now_playing)
+							"Last Played: ", React.createElement("a", {href: href}, last_played)
 						)
 					)
 				), 
