@@ -45087,6 +45087,9 @@ exports.random = function() {
 },{}],191:[function(require,module,exports){
 var users = [];
 
+var GLOBAL_UUID = null;
+var GLOBAL_SELF = null;
+
 var React = require('react');
 var ReactDOM = require('react-dom');
 
@@ -45115,14 +45118,16 @@ firebase.database().ref('users').on('value', (user_list) => {
 		var artists = user.artists;
 		var recently_played = user['recently-played'];
 		var tmp_user = React.createElement(SpotifyUser, {uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played});
-		users.push(tmp_user);
-		user_container = React.createElement(UsersContainer, {users: users})
+		if (uuid != GLOBAL_UUID){
+			users.push(tmp_user);
+		} else {
+			GLOBAL_SELF = tmp_user;
+		}
+		user_container = React.createElement(UsersContainer, {self: GLOBAL_SELF, users: users})
 		ReactDOM.render(user_container, mount);
 
 	});
 });
-
-var GLOBAL_UUID = null;
 
 //https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript/901144#12151322
 function getParameterByName(name) {
@@ -45227,6 +45232,7 @@ class UsersContainer extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
+			self: props.self,
 			users: props.users,
 			authenticated: props.authenticated
 		};
@@ -45259,6 +45265,7 @@ class UsersContainer extends React.Component {
 		return (
 		React.createElement("div", null, 
 			authButton, 
+			React.createElement("div", {className: "spotifySelfContainer"}, this.state.self), 
 			React.createElement("div", {className: "spotifyUsersContainer", style: { flexWrap: 'wrap'}}, listOfUsers)
 		)
 		);
@@ -45267,9 +45274,9 @@ class UsersContainer extends React.Component {
 
 var mount = document.querySelector('#spotifyUsers');
 
-console.log('true or not? ' + (GLOBAL_UUID == null));
+console.log('true or not? ' + (typeof GLOBAL_UUID === 'undefined'));
 
-var user_container = React.createElement(UsersContainer, {users: users, authenticated: GLOBAL_UUID == null})
+var user_container = React.createElement(UsersContainer, {users: users, authenticated: (typeof GLOBAL_UUID === 'undefined')})
 ReactDOM.render(user_container, mount);
 
 },{"firebase":175,"react":187,"react-dom":183,"uuid-v4":190}],192:[function(require,module,exports){
