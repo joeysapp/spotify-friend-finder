@@ -30,17 +30,6 @@ firebase.database().ref('users').on('value', (user_list) => {
 
 $(document).ready(() => {
 	console.log('document.ready()');
-
-
-	console.log(document.cookies);
-
-	$(document).click(() => {
-		console.log(user_container);
-		mount = document.querySelector('#spotifyUsers');
-
-		console.log(user_container);
-		ReactDOM.render(user_container, mount);
-	});
 });
 
 class TopArtists extends React.Component {
@@ -53,7 +42,6 @@ class TopArtists extends React.Component {
 
 	render() {
 		var artistGenres = this.state.artists.map((artist) => {
-			console.log(artist.genres);
 			<div className='spotifyArtistGenre'>{artist.genres}</div>
 
 		});
