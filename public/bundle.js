@@ -35,8 +35,25 @@ firebase.database().ref('users').on('value', (user_list) => {
 	});
 });
 
+var GLOBAL_UUID;
+
+//https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript/901144#12151322
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
 $(document).ready(() => {
 	console.log('document.ready()');
+	console.log(getParameterByName('client_id'));
+
+	if (document.cookie.indexOf('spotify-uuid') == -1){
+		// document.cookie = `spotify-uuid=${}`;
+		console.log('never been here before');
+	} else {
+		console.log('nah ive bene here');
+	}
+	console.log(GLOBAL_UUID)
 });
 
 class TopArtists extends React.Component {

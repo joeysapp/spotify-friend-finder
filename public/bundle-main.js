@@ -1064,7 +1064,7 @@ exports.DatabaseInternals = DatabaseInternals;
 
 
 
-},{"../core/Repo":17,"../core/RepoManager":19,"../core/util/Path":57,"../core/util/libs/parser":62,"../core/util/util":63,"../core/util/validation":64,"./Reference":8,"@firebase/util":141,"tslib":188}],7:[function(require,module,exports){
+},{"../core/Repo":17,"../core/RepoManager":19,"../core/util/Path":57,"../core/util/libs/parser":62,"../core/util/util":63,"../core/util/validation":64,"./Reference":8,"@firebase/util":141,"tslib":189}],7:[function(require,module,exports){
 "use strict";
 /**
  * Copyright 2017 Google Inc.
@@ -1873,7 +1873,7 @@ SyncPoint_1.SyncPoint.__referenceConstructor = Reference;
 
 
 
-},{"../core/Repo":17,"../core/SyncPoint":24,"../core/util/NextPushId":55,"../core/util/Path":57,"../core/util/util":63,"../core/util/validation":64,"../core/view/QueryParams":73,"./Query":7,"./TransactionResult":9,"./onDisconnect":11,"@firebase/util":141,"tslib":188}],9:[function(require,module,exports){
+},{"../core/Repo":17,"../core/SyncPoint":24,"../core/util/NextPushId":55,"../core/util/Path":57,"../core/util/util":63,"../core/util/validation":64,"../core/view/QueryParams":73,"./Query":7,"./TransactionResult":9,"./onDisconnect":11,"@firebase/util":141,"tslib":189}],9:[function(require,module,exports){
 "use strict";
 /**
  * Copyright 2017 Google Inc.
@@ -3280,7 +3280,7 @@ exports.PersistentConnection = PersistentConnection;
 
 
 
-},{"../realtime/Connection":81,"./ServerActions":21,"./util/OnlineMonitor":56,"./util/Path":57,"./util/VisibilityMonitor":61,"./util/util":63,"@firebase/app":1,"@firebase/util":141,"tslib":188}],16:[function(require,module,exports){
+},{"../realtime/Connection":81,"./ServerActions":21,"./util/OnlineMonitor":56,"./util/Path":57,"./util/VisibilityMonitor":61,"./util/util":63,"@firebase/app":1,"@firebase/util":141,"tslib":189}],16:[function(require,module,exports){
 "use strict";
 /**
  * Copyright 2017 Google Inc.
@@ -3463,7 +3463,7 @@ exports.ReadonlyRestClient = ReadonlyRestClient;
 
 
 
-},{"./ServerActions":21,"./util/util":63,"@firebase/util":141,"tslib":188}],17:[function(require,module,exports){
+},{"./ServerActions":21,"./util/util":63,"@firebase/util":141,"tslib":189}],17:[function(require,module,exports){
 "use strict";
 /**
  * Copyright 2017 Google Inc.
@@ -7512,7 +7512,7 @@ PriorityIndex_1.setMaxNode(exports.MAX_NODE);
 
 
 
-},{"../util/SortedMap":59,"../util/util":63,"./IndexMap":33,"./LeafNode":34,"./Node":35,"./comparators":37,"./indexes/KeyIndex":39,"./indexes/PriorityIndex":41,"./snap":44,"@firebase/util":141,"tslib":188}],33:[function(require,module,exports){
+},{"../util/SortedMap":59,"../util/util":63,"./IndexMap":33,"./LeafNode":34,"./Node":35,"./comparators":37,"./indexes/KeyIndex":39,"./indexes/PriorityIndex":41,"./snap":44,"@firebase/util":141,"tslib":189}],33:[function(require,module,exports){
 "use strict";
 /**
  * Copyright 2017 Google Inc.
@@ -8327,7 +8327,7 @@ exports.KEY_INDEX = new KeyIndex();
 
 
 
-},{"../../util/util":63,"../Node":35,"./Index":38,"@firebase/util":141,"tslib":188}],40:[function(require,module,exports){
+},{"../../util/util":63,"../Node":35,"./Index":38,"@firebase/util":141,"tslib":189}],40:[function(require,module,exports){
 "use strict";
 /**
  * Copyright 2017 Google Inc.
@@ -8420,7 +8420,7 @@ exports.PathIndex = PathIndex;
 
 
 
-},{"../../util/util":63,"../ChildrenNode":32,"../Node":35,"../nodeFromJSON":43,"./Index":38,"@firebase/util":141,"tslib":188}],41:[function(require,module,exports){
+},{"../../util/util":63,"../ChildrenNode":32,"../Node":35,"../nodeFromJSON":43,"./Index":38,"@firebase/util":141,"tslib":189}],41:[function(require,module,exports){
 "use strict";
 /**
  * Copyright 2017 Google Inc.
@@ -8523,7 +8523,7 @@ exports.PRIORITY_INDEX = new PriorityIndex();
 
 
 
-},{"../../util/util":63,"../LeafNode":34,"../Node":35,"./Index":38,"tslib":188}],42:[function(require,module,exports){
+},{"../../util/util":63,"../LeafNode":34,"../Node":35,"./Index":38,"tslib":189}],42:[function(require,module,exports){
 "use strict";
 /**
  * Copyright 2017 Google Inc.
@@ -8614,7 +8614,7 @@ exports.VALUE_INDEX = new ValueIndex();
 
 
 
-},{"../../util/util":63,"../Node":35,"../nodeFromJSON":43,"./Index":38,"tslib":188}],43:[function(require,module,exports){
+},{"../../util/util":63,"../Node":35,"../nodeFromJSON":43,"./Index":38,"tslib":189}],43:[function(require,module,exports){
 "use strict";
 /**
  * Copyright 2017 Google Inc.
@@ -9870,7 +9870,7 @@ exports.OnlineMonitor = OnlineMonitor;
 
 
 
-},{"./EventEmitter":53,"@firebase/util":141,"tslib":188}],57:[function(require,module,exports){
+},{"./EventEmitter":53,"@firebase/util":141,"tslib":189}],57:[function(require,module,exports){
 "use strict";
 /**
  * Copyright 2017 Google Inc.
@@ -11275,7 +11275,7 @@ exports.VisibilityMonitor = VisibilityMonitor;
 
 
 
-},{"./EventEmitter":53,"@firebase/util":141,"tslib":188}],62:[function(require,module,exports){
+},{"./EventEmitter":53,"@firebase/util":141,"tslib":189}],62:[function(require,module,exports){
 "use strict";
 /**
  * Copyright 2017 Google Inc.
@@ -16896,7 +16896,7 @@ exports.WebSocketConnection = WebSocketConnection;
 
 
 }).call(this,require('_process'))
-},{"../core/stats/StatsManager":47,"../core/storage/storage":51,"../core/util/util":63,"./Constants":82,"@firebase/app":1,"@firebase/util":141,"_process":191}],85:[function(require,module,exports){
+},{"../core/stats/StatsManager":47,"../core/storage/storage":51,"../core/util/util":63,"./Constants":82,"@firebase/app":1,"@firebase/util":141,"_process":192}],85:[function(require,module,exports){
 "use strict";
 /**
  * Copyright 2017 Google Inc.
@@ -17576,7 +17576,7 @@ exports.default = ControllerInterface;
 
 
 
-},{"../helpers/array-buffer-to-base64":92,"../models/errors":97,"../models/iid-model":99,"../models/notification-permission":100,"../models/token-details-model":101,"../models/vapid-details-model":102,"@firebase/util":141,"tslib":188}],90:[function(require,module,exports){
+},{"../helpers/array-buffer-to-base64":92,"../models/errors":97,"../models/iid-model":99,"../models/notification-permission":100,"../models/token-details-model":101,"../models/vapid-details-model":102,"@firebase/util":141,"tslib":189}],90:[function(require,module,exports){
 /**
  * Copyright 2017 Google Inc.
  *
@@ -17909,7 +17909,7 @@ exports.default = SWController;
 
 
 
-},{"../models/errors":97,"../models/fcm-details":98,"../models/worker-page-message":103,"./controller-interface":89,"tslib":188}],91:[function(require,module,exports){
+},{"../models/errors":97,"../models/fcm-details":98,"../models/worker-page-message":103,"./controller-interface":89,"tslib":189}],91:[function(require,module,exports){
 /**
  * Copyright 2017 Google Inc.
  *
@@ -18281,7 +18281,7 @@ exports.default = WindowController;
 
 
 
-},{"../helpers/base64-to-array-buffer":93,"../models/default-sw":96,"../models/errors":97,"../models/fcm-details":98,"../models/notification-permission":100,"../models/worker-page-message":103,"./controller-interface":89,"@firebase/util":141,"tslib":188}],92:[function(require,module,exports){
+},{"../helpers/base64-to-array-buffer":93,"../models/default-sw":96,"../models/errors":97,"../models/fcm-details":98,"../models/notification-permission":100,"../models/worker-page-message":103,"./controller-interface":89,"@firebase/util":141,"tslib":189}],92:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
@@ -19234,7 +19234,7 @@ exports.default = TokenDetailsModel;
 
 
 
-},{"../helpers/array-buffer-to-base64":92,"./clean-v1-undefined":94,"./db-interface":95,"./errors":97,"tslib":188}],102:[function(require,module,exports){
+},{"../helpers/array-buffer-to-base64":92,"./clean-v1-undefined":94,"./db-interface":95,"./errors":97,"tslib":189}],102:[function(require,module,exports){
 /**
  * Copyright 2017 Google Inc.
  *
@@ -19365,7 +19365,7 @@ exports.default = VapidDetailsModel;
 
 
 
-},{"./db-interface":95,"./errors":97,"tslib":188}],103:[function(require,module,exports){
+},{"./db-interface":95,"./errors":97,"tslib":189}],103:[function(require,module,exports){
 /**
  * Copyright 2017 Google Inc.
  *
@@ -19473,7 +19473,7 @@ if (typeof Promise === 'undefined') {
 
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{"promise-polyfill":179}],106:[function(require,module,exports){
+},{"promise-polyfill":178}],106:[function(require,module,exports){
 /**
  * Copyright 2017 Google Inc.
  *
@@ -24945,7 +24945,7 @@ exports.Sha1 = Sha1;
 
 
 
-},{"./hash":149,"tslib":188}],155:[function(require,module,exports){
+},{"./hash":149,"tslib":189}],155:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 /**
@@ -25570,7 +25570,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = emptyObject;
 }).call(this,require('_process'))
-},{"_process":191}],164:[function(require,module,exports){
+},{"_process":192}],164:[function(require,module,exports){
 'use strict';
 
 /**
@@ -25731,7 +25731,7 @@ function invariant(condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":191}],168:[function(require,module,exports){
+},{"_process":192}],168:[function(require,module,exports){
 'use strict';
 
 /**
@@ -25908,7 +25908,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 module.exports = warning;
 }).call(this,require('_process'))
-},{"./emptyFunction":162,"_process":191}],172:[function(require,module,exports){
+},{"./emptyFunction":162,"_process":192}],172:[function(require,module,exports){
 /**
  * Copyright 2017 Google Inc.
  *
@@ -26030,98 +26030,6 @@ require('@firebase/messaging');
 require('@firebase/storage');
 
 },{"@firebase/storage":108}],178:[function(require,module,exports){
-/*
-object-assign
-(c) Sindre Sorhus
-@license MIT
-*/
-
-'use strict';
-/* eslint-disable no-unused-vars */
-var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-var hasOwnProperty = Object.prototype.hasOwnProperty;
-var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-function toObject(val) {
-	if (val === null || val === undefined) {
-		throw new TypeError('Object.assign cannot be called with null or undefined');
-	}
-
-	return Object(val);
-}
-
-function shouldUseNative() {
-	try {
-		if (!Object.assign) {
-			return false;
-		}
-
-		// Detect buggy property enumeration order in older V8 versions.
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
-		test1[5] = 'de';
-		if (Object.getOwnPropertyNames(test1)[0] === '5') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test2 = {};
-		for (var i = 0; i < 10; i++) {
-			test2['_' + String.fromCharCode(i)] = i;
-		}
-		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-			return test2[n];
-		});
-		if (order2.join('') !== '0123456789') {
-			return false;
-		}
-
-		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-		var test3 = {};
-		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-			test3[letter] = letter;
-		});
-		if (Object.keys(Object.assign({}, test3)).join('') !==
-				'abcdefghijklmnopqrst') {
-			return false;
-		}
-
-		return true;
-	} catch (err) {
-		// We don't expect any of the above to throw, but better to be safe.
-		return false;
-	}
-}
-
-module.exports = shouldUseNative() ? Object.assign : function (target, source) {
-	var from;
-	var to = toObject(target);
-	var symbols;
-
-	for (var s = 1; s < arguments.length; s++) {
-		from = Object(arguments[s]);
-
-		for (var key in from) {
-			if (hasOwnProperty.call(from, key)) {
-				to[key] = from[key];
-			}
-		}
-
-		if (getOwnPropertySymbols) {
-			symbols = getOwnPropertySymbols(from);
-			for (var i = 0; i < symbols.length; i++) {
-				if (propIsEnumerable.call(from, symbols[i])) {
-					to[symbols[i]] = from[symbols[i]];
-				}
-			}
-		}
-	}
-
-	return to;
-};
-
-},{}],179:[function(require,module,exports){
 'use strict';
 
 // Store setTimeout reference so promise-polyfill will be unaffected by
@@ -26365,7 +26273,7 @@ Promise._unhandledRejectionFn = function _unhandledRejectionFn(err) {
 
 module.exports = Promise;
 
-},{}],180:[function(require,module,exports){
+},{}],179:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
@@ -26428,7 +26336,7 @@ function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
 module.exports = checkPropTypes;
 
 }).call(this,require('_process'))
-},{"./lib/ReactPropTypesSecret":181,"_process":191,"fbjs/lib/invariant":167,"fbjs/lib/warning":171}],181:[function(require,module,exports){
+},{"./lib/ReactPropTypesSecret":180,"_process":192,"fbjs/lib/invariant":167,"fbjs/lib/warning":171}],180:[function(require,module,exports){
 /**
  * Copyright (c) 2013-present, Facebook, Inc.
  *
@@ -26442,7 +26350,7 @@ var ReactPropTypesSecret = 'SECRET_DO_NOT_PASS_THIS_OR_YOU_WILL_BE_FIRED';
 
 module.exports = ReactPropTypesSecret;
 
-},{}],182:[function(require,module,exports){
+},{}],181:[function(require,module,exports){
 (function (process){
 /** @license React v16.3.1
  * react-dom.development.js
@@ -43070,7 +42978,7 @@ module.exports = reactDom;
 }
 
 }).call(this,require('_process'))
-},{"_process":191,"fbjs/lib/ExecutionEnvironment":158,"fbjs/lib/camelizeStyleName":160,"fbjs/lib/containsNode":161,"fbjs/lib/emptyFunction":162,"fbjs/lib/emptyObject":163,"fbjs/lib/getActiveElement":164,"fbjs/lib/hyphenateStyleName":166,"fbjs/lib/invariant":167,"fbjs/lib/shallowEqual":170,"fbjs/lib/warning":171,"object-assign":178,"prop-types/checkPropTypes":180,"react":187}],183:[function(require,module,exports){
+},{"_process":192,"fbjs/lib/ExecutionEnvironment":158,"fbjs/lib/camelizeStyleName":160,"fbjs/lib/containsNode":161,"fbjs/lib/emptyFunction":162,"fbjs/lib/emptyObject":163,"fbjs/lib/getActiveElement":164,"fbjs/lib/hyphenateStyleName":166,"fbjs/lib/invariant":167,"fbjs/lib/shallowEqual":170,"fbjs/lib/warning":171,"object-assign":184,"prop-types/checkPropTypes":179,"react":187}],182:[function(require,module,exports){
 /** @license React v16.3.1
  * react-dom.production.min.js
  *
@@ -43317,7 +43225,7 @@ var Gg={createPortal:Fg,findDOMNode:function(a){if(null==a)return null;if(1===a.
 D("40");return a._reactRootContainer?(X.unbatchedUpdates(function(){Eg(null,null,a,!1,function(){a._reactRootContainer=null})}),!0):!1},unstable_createPortal:function(){return Fg.apply(void 0,arguments)},unstable_batchedUpdates:X.batchedUpdates,unstable_deferredUpdates:X.deferredUpdates,flushSync:X.flushSync,unstable_flushControlled:X.flushControlled,__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{EventPluginHub:Qa,EventPluginRegistry:xa,EventPropagators:jb,ReactControlledComponent:Zb,ReactDOMComponentTree:Xa,
 ReactDOMEventListener:Zd},unstable_createRoot:function(a,b){return new sg(a,!0,null!=b&&!0===b.hydrate)}};X.injectIntoDevTools({findFiberByHostInstance:Ta,bundleType:0,version:"16.3.1",rendererPackageName:"react-dom"});var Hg=Object.freeze({default:Gg}),Ig=Hg&&Gg||Hg;module.exports=Ig["default"]?Ig["default"]:Ig;
 
-},{"fbjs/lib/ExecutionEnvironment":158,"fbjs/lib/containsNode":161,"fbjs/lib/emptyFunction":162,"fbjs/lib/emptyObject":163,"fbjs/lib/getActiveElement":164,"fbjs/lib/shallowEqual":170,"object-assign":178,"react":187}],184:[function(require,module,exports){
+},{"fbjs/lib/ExecutionEnvironment":158,"fbjs/lib/containsNode":161,"fbjs/lib/emptyFunction":162,"fbjs/lib/emptyObject":163,"fbjs/lib/getActiveElement":164,"fbjs/lib/shallowEqual":170,"object-assign":184,"react":187}],183:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -43359,7 +43267,99 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react-dom.development.js":182,"./cjs/react-dom.production.min.js":183,"_process":191}],185:[function(require,module,exports){
+},{"./cjs/react-dom.development.js":181,"./cjs/react-dom.production.min.js":182,"_process":192}],184:[function(require,module,exports){
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+'use strict';
+/* eslint-disable no-unused-vars */
+var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+var propIsEnumerable = Object.prototype.propertyIsEnumerable;
+
+function toObject(val) {
+	if (val === null || val === undefined) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+function shouldUseNative() {
+	try {
+		if (!Object.assign) {
+			return false;
+		}
+
+		// Detect buggy property enumeration order in older V8 versions.
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=4118
+		var test1 = new String('abc');  // eslint-disable-line no-new-wrappers
+		test1[5] = 'de';
+		if (Object.getOwnPropertyNames(test1)[0] === '5') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test2 = {};
+		for (var i = 0; i < 10; i++) {
+			test2['_' + String.fromCharCode(i)] = i;
+		}
+		var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
+			return test2[n];
+		});
+		if (order2.join('') !== '0123456789') {
+			return false;
+		}
+
+		// https://bugs.chromium.org/p/v8/issues/detail?id=3056
+		var test3 = {};
+		'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
+			test3[letter] = letter;
+		});
+		if (Object.keys(Object.assign({}, test3)).join('') !==
+				'abcdefghijklmnopqrst') {
+			return false;
+		}
+
+		return true;
+	} catch (err) {
+		// We don't expect any of the above to throw, but better to be safe.
+		return false;
+	}
+}
+
+module.exports = shouldUseNative() ? Object.assign : function (target, source) {
+	var from;
+	var to = toObject(target);
+	var symbols;
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = Object(arguments[s]);
+
+		for (var key in from) {
+			if (hasOwnProperty.call(from, key)) {
+				to[key] = from[key];
+			}
+		}
+
+		if (getOwnPropertySymbols) {
+			symbols = getOwnPropertySymbols(from);
+			for (var i = 0; i < symbols.length; i++) {
+				if (propIsEnumerable.call(from, symbols[i])) {
+					to[symbols[i]] = from[symbols[i]];
+				}
+			}
+		}
+	}
+
+	return to;
+};
+
+},{}],185:[function(require,module,exports){
 (function (process){
 /** @license React v16.3.1
  * react.development.js
@@ -44772,7 +44772,7 @@ module.exports = react;
 }
 
 }).call(this,require('_process'))
-},{"_process":191,"fbjs/lib/emptyFunction":162,"fbjs/lib/emptyObject":163,"fbjs/lib/invariant":167,"fbjs/lib/warning":171,"object-assign":178,"prop-types/checkPropTypes":180}],186:[function(require,module,exports){
+},{"_process":192,"fbjs/lib/emptyFunction":162,"fbjs/lib/emptyObject":163,"fbjs/lib/invariant":167,"fbjs/lib/warning":171,"object-assign":188,"prop-types/checkPropTypes":179}],186:[function(require,module,exports){
 /** @license React v16.3.1
  * react.production.min.js
  *
@@ -44796,7 +44796,7 @@ _calculateChangedBits:b,_defaultValue:a,_currentValue:a,_changedBits:0,Provider:
 c)&&!J.hasOwnProperty(c)&&(d[c]=void 0===b[c]&&void 0!==k?k[c]:b[c])}c=arguments.length-2;if(1===c)d.children=e;else if(1<c){k=Array(c);for(var l=0;l<c;l++)k[l]=arguments[l+2];d.children=k}return{$$typeof:r,type:a.type,key:g,ref:h,props:d,_owner:f}},createFactory:function(a){var b=K.bind(null,a);b.type=a;return b},isValidElement:L,version:"16.3.1",__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED:{ReactCurrentOwner:H,assign:m}},W=Object.freeze({default:V}),X=W&&V||W;
 module.exports=X["default"]?X["default"]:X;
 
-},{"fbjs/lib/emptyFunction":162,"fbjs/lib/emptyObject":163,"object-assign":178}],187:[function(require,module,exports){
+},{"fbjs/lib/emptyFunction":162,"fbjs/lib/emptyObject":163,"object-assign":188}],187:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -44807,7 +44807,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this,require('_process'))
-},{"./cjs/react.development.js":185,"./cjs/react.production.min.js":186,"_process":191}],188:[function(require,module,exports){
+},{"./cjs/react.development.js":185,"./cjs/react.production.min.js":186,"_process":192}],188:[function(require,module,exports){
+arguments[4][184][0].apply(exports,arguments)
+},{"dup":184}],189:[function(require,module,exports){
 (function (global){
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation. All rights reserved.
@@ -45052,7 +45054,7 @@ var __importDefault;
 });
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],189:[function(require,module,exports){
+},{}],190:[function(require,module,exports){
 
 exports = module.exports = function() {
 	var ret = '', value;
@@ -45082,7 +45084,7 @@ exports.random = function() {
 };
 
 
-},{}],190:[function(require,module,exports){
+},{}],191:[function(require,module,exports){
 var users = [];
 
 var React = require('react');
@@ -45120,8 +45122,25 @@ firebase.database().ref('users').on('value', (user_list) => {
 	});
 });
 
+var GLOBAL_UUID;
+
+//https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript/901144#12151322
+function getParameterByName(name) {
+    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
 $(document).ready(() => {
 	console.log('document.ready()');
+	console.log(getParameterByName('client_id'));
+
+	if (document.cookie.indexOf('spotify-uuid') == -1){
+		// document.cookie = `spotify-uuid=${}`;
+		console.log('never been here before');
+	} else {
+		console.log('nah ive bene here');
+	}
+	console.log(GLOBAL_UUID)
 });
 
 class TopArtists extends React.Component {
@@ -45238,7 +45257,7 @@ var mount = document.querySelector('#spotifyUsers');
 var user_container = React.createElement(UsersContainer, {users: users})
 ReactDOM.render(user_container, mount);
 
-},{"firebase":175,"react":187,"react-dom":184,"uuid-v4":189}],191:[function(require,module,exports){
+},{"firebase":175,"react":187,"react-dom":183,"uuid-v4":190}],192:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -45420,4 +45439,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[190]);
+},{}]},{},[191]);
