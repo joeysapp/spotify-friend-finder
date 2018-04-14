@@ -18,7 +18,7 @@ firebase.database().ref('users').on('value', function(user_list) {
 		var user = user_snapshot.val();
 		var uuid = user.uuid;
 		var username = user.user_info.id;
-		var avatar = user.user_info.images[0];
+		var avatar = user.user_info.images[0].url;
 		var tmp_user = <SpotifyUser uuid={uuid} username={username} avatar={avatar}/>;
 		users.push(tmp_user);
 		user_container = <UsersContainer users={users}/>
@@ -39,6 +39,10 @@ $(document).ready(() => {
 	});
 });
 
+// var listOfArtists = this.top_artists.map((artist) => 
+// 	<li key={artist}>{artist}</li>
+// );
+
 class SpotifyUser extends React.Component {
 	constructor(props){
 		super();
@@ -52,9 +56,7 @@ class SpotifyUser extends React.Component {
 	}
 
 	render() {
-		var listOfArtists = this.top_artists.map((artist) => 
-			<li key={artist}>{artist}</li>
-		);
+
 		return (
 			<div className='spotifyUser'>
 				<div className='spotifyHeader'>
@@ -91,7 +93,7 @@ class UsersContainer extends React.Component {
 
 	render(){
 		var listOfUsers = this.state.users.map((user) => 
-			<div key={uuidv4()}>{user}</div>
+			<div key={user.uuid}>{user}</div>
 		);
 		return (
 		<div>

@@ -45103,7 +45103,7 @@ firebase.database().ref('users').on('value', function(user_list) {
 		var user = user_snapshot.val();
 		var uuid = user.uuid;
 		var username = user.user_info.id;
-		var avatar = user.user_info.images[0];
+		var avatar = user.user_info.images[0].url;
 		var tmp_user = React.createElement(SpotifyUser, {uuid: uuid, username: username, avatar: avatar});
 		users.push(tmp_user);
 		user_container = React.createElement(UsersContainer, {users: users})
@@ -45124,6 +45124,10 @@ $(document).ready(() => {
 	});
 });
 
+// var listOfArtists = this.top_artists.map((artist) => 
+// 	<li key={artist}>{artist}</li>
+// );
+
 class SpotifyUser extends React.Component {
 	constructor(props){
 		super();
@@ -45137,9 +45141,7 @@ class SpotifyUser extends React.Component {
 	}
 
 	render() {
-		var listOfArtists = this.top_artists.map((artist) => 
-			React.createElement("li", {key: artist}, artist)
-		);
+
 		return (
 			React.createElement("div", {className: "spotifyUser"}, 
 				React.createElement("div", {className: "spotifyHeader"}, 
@@ -45176,7 +45178,7 @@ class UsersContainer extends React.Component {
 
 	render(){
 		var listOfUsers = this.state.users.map((user) => 
-			React.createElement("div", {key: uuidv4()}, user)
+			React.createElement("div", {key: user.uuid}, user)
 		);
 		return (
 		React.createElement("div", null, 
