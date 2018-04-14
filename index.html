@@ -39,7 +39,7 @@
 	}
 	#navbar {
 		background: black;
-		width:100%;
+		width:auto;
 		height:4vh;
 		padding-left:1vh;
 	}
@@ -54,7 +54,7 @@
 	.spotifyUser {
 		border: 3px solid black;
 		width: 90vw;
-		height: 20vh;
+		height: 30vh;
 		margin: 1vh;
 		padding: 1vh;
 	}
@@ -70,8 +70,23 @@
 		margin:0.5vh;
 		padding:0.5vh;
 		font-size: 2.5vh;
-		height: 10vh;
+		height: 20vh;
 		/*overflow-y: scroll;*/
+	}
+
+	.authenticateButton{
+		width:100vw;
+		height:5vh;
+		background:green;
+		position:relative;
+
+	}
+
+	.authenticateButton a {
+		position:absolute;
+		left: 2vw;
+		top:1vh;
+		font-size: 2.2vh;
 	}
 
 </style>
@@ -91,67 +106,7 @@
 </div>
 
 <div id='spotifyUsers'>
-<script type='text/babel'>
-	class SpotifyUser extends React.Component {
-		constructor(props){
-			super();
-			this.user = {
-				username: props.username,
-				avatar: props.avatar
-			}
-			this.uuid = props.uuid;
-			this.favorite_artists = props.favorite_artists;
-		}
-
-		render() {
-			var listOfArtists = this.favorite_artists.map((artist) => 
-				<li>{artist}</li>
-			);
-			return (
-				<div className='spotifyUser'>
-					<div className='spotifyHeader'>
-						<img className='spotifyAvatar' src={this.user.avatar} alt={this.user.username} />
-						<div className='spotifyUsername'>{this.user.username}</div>
-					</div>
-					<div className='spotifyStatistics'>
-						<div style={{overflow: 'auto'}} className='spotifyTopArtists'>
-							Top Artists
-							{listOfArtists}
-						</div>
-					</div>
-				</div>
-			)
-		}
-	}
-	class UsersContainer extends React.Component {
-		constructor(props){
-			super();
-			this.users = props.users;
-		}
-
-		render(){
-			var listOfArtists = this.users.map((user) => 
-				<div>{user}</div>
-			);
-			return <div className='spotifyUsersContainer' style={{ maxHeight:'10vh', flexWrap: 'wrap'}}>{listOfArtists}</div>;
-		}
-	}
-
-	var mount = document.querySelector('#spotifyUsers');
-	var avatar_joey = 'public/avatars/joeysapp.jpeg';
-	var avatar_steve = 'public/avatars/steve.jpg';
-
-
-	var favorite_artists_joey = ['Kanye West', 'Alt-J', 'Sufjan Stevens', 'LCD Soundsystem', 'Lord Huron']
-	var favorite_artists_steve = ['Billy Ray Cyrus']
-	var joey = <SpotifyUser uuid='1' username='joeysapp' avatar={avatar_joey} favorite_artists={favorite_artists_joey} />;
-	var steve = <SpotifyUser uuid='2' username='steve934' avatar={avatar_steve} favorite_artists={favorite_artists_steve} />;
-
-	var users = [joey, steve];
-	ReactDOM.render(<UsersContainer users={users} />, mount);
-
-
-</script>
+<script src='public/bundle-main.js'></script>
 </div>
 
 </div>

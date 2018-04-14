@@ -1,0 +1,21 @@
+{
+  "name": "joeysapp.github.io",
+  "version": "1.0.0",
+  "description": "personal website for github using react",
+  "main": "index.js",
+  "repository": "git@github.com:joeysapp/joeysapp.github.io.git",
+  "author": "Joseph Sapp <sapp.joey@tamu.edu>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-react": "^6.24.1",
+    "babelify": "^8.0.0",
+    "browserify": "^16.2.0",
+    "firebase": "^4.12.1",
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "reactify": "^1.1.1",
+    "uuid-v4": "^0.1.0",
+    "wzrd": "^1.5.0"
+  }
+}
