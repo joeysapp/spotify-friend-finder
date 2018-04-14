@@ -93,7 +93,7 @@ class UsersContainer extends React.Component {
 		return (
 		<div>
 			<div className='authenticateButton'>
-				<a href='/login'> Link Spotify Statistics</a>
+				<a href='http://50.24.61.224:8000/login'> Link Spotify Statistics</a>
 			</div>
 			<div className='spotifyUsersContainer' style={{ flexWrap: 'wrap'}}>{listOfUsers}</div>
 
