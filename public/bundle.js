@@ -61,7 +61,9 @@ class TopArtists extends React.Component {
 			<div key={artist.name } className='spotifyArtist'>
 				<img className='spotifyArtistImage' src={artist.images[0].url} alt={artist.name} />
 				<div className='spotifyArtistName'>{artist.name}</div>
-				<div className='spotifyArtistGenres'>{artistGenres}</div>
+				<div className='spotifyArtistGenres'>
+					{artist.genres}
+				</div>
 			</div>
 		);
 		return (
