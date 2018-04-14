@@ -54,9 +54,8 @@ class TopArtists extends React.Component {
 	render() {
 		var artistGenres = this.state.artists.map((artist) => {
 			console.log(artist.genres);
-			artist.genres.map((genre) => {
-				<div className='spotifyArtistGenre'>{genre}</div>
-			});
+			<div className='spotifyArtistGenre'>{artist.genres}</div>
+
 		});
 		var listOfArtists = this.state.artists.map((artist) => 
 			<div key={artist.name } className='spotifyArtist'>
