@@ -45241,7 +45241,7 @@ class UsersContainer extends React.Component {
 	}
 
 	componentDidMount() {
-
+		this.setState({self: GLOBAL_SELF});
 	}
 
 	componentWillUnmount(){
