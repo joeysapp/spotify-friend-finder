@@ -44,12 +44,13 @@ function getParameterByName(name) {
 }
 
 $(document).ready(() => {
-	console.log('spotify_uuid='+getParameterByName('client_id'));
+	console.log('document.cookie= '+document.cookie);
 	console.log('GLOBAL_UUID: '+GLOBAL_UUID);
 	if (document.cookie.indexOf('spotify-uuid') === -1 && getParameterByName('client_id') !== null){
 		document.cookie = 'spotify_uuid='+getParameterByName('client_id');
-	} else {
 		GLOBAL_UUID = getParameterByName('client_id')
+	} else {
+		GLOBAL_UUID = document.cookie.slice(document.cookie.indexOf('spotify_uuid='));
 		console.log('GLOBAL_UUID: '+GLOBAL_UUID);
 	}
 });
