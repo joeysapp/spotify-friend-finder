@@ -45131,16 +45131,13 @@ function getParameterByName(name) {
 }
 
 $(document).ready(() => {
-	console.log('document.ready()');
-
 	if (document.cookie.indexOf('spotify-uuid') === -1 && getParameterByName('client_id') !== null){
 		console.log('never been here before');
 		document.cookie = 'spotify_uuid='+getParameterByName('client_id');
 	} else {
-		console.log('nah ive bene here');
-		console.log(document.cookie);
+		GLOBAL_UUID = getParameterByName('client_id')
 	}
-	console.log(GLOBAL_UUID)
+	console.log('GLOBAL_UUID: '+GLOBAL_UUID);
 });
 
 class TopArtists extends React.Component {
