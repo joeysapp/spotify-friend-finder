@@ -45150,8 +45150,7 @@ class SpotifyUser extends React.Component {
 				), 
 				React.createElement("div", {className: "spotifyStatistics"}, 
 					React.createElement("div", {style: {overflow: 'auto'}, className: "spotifyTopArtists"}, 
-						"Top Artists", 
-						listOfArtists
+						"Top Artists"
 					)
 				)
 			)

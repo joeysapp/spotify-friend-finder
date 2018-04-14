@@ -66,7 +66,6 @@ class SpotifyUser extends React.Component {
 				<div className='spotifyStatistics'>
 					<div style={{overflow: 'auto'}} className='spotifyTopArtists'>
 						Top Artists
-						{listOfArtists}
 					</div>
 				</div>
 			</div>
