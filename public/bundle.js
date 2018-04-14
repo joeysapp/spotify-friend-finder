@@ -16,7 +16,15 @@ var config = {
 };
 firebase.initializeApp(config);
 
+
+// so I think this should all go inside the user_container thing
+// so we can handle states correctly lol
 firebase.database().ref('users').on('value', (user_list) => {
+	var items_retrieved = 0;
+	var items_needed = 0;
+	user_list.forEach(idx => {
+		items_needed++;
+	})
 	user_list.forEach(user_snapshot => {
 		var user = user_snapshot.val();
 		var uuid = user.uuid;
@@ -31,11 +39,16 @@ firebase.database().ref('users').on('value', (user_list) => {
 		var artists = user.artists;
 		var recently_played = user['recently-played'];
 		var tmp_user = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
+		items_retrieved++;
 		if (uuid != GLOBAL_UUID){
 			users.push(tmp_user);
 		} else {
 			console.log('saw u');
 			GLOBAL_SELF = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
+			user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
+			ReactDOM.render(user_container, mount);
+		}
+		if (items_retrieved === items_needed){
 			user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
 			ReactDOM.render(user_container, mount);
 		}
@@ -68,6 +81,12 @@ $(document).ready(() => {
 
 	console.log('GLOBAL_UUID: '+GLOBAL_UUID);
 	console.log('GLOBAL_SELF: '+GLOBAL_SELF);
+
+	// lol
+
+	window.setTimeout(() => {
+		console.log('hi');
+	}, 100);
 });
 
 class TopArtists extends React.Component {
@@ -175,7 +194,7 @@ class UsersContainer extends React.Component {
 		);
 		var authButton;
 		if (this.state.authenticated === true){
-			authButton = <div className='spotifyContainer'>
+			authButton = <div className='spotifyContainer' style={{ display: 'flex' }}>
 							<div className='authenticateRefreshButton'>
 								<a href='http://50.24.61.224:8000/login' style={{ display: 'hidden'}}> Refresh Spotify Statistics</a>
 							</div>
