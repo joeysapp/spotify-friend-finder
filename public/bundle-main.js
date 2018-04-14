@@ -45132,13 +45132,13 @@ function getParameterByName(name) {
 
 $(document).ready(() => {
 	console.log('document.ready()');
-	console.log(getParameterByName('client_id'));
 
-	if (document.cookie.indexOf('spotify-uuid') == -1){
-		// document.cookie = `spotify-uuid=${}`;
+	if (document.cookie.indexOf('spotify-uuid') === -1 && getParameterByName('client_id') !== null){
 		console.log('never been here before');
+		document.cookie = `spotify-uuid=${client_id}`;
 	} else {
 		console.log('nah ive bene here');
+		console.log(document.cookie);
 	}
 	console.log(GLOBAL_UUID)
 });
