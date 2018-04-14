@@ -45174,7 +45174,7 @@ class SpotifyUser extends React.Component {
 		var href = '';
 		if (typeof this.user.now_playing !== 'undefined'){
 			now_playing = this.user.now_playing.item.name + ' - ' + this.user.now_playing.item.artists[0].name;
-			href = this.user.now_playing.item.external_url.spotify;
+			href = this.user.now_playing.item.external_urls.spotify;
 		}
 
 		return (
