@@ -45103,9 +45103,16 @@ firebase.database().ref('users').on('value', (user_list) => {
 		var user = user_snapshot.val();
 		var uuid = user.uuid;
 		var username = user.user_info.id;
-		var avatar = user.user_info.images[0].url;
+		var avatar;
+		if (user.user_info.images){
+			avatar = user.user_info.images[0].url;
+
+		} else {
+			avatar = 'public/avatars/empty.jpg';
+		}
 		var artists = user.artists;
-		var tmp_user = React.createElement(SpotifyUser, {uuid: uuid, username: username, avatar: avatar, artists: artists});
+		var now_playing ='test';
+		var tmp_user = React.createElement(SpotifyUser, {uuid: uuid, username: username, avatar: avatar, artists: artists, now_playing: now_playing});
 		users.push(tmp_user);
 		user_container = React.createElement(UsersContainer, {users: users})
 		ReactDOM.render(user_container, mount);
@@ -45154,7 +45161,8 @@ class SpotifyUser extends React.Component {
 		super(props);
 		this.user = {
 			username: props.username,
-			avatar: props.avatar
+			avatar: props.avatar,
+			now_playing: props.now_playing
 		}
 		this.uuid = props.uuid;
 		this.key = props.uuid;
@@ -45167,11 +45175,11 @@ class SpotifyUser extends React.Component {
 			React.createElement("div", {className: "spotifyUser"}, 
 				React.createElement("div", {className: "spotifyHeader"}, 
 					React.createElement("img", {className: "spotifyAvatar", src: this.user.avatar, alt: this.user.username}), 
-					React.createElement("div", {className: "spotifyUsername"}, this.user.username)
+					React.createElement("div", {className: "spotifyUsername"}, this.user.username), 
+					React.createElement("div", {className: "spotifyNowPlaying"}, this.user.now_playing)
 				), 
 				React.createElement("div", {className: "spotifyStatistics"}, 
 						React.createElement(TopArtists, {artists: this.top_artists})
-
 				)
 			)
 		)
@@ -45204,7 +45212,7 @@ class UsersContainer extends React.Component {
 		return (
 		React.createElement("div", null, 
 			React.createElement("div", {className: "authenticateButton"}, 
-				React.createElement("a", {href: "http://50.24.61.224:8000/login"}, " Link Spotify Statistics")
+				React.createElement("a", {href: "http://50.24.61.224:8000/login", style: { display: 'hidden'}}, " Link Spotify Statistics")
 			), 
 			React.createElement("div", {className: "spotifyUsersContainer", style: { flexWrap: 'wrap'}}, listOfUsers)
 
