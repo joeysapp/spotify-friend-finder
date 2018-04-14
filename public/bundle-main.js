@@ -45137,10 +45137,16 @@ class TopArtists extends React.Component {
 	}
 
 	render() {
+		this.state.artists.map((artist) => {
+			artist.genres.map((genre) => {
+				React.createElement("div", {className: "spotifyArtistGenre"}, genre)
+			});
+		});
 		var listOfArtists = this.state.artists.map((artist) => 
 			React.createElement("div", {key: artist.name, className: "spotifyArtist"}, 
 				React.createElement("img", {className: "spotifyArtistImage", src: artist.images[0].url, alt: artist.name}), 
-				React.createElement("div", {classname: "spotifyArtistName"}, artist.name)
+				React.createElement("div", {className: "spotifyArtistName"}, artist.name), 
+				React.createElement("div", {className: "spotifyArtistGenres"}, artistGenres)
 			)
 		);
 		return (
