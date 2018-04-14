@@ -45171,10 +45171,8 @@ class SpotifyUser extends React.Component {
 
 	render() {
 
-		var now_playing = '';
-		if (this.user.now_playing){
-			now_playing = this.user.now_playing.item.name;
-		}
+
+		var now_playing = '' || this.user.now_playing.item.name;
 
 		return (
 			React.createElement("div", {className: "spotifyUser"}, 
