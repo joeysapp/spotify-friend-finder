@@ -1,0 +1,132 @@
+@font-face {
+	font-family: incons;
+	src: url(incons.ttf);
+}
+body {
+	font-family: incons;
+	font-size: 3vh;
+	margin: 0px;
+	background:black;
+}
+#header {
+	position:relative;
+	height:6vh;
+	background:white;
+	width: 100%;
+}
+#self {
+	position:absolute;
+	bottom:1vh;
+	left:1vh;
+}
+#navbar a:link {
+	color:white;
+}
+#navbar a:visited {
+	color:white;
+}
+img {
+	width:8vh;
+	height:8vh;
+}
+#navbar {
+	background: black;
+	width:auto;
+	height:4vh;
+}
+#spotifyUsers {
+	margin: 0;
+	/*border: 3px solid black;*/
+	width: 100vw;
+	height:100vh;
+	padding: 0;
+	display:inline-flex;
+	background:black;
+
+}
+.spotifyUser {
+	border: 3px solid black;
+	width: 100vw;
+	height: 50vh;
+	margin: 1vh;
+	padding: 1vh;
+	background:white;
+	box-sizing: border-box;
+
+}
+.spotifyHeader {
+	display: flex;
+}
+.spotifyUsername {
+	padding-left: 2vw;
+	min-width:50%;
+}
+
+.spotifyTopArtists {
+	border: 1px solid black;
+	padding-top:0.5vh;
+	font-size: 2.5vh;
+	height: 40vh;
+	box-sizing: border-box;
+/*overflow-y: scroll;*/
+}
+
+.authenticateButton{
+	width:100vw;
+	height:10vh;
+	background:green;
+	position:relative;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+
+	border: 5px solid white;
+
+}
+
+.authenticateButton a {
+	font-size: 3vh;
+}
+
+.authenticateButton a:link {
+	color:white;
+}
+.authenticateButton a:visited {
+	color:white;
+}
+
+.spotifyArtist {
+	display: flex;
+	margin:1vh;
+	align-items: center;
+
+
+}
+
+.spotifyArtistImage {
+	min-height:5vh;
+	min-width:5vh;
+	max-height:5vh;
+	max-width:5vh;
+}
+
+.spotifyArtistName {
+	min-width: 40%;
+	padding-left: 2vw;
+
+}
+
+.spotifyArtistGenres {
+	font-size: 2vh;
+}
+
+.spotifyLastPlayed {
+	font-size: 1.8vh;
+	margin-left:auto;
+	margin-right:0;
+	padding-left: 2vw;
+
+}
+
+
