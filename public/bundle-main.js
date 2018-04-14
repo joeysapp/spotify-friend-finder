@@ -45196,12 +45196,11 @@ class SpotifyUser extends React.Component {
 		var last_played;
 		var href;
 
-		if (typeof this.user.recently_played !== 'undefined'){
+		if (this.user.recently_played != null){
 			var track = this.user.recently_played.items[0];
 			last_played = track.name + ' - ' + track.artists[0].name;
 			href = track.external_urls.spotify;
 		}
-
 
 		return (
 			React.createElement("div", {className: "spotifyUser"}, 
