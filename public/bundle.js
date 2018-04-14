@@ -187,7 +187,7 @@ class UsersContainer extends React.Component {
 
 var mount = document.querySelector('#spotifyUsers');
 
-var user_container = <UsersContainer users={users} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
+var user_container = <UsersContainer self={GLOBAL_SELF} users={users} authenticated={(typeof GLOBAL_UUID === 'undefined')}/>
 ReactDOM.render(user_container, mount);
 
 
