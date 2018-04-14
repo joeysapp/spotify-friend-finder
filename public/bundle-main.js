@@ -45101,7 +45101,10 @@ firebase.initializeApp(config);
 firebase.database().ref('users').on('value', function(user_list) {
 	user_list.forEach(user_snapshot => {
 		var user = user_snapshot.val();
-		var tmp_user = React.createElement(SpotifyUser, {uuid: user.uuid, username: user.id, avatar: "public/avatars/joeysapp.jpeg", top_artists: user.top_artists});
+		var uuid = user.uuid;
+		var username = user.user_info.id;
+		var avatar = user.user_info.images[0];
+		var tmp_user = React.createElement(SpotifyUser, {uuid: uuid, username: username, avatar: avatar});
 		users.push(tmp_user);
 		user_container = React.createElement(UsersContainer, {users: users})
 		ReactDOM.render(user_container, mount);
@@ -45130,7 +45133,7 @@ class SpotifyUser extends React.Component {
 		}
 		this.uuid = props.uuid;
 		this.key = props.uuid;
-		this.top_artists = props.top_artists;
+		this.top_artists = ['a'];
 	}
 
 	render() {
