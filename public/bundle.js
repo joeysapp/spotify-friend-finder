@@ -180,9 +180,9 @@ class UsersContainer extends React.Component {
 
 var mount = document.querySelector('#spotifyUsers');
 
-console.log('true or not?' + (GLOBAL_UUID != null));
+console.log('true or not? ' + (GLOBAL_UUID == null));
 
-var user_container = <UsersContainer users={users} authenticated={GLOBAL_UUID != null}/>
+var user_container = <UsersContainer users={users} authenticated={GLOBAL_UUID == null}/>
 ReactDOM.render(user_container, mount);
 
 

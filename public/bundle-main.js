@@ -45267,9 +45267,9 @@ class UsersContainer extends React.Component {
 
 var mount = document.querySelector('#spotifyUsers');
 
-console.log('true or not?' + (GLOBAL_UUID != null));
+console.log('true or not? ' + (GLOBAL_UUID == null));
 
-var user_container = React.createElement(UsersContainer, {users: users, authenticated: GLOBAL_UUID != null})
+var user_container = React.createElement(UsersContainer, {users: users, authenticated: GLOBAL_UUID == null})
 ReactDOM.render(user_container, mount);
 
 },{"firebase":175,"react":187,"react-dom":183,"uuid-v4":190}],192:[function(require,module,exports){
