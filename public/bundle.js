@@ -86,12 +86,14 @@ class SpotifyUser extends React.Component {
 
 	render() {
 
+		var now_playing = this.user.now_playing.item.name;
+
 		return (
 			<div className='spotifyUser'>
 				<div className='spotifyHeader'>
 					<img className='spotifyAvatar' src={this.user.avatar} alt={this.user.username} />
 					<div className='spotifyUsername'>{this.user.username}</div>
-					<div className='spotifyNowPlaying'>{this.user.now_playing}</div>
+					<div className='spotifyNowPlaying'>{now_playing}</div>
 				</div>
 				<div className='spotifyStatistics'>
 						<TopArtists artists={this.top_artists} />

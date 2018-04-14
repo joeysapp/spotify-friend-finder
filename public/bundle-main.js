@@ -45171,12 +45171,14 @@ class SpotifyUser extends React.Component {
 
 	render() {
 
+		var now_playing = this.user.now_playing.item.name;
+
 		return (
 			React.createElement("div", {className: "spotifyUser"}, 
 				React.createElement("div", {className: "spotifyHeader"}, 
 					React.createElement("img", {className: "spotifyAvatar", src: this.user.avatar, alt: this.user.username}), 
 					React.createElement("div", {className: "spotifyUsername"}, this.user.username), 
-					React.createElement("div", {className: "spotifyNowPlaying"}, this.user.now_playing)
+					React.createElement("div", {className: "spotifyNowPlaying"}, now_playing)
 				), 
 				React.createElement("div", {className: "spotifyStatistics"}, 
 						React.createElement(TopArtists, {artists: this.top_artists})
