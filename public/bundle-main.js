@@ -45132,8 +45132,8 @@ firebase.database().ref('users').on('value', (user_list) => {
 		} else {
 			console.log('saw u');
 			GLOBAL_SELF = React.createElement(SpotifyUser, {uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played});
-			user_container = React.createElement(UsersContainer, {users: users, self: GLOBAL_SELF, authenticated: (typeof GLOBAL_UUID !== 'undefined')})
-			ReactDOM.render(user_container, mount);
+			// user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
+			// ReactDOM.render(user_container, mount);
 		}
 		if (items_retrieved === items_needed){
 			user_container = React.createElement(UsersContainer, {users: users, self: GLOBAL_SELF, authenticated: (typeof GLOBAL_UUID !== 'undefined')})
