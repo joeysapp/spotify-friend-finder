@@ -58,7 +58,7 @@ class TopArtists extends React.Component {
 				<img className='spotifyArtistImage' src={artist.images[0].url} alt={artist.name} />
 				<a href={artist.external_urls.spotify} className='spotifyArtistName'>{artist.name}</a>
 				<div className='spotifyArtistGenres'>
-					{typeof artist.genres === 'undefined' ? null : artist.genres.join(', ')};
+					{typeof artist.genres === 'undefined' ? '' : artist.genres.join(', ')};
 				</div>
 			</div>
 		);

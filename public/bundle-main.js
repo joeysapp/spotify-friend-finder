@@ -45143,7 +45143,7 @@ class TopArtists extends React.Component {
 				React.createElement("img", {className: "spotifyArtistImage", src: artist.images[0].url, alt: artist.name}), 
 				React.createElement("a", {href: artist.external_urls.spotify, className: "spotifyArtistName"}, artist.name), 
 				React.createElement("div", {className: "spotifyArtistGenres"}, 
-					typeof artist.genres === 'undefined' ? null : artist.genres.join(', '), ";"
+					typeof artist.genres === 'undefined' ? '' : artist.genres.join(', '), ";"
 				)
 			)
 		);
