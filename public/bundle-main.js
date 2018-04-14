@@ -45124,7 +45124,7 @@ firebase.database().ref('users').on('value', (user_list) => {
 			console.log('saw u');
 			GLOBAL_SELF = React.createElement(SpotifyUser, {uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played});
 		}
-		user_container = React.createElement(UsersContainer, {self: GLOBAL_SELF, users: users, authenticated: (typeof GLOBAL_UUID !== 'undefined')})
+		user_container = React.createElement(UsersContainer, {users: users, self: GLOBAL_SELF, authenticated: (typeof GLOBAL_UUID !== 'undefined')})
 		ReactDOM.render(user_container, mount);
 
 	});
@@ -45143,7 +45143,7 @@ function getCookie(name) {
 }
 
 $(document).ready(() => {
-	if (document.cookie.indexOf('spotify-uuid') === -1 && getParameterByName('client_id') !== null){
+	if (document.cookie.indexOf('spotify_uuid') === -1 && getParameterByName('client_id') !== null){
 		document.cookie = 'spotify_uuid='+getParameterByName('client_id');
 		GLOBAL_UUID = getParameterByName('client_id')
 	} else {
@@ -45152,6 +45152,7 @@ $(document).ready(() => {
 	}
 
 	console.log('GLOBAL_UUID: '+GLOBAL_UUID);
+	console.log('GLOBAL_SELF: '+GLOBAL_SELF);
 });
 
 class TopArtists extends React.Component {
