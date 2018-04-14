@@ -176,10 +176,10 @@ class UsersContainer extends React.Component {
 		var authButton;
 		if (this.state.authenticated === true){
 			authButton = <div className='spotifyContainer'>
-							<div className='spotifySelfContainer'>{this.state.self}</div>;
 							<div className='authenticateRefreshButton'>
 								<a href='http://50.24.61.224:8000/login' style={{ display: 'hidden'}}> Refresh Spotify Statistics</a>
 							</div>
+							<div className='spotifySelfContainer'>{this.state.self}</div>;
 						</div>
 		} else {
 			authButton = <div className='authenticateButton'>

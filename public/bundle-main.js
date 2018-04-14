@@ -45263,10 +45263,10 @@ class UsersContainer extends React.Component {
 		var authButton;
 		if (this.state.authenticated === true){
 			authButton = React.createElement("div", {className: "spotifyContainer"}, 
-							React.createElement("div", {className: "spotifySelfContainer"}, this.state.self), ";", 
 							React.createElement("div", {className: "authenticateRefreshButton"}, 
 								React.createElement("a", {href: "http://50.24.61.224:8000/login", style: { display: 'hidden'}}, " Refresh Spotify Statistics")
-							)
+							), 
+							React.createElement("div", {className: "spotifySelfContainer"}, this.state.self), ";"
 						)
 		} else {
 			authButton = React.createElement("div", {className: "authenticateButton"}, 
