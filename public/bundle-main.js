@@ -45122,7 +45122,7 @@ firebase.database().ref('users').on('value', (user_list) => {
 	});
 });
 
-var GLOBAL_UUID;
+var GLOBAL_UUID = null;
 
 //https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript/901144#12151322
 function getParameterByName(name) {
@@ -45142,6 +45142,7 @@ $(document).ready(() => {
 		GLOBAL_UUID = getParameterByName('client_id')
 	} else {
 		GLOBAL_UUID = getCookie('spotify_uuid');
+
 	}
 
 	console.log('GLOBAL_UUID: '+GLOBAL_UUID);
@@ -45158,7 +45159,6 @@ class TopArtists extends React.Component {
 	render() {
 		var artistGenres = this.state.artists.map((artist) => {
 			React.createElement("div", {className: "spotifyArtistGenre"}, artist.genres)
-
 		});
 
 		var listOfArtists = this.state.artists.map((artist) => 
@@ -45199,7 +45199,6 @@ class SpotifyUser extends React.Component {
 		var href;
 
 		if (typeof this.user.recently_played !== 'undefined' && 'items' in this.user.recently_played){
-			console.log(this.user.recently_played);
 			var track = this.user.recently_played.items[0].track;
 			last_played = track.name + ' - ' + track.artists[0].name;
 			href = track.external_urls.spotify;
@@ -45228,7 +45227,8 @@ class UsersContainer extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			users: props.users
+			users: props.users,
+			authenticated: props.authenticated
 		};
 	}
 
@@ -45248,13 +45248,18 @@ class UsersContainer extends React.Component {
 		var listOfUsers = this.state.users.map((user) => 
 			React.createElement("div", {key: user.props.uuid}, user)
 		);
+		var authButton;
+		if (this.state.authenticated === true){
+			authButton = '';
+		} else {
+			authButton = React.createElement("div", {className: "authenticateButton"}, 
+				React.createElement("a", {href: "http://50.24.61.224:8000/login", style: { display: 'hidden'}}, " Link Spotify Statistics")
+			)
+		}
 		return (
 		React.createElement("div", null, 
-			React.createElement("div", {className: "authenticateButton"}, 
-				React.createElement("a", {href: "http://50.24.61.224:8000/login", style: { display: 'hidden'}}, " Link Spotify Statistics")
-			), 
+			authButton, 
 			React.createElement("div", {className: "spotifyUsersContainer", style: { flexWrap: 'wrap'}}, listOfUsers)
-
 		)
 		);
 	}
@@ -45262,7 +45267,7 @@ class UsersContainer extends React.Component {
 
 var mount = document.querySelector('#spotifyUsers');
 
-var user_container = React.createElement(UsersContainer, {users: users})
+var user_container = React.createElement(UsersContainer, {users: users, authenticated: GLOBAL_UUID !== null})
 ReactDOM.render(user_container, mount);
 
 },{"firebase":175,"react":187,"react-dom":183,"uuid-v4":190}],192:[function(require,module,exports){

@@ -35,7 +35,7 @@ firebase.database().ref('users').on('value', (user_list) => {
 	});
 });
 
-var GLOBAL_UUID;
+var GLOBAL_UUID = null;
 
 //https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript/901144#12151322
 function getParameterByName(name) {
@@ -55,6 +55,7 @@ $(document).ready(() => {
 		GLOBAL_UUID = getParameterByName('client_id')
 	} else {
 		GLOBAL_UUID = getCookie('spotify_uuid');
+
 	}
 
 	console.log('GLOBAL_UUID: '+GLOBAL_UUID);
@@ -71,7 +72,6 @@ class TopArtists extends React.Component {
 	render() {
 		var artistGenres = this.state.artists.map((artist) => {
 			<div className='spotifyArtistGenre'>{artist.genres}</div>
-
 		});
 
 		var listOfArtists = this.state.artists.map((artist) => 
@@ -112,7 +112,6 @@ class SpotifyUser extends React.Component {
 		var href;
 
 		if (typeof this.user.recently_played !== 'undefined' && 'items' in this.user.recently_played){
-			console.log(this.user.recently_played);
 			var track = this.user.recently_played.items[0].track;
 			last_played = track.name + ' - ' + track.artists[0].name;
 			href = track.external_urls.spotify;
@@ -141,7 +140,8 @@ class UsersContainer extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			users: props.users
+			users: props.users,
+			authenticated: props.authenticated
 		};
 	}
 
@@ -161,13 +161,18 @@ class UsersContainer extends React.Component {
 		var listOfUsers = this.state.users.map((user) => 
 			<div key={user.props.uuid}>{user}</div>
 		);
-		return (
-		<div>
-			<div className='authenticateButton'>
+		var authButton;
+		if (this.state.authenticated === true){
+			authButton = '';
+		} else {
+			authButton = <div className='authenticateButton'>
 				<a href='http://50.24.61.224:8000/login' style={{ display: 'hidden'}}> Link Spotify Statistics</a>
 			</div>
+		}
+		return (
+		<div>
+			{authButton}
 			<div className='spotifyUsersContainer' style={{ flexWrap: 'wrap'}}>{listOfUsers}</div>
-
 		</div>
 		);
 	}
@@ -175,7 +180,7 @@ class UsersContainer extends React.Component {
 
 var mount = document.querySelector('#spotifyUsers');
 
-var user_container = <UsersContainer users={users} />
+var user_container = <UsersContainer users={users} authenticated={GLOBAL_UUID !== null}/>
 ReactDOM.render(user_container, mount);
 
 
