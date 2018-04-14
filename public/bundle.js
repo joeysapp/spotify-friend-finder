@@ -52,7 +52,7 @@ class TopArtists extends React.Component {
 	}
 
 	render() {
-		var listOfArtists = this.state.artists.map((user) => 
+		var listOfArtists = this.state.artists.map((artist) => 
 			<div key={artist.name}>{artist.name}</div>
 		);
 		return (
