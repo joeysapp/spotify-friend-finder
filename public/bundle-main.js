@@ -45143,6 +45143,8 @@ $(document).ready(() => {
 	} else {
 		GLOBAL_UUID = getCookie('spotify_uuid');
 	}
+
+	console.log('GLOBAL_UUID: '+GLOBAL_UUID);
 });
 
 class TopArtists extends React.Component {
