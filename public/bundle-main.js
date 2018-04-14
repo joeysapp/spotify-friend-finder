@@ -45098,13 +45098,14 @@ var config = {
 };
 firebase.initializeApp(config);
 
-firebase.database().ref('users').on('value', function(user_list) {
+firebase.database().ref('users').on('value', (user_list) => {
 	user_list.forEach(user_snapshot => {
 		var user = user_snapshot.val();
 		var uuid = user.uuid;
 		var username = user.user_info.id;
 		var avatar = user.user_info.images[0].url;
-		var tmp_user = React.createElement(SpotifyUser, {uuid: uuid, username: username, avatar: avatar});
+		var artists = user.artists;
+		var tmp_user = React.createElement(SpotifyUser, {uuid: uuid, username: username, avatar: avatar, artists: artists});
 		users.push(tmp_user);
 		user_container = React.createElement(UsersContainer, {users: users})
 		ReactDOM.render(user_container, mount);
@@ -45114,6 +45115,8 @@ firebase.database().ref('users').on('value', function(user_list) {
 
 $(document).ready(() => {
 	console.log('document.ready()');
+
+
 	console.log(document.cookies);
 
 	$(document).click(() => {
@@ -45125,18 +45128,38 @@ $(document).ready(() => {
 	});
 });
 
+class TopArtists extends React.Component {
+	constructor(props){
+		super(props);
+		this.state = {
+			artists: props.artists.items
+		};
+	}
+
+	render() {
+		var listOfArtists = this.state.artists.map((user) => 
+			React.createElement("div", {key: artist.name}, artist.name)
+		);
+		return (
+			React.createElement("div", {style: {overflow: 'auto'}, className: "spotifyTopArtists"}, 
+				listofArtists	
+			)
+		)
+	}
+
+}
 
 
 class SpotifyUser extends React.Component {
 	constructor(props){
-		super();
+		super(props);
 		this.user = {
 			username: props.username,
 			avatar: props.avatar
 		}
 		this.uuid = props.uuid;
 		this.key = props.uuid;
-		this.top_artists = ['a'];
+		this.top_artists = props.artists;
 	}
 
 	render() {
@@ -45148,9 +45171,8 @@ class SpotifyUser extends React.Component {
 					React.createElement("div", {className: "spotifyUsername"}, this.user.username)
 				), 
 				React.createElement("div", {className: "spotifyStatistics"}, 
-					React.createElement("div", {style: {overflow: 'auto'}, className: "spotifyTopArtists"}, 
-						"Top Artists"
-					)
+						React.createElement(TopArtists, {artists: this.top_artists})
+
 				)
 			)
 		)
@@ -45159,7 +45181,9 @@ class SpotifyUser extends React.Component {
 class UsersContainer extends React.Component {
 	constructor(props){
 		super(props);
-		this.state = {users: props.users}
+		this.state = {
+			users: props.users
+		};
 	}
 
 	componentDidMount() {
