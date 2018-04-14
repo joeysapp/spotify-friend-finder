@@ -97,7 +97,7 @@ class SpotifyUser extends React.Component {
 				<div className='spotifyHeader'>
 					<img className='spotifyAvatar' src={this.user.avatar} alt={this.user.username} />
 					<div className='spotifyUsername'>{this.user.username}</div>
-					<a href={href} className='spotifyNowPlaying'>{now_playing}</a>
+					Last Played: <a href={href} className='spotifyNowPlaying'>{now_playing}</a>
 				</div>
 				<div className='spotifyStatistics'>
 						<TopArtists artists={this.top_artists} />

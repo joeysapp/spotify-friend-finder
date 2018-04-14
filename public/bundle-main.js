@@ -45182,7 +45182,7 @@ class SpotifyUser extends React.Component {
 				React.createElement("div", {className: "spotifyHeader"}, 
 					React.createElement("img", {className: "spotifyAvatar", src: this.user.avatar, alt: this.user.username}), 
 					React.createElement("div", {className: "spotifyUsername"}, this.user.username), 
-					React.createElement("a", {href: href, className: "spotifyNowPlaying"}, now_playing)
+					"Last Played: ", React.createElement("a", {href: href, className: "spotifyNowPlaying"}, now_playing)
 				), 
 				React.createElement("div", {className: "spotifyStatistics"}, 
 						React.createElement(TopArtists, {artists: this.top_artists})
