@@ -45172,7 +45172,7 @@ class SpotifyUser extends React.Component {
 	render() {
 		var now_playing;
 		if (typeof this.user.now_playing.item !== 'undefined'){
-			now_playing = '' || this.user.now_playing.item.name;
+			now_playing = this.user.now_playing.item.name;
 
 		}
 
