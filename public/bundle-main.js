@@ -45135,7 +45135,7 @@ $(document).ready(() => {
 
 	if (document.cookie.indexOf('spotify-uuid') === -1 && getParameterByName('client_id') !== null){
 		console.log('never been here before');
-		document.cookie = 'spotify_uuid='+client_id;
+		document.cookie = 'spotify_uuid='+getParameterByName('client_id');
 	} else {
 		console.log('nah ive bene here');
 		console.log(document.cookie);
