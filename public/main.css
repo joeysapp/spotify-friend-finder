@@ -80,15 +80,12 @@ img {
 	justify-content: center;
 	align-items: center;
 	box-sizing: border-box;
-
 	border: 5px solid white;
-
 }
 
 .authenticateButton a {
 	font-size: 3vh;
 }
-
 .authenticateButton a:link {
 	color:white;
 }
@@ -96,12 +93,32 @@ img {
 	color:white;
 }
 
+.authenticateRefreshButton{
+	width:100vw;
+	height:5vh;
+	background:green;
+	position:relative;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	border: 5px solid white;
+}
+
+.authenticateRefreshButton a {
+	font-size: 2vh;
+}
+.authenticateRefreshButton a:link {
+	color:white;
+}
+.authenticateRefreshButton a:visited {
+	color:white;
+}
+
 .spotifyArtist {
 	display: flex;
 	margin:1vh;
 	align-items: center;
-
-
 }
 
 .spotifyArtistImage {
