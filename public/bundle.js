@@ -86,8 +86,8 @@ class SpotifyUser extends React.Component {
 
 	render() {
 		var now_playing;
-		if (typeof this.user.now_playing.item !== 'undefined'){
-			now_playing = this.user.now_playing.item;
+		if (typeof this.user.now_playing !== 'undefined'){
+			now_playing = this.user.now_playing.item.name;
 			console.log('now playing:' +now_playing);
 
 		} else {
