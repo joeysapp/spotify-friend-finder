@@ -23,7 +23,7 @@ firebase.database().ref('users').on('value', (user_list) => {
 			avatar = user.user_info.images[0].url;
 
 		} else {
-			avatar = 'public/avatars/empty.jpg';
+			avatar = 'public/avatars/empty.png';
 		}
 		var artists = user.artists;
 		var now_playing ='test';
