@@ -45126,8 +45126,14 @@ var GLOBAL_UUID;
 
 //https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript/901144#12151322
 function getParameterByName(name) {
-    var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
-    return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+	var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
+	return match && decodeURIComponent(match[1].replace(/\+/g, ' '));
+}
+
+function getCookie(name) {
+	var value = "; " + document.cookie;
+	var parts = value.split("; " + name + "=");
+	if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
 $(document).ready(() => {
@@ -45137,7 +45143,7 @@ $(document).ready(() => {
 		document.cookie = 'spotify_uuid='+getParameterByName('client_id');
 		GLOBAL_UUID = getParameterByName('client_id')
 	} else {
-		GLOBAL_UUID = document.cookie.slice(document.cookie.indexOf('spotify_uuid='));
+		GLOBAL_UUID = getCookie('spotify_uuid');
 		console.log('GLOBAL_UUID: '+GLOBAL_UUID);
 	}
 });
