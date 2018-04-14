@@ -45123,6 +45123,7 @@ firebase.database().ref('users').on('value', (user_list) => {
 		} else {
 			console.log('saw u');
 			GLOBAL_SELF = React.createElement(SpotifyUser, {uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played});
+			ReactDOM.render(user_container, mount);
 		}
 		user_container = React.createElement(UsersContainer, {users: users, self: GLOBAL_SELF, authenticated: (typeof GLOBAL_UUID !== 'undefined')})
 		ReactDOM.render(user_container, mount);
@@ -45241,6 +45242,7 @@ class UsersContainer extends React.Component {
 	}
 
 	componentDidMount() {
+		console.log('cpomonentn moutnetned!');
 		this.setState({self: GLOBAL_SELF});
 	}
 
@@ -45249,7 +45251,6 @@ class UsersContainer extends React.Component {
 	}
 
 	update(users){
-		console.log('UPDATING STATE!');
 		this.setState({users: users});
 	}
 
