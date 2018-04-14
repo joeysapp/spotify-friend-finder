@@ -45114,6 +45114,7 @@ firebase.database().ref('users').on('value', function(user_list) {
 
 $(document).ready(() => {
 	console.log('document.ready()');
+	console.log(document.cookies);
 
 	$(document).click(() => {
 		console.log(user_container);
