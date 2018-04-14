@@ -86,13 +86,10 @@ class SpotifyUser extends React.Component {
 
 	render() {
 		var now_playing;
+		var href = '';
 		if (typeof this.user.now_playing !== 'undefined'){
-			now_playing = this.user.now_playing.item.name;
-			console.log('now playing:' +now_playing);
-
-		} else {
-			console.log('no now_playing');
-			console.log(this.user);
+			now_playing = this.user.now_playing.item.name + ' - ' + this.user.now_playing.item.artists[0].name;
+			href = this.user.now_playing.item.external_url.spotify;
 		}
 
 		return (
@@ -100,7 +97,7 @@ class SpotifyUser extends React.Component {
 				<div className='spotifyHeader'>
 					<img className='spotifyAvatar' src={this.user.avatar} alt={this.user.username} />
 					<div className='spotifyUsername'>{this.user.username}</div>
-					<div className='spotifyNowPlaying'>{now_playing}</div>
+					<a href={href} className='spotifyNowPlaying'>{now_playing}</a>
 				</div>
 				<div className='spotifyStatistics'>
 						<TopArtists artists={this.top_artists} />
