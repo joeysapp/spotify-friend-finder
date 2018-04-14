@@ -45193,8 +45193,8 @@ class SpotifyUser extends React.Component {
 	}
 
 	render() {
-		var recently_played;
-		var href = '';
+		var last_played;
+		var href;
 
 		if (typeof this.user.recently_played !== 'undefined'){
 			var track = this.user.recently_played.items[0];
