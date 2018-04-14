@@ -45178,7 +45178,7 @@ class UsersContainer extends React.Component {
 		return (
 		React.createElement("div", null, 
 			React.createElement("div", {className: "authenticateButton"}, 
-				React.createElement("a", {href: "/login"}, " Link Spotify Statistics")
+				React.createElement("a", {href: "http://50.24.61.224:8000/login"}, " Link Spotify Statistics")
 			), 
 			React.createElement("div", {className: "spotifyUsersContainer", style: { flexWrap: 'wrap'}}, listOfUsers)
 
