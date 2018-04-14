@@ -45138,6 +45138,7 @@ class TopArtists extends React.Component {
 
 	render() {
 		var artistGenres = this.state.artists.map((artist) => {
+			console.log(artist.genres);
 			artist.genres.map((genre) => {
 				React.createElement("div", {className: "spotifyArtistGenre"}, genre)
 			});
