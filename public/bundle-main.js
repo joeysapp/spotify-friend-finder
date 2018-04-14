@@ -45111,7 +45111,7 @@ firebase.database().ref('users').on('value', (user_list) => {
 			avatar = 'public/avatars/empty.png';
 		}
 		var artists = user.artists;
-		var now_playing ='test';
+		var now_playing = user.now_playing;
 		var tmp_user = React.createElement(SpotifyUser, {uuid: uuid, username: username, avatar: avatar, artists: artists, now_playing: now_playing});
 		users.push(tmp_user);
 		user_container = React.createElement(UsersContainer, {users: users})
@@ -45175,6 +45175,9 @@ class SpotifyUser extends React.Component {
 			now_playing = this.user.now_playing.item.name;
 			console.log('now playing:' +now_playing);
 
+		} else {
+			console.log('no now_playing');
+			console.log(this.user);
 		}
 
 		return (
