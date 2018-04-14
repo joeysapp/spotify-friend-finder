@@ -57,7 +57,7 @@ class TopArtists extends React.Component {
 		);
 		return (
 			<div style={{overflow: 'auto'}} className='spotifyTopArtists'>
-				{listofArtists}	
+				{listOfArtists}	
 			</div>
 		)
 	}

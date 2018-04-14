@@ -45142,7 +45142,7 @@ class TopArtists extends React.Component {
 		);
 		return (
 			React.createElement("div", {style: {overflow: 'auto'}, className: "spotifyTopArtists"}, 
-				listofArtists	
+				listOfArtists	
 			)
 		)
 	}
