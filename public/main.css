@@ -116,7 +116,9 @@ img {
 }
 
 .spotifyContainer {
-	height:56.5vh;
+	height:58vh;
+	flex-wrap: wrap;
+	display:flex;
 }
 
 .spotifyArtist {
