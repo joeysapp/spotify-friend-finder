@@ -45097,49 +45097,46 @@ var firebase = require('firebase');
 var config = {
 	apiKey: "AIzaSyCpSdQt0tWey4qV9ynPIyeAMhMTyiJaTO8",
 	authDomain: "joeysappgithub.firebaseapp.com",
-	databaseURL: "https://joeysappgithub.firebaseio.com",
+	databaseURL: "https://joeysappgithub.firebaseio.com"
 };
 firebase.initializeApp(config);
 
-
 // so I think this should all go inside the user_container thing
 // so we can handle states correctly lol
-firebase.database().ref('users').on('value', (user_list) => {
+firebase.database().ref('users').on('value', user_list => {
 	var items_retrieved = 0;
 	var items_needed = 0;
 	user_list.forEach(idx => {
 		items_needed++;
-	})
+	});
 	user_list.forEach(user_snapshot => {
 		var user = user_snapshot.val();
 		var uuid = user.uuid;
 		var username = user.user_info.id;
 		var avatar;
-		if (user.user_info.images){
+		if (user.user_info.images) {
 			avatar = user.user_info.images[0].url;
-
 		} else {
 			avatar = 'public/avatars/empty.png';
 		}
 		var artists = user.artists;
 		var recently_played = user['recently-played'];
-		var tmp_user = React.createElement(SpotifyUser, {uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played});
+		var tmp_user = React.createElement(SpotifyUser, { uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played });
 		items_retrieved++;
-		if (uuid != GLOBAL_UUID){
+		if (uuid != GLOBAL_UUID) {
 			users.push(tmp_user);
 		} else {
 			console.log('saw u');
-			GLOBAL_SELF = React.createElement(SpotifyUser, {uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played});
+			GLOBAL_SELF = React.createElement(SpotifyUser, { uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played });
 			// user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
 			// ReactDOM.render(user_container, mount);
 		}
-		if (items_retrieved === items_needed){
-			user_container = React.createElement(UsersContainer, {users: users, self: GLOBAL_SELF, authenticated: (typeof GLOBAL_UUID !== 'undefined')})
+		if (items_retrieved === items_needed) {
+			user_container = React.createElement(UsersContainer, { users: users, self: GLOBAL_SELF, authenticated: typeof GLOBAL_UUID !== 'undefined' });
 			ReactDOM.render(user_container, mount);
 		}
 		// user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
 		// ReactDOM.render(user_container, mount);
-
 	});
 });
 
@@ -45156,16 +45153,15 @@ function getCookie(name) {
 }
 
 $(document).ready(() => {
-	if (document.cookie.indexOf('spotify_uuid') === -1 && getParameterByName('client_id') !== null){
-		document.cookie = 'spotify_uuid='+getParameterByName('client_id');
-		GLOBAL_UUID = getParameterByName('client_id')
+	if (document.cookie.indexOf('spotify_uuid') === -1 && getParameterByName('client_id') !== null) {
+		document.cookie = 'spotify_uuid=' + getParameterByName('client_id');
+		GLOBAL_UUID = getParameterByName('client_id');
 	} else {
 		GLOBAL_UUID = getCookie('spotify_uuid');
-
 	}
 
-	console.log('GLOBAL_UUID: '+GLOBAL_UUID);
-	console.log('GLOBAL_SELF: '+GLOBAL_SELF);
+	console.log('GLOBAL_UUID: ' + GLOBAL_UUID);
+	console.log('GLOBAL_SELF: ' + GLOBAL_SELF);
 
 	// lol
 
@@ -45175,7 +45171,7 @@ $(document).ready(() => {
 });
 
 class TopArtists extends React.Component {
-	constructor(props){
+	constructor(props) {
 		super(props);
 		this.state = {
 			artists: props.artists.items
@@ -45183,38 +45179,48 @@ class TopArtists extends React.Component {
 	}
 
 	render() {
-		var artistGenres = this.state.artists.map((artist) => {
-			React.createElement("div", {className: "spotifyArtistGenre"}, artist.genres)
+		var artistGenres = this.state.artists.map(artist => {
+			React.createElement(
+				'div',
+				{ className: 'spotifyArtistGenre' },
+				artist.genres
+			);
 		});
 
-		var listOfArtists = this.state.artists.map((artist) => 
-			React.createElement("div", {key: artist.name, className: "spotifyArtist"}, 
-				React.createElement("img", {className: "spotifyArtistImage", src: artist.images[0].url, alt: artist.name}), 
-				React.createElement("a", {href: artist.external_urls.spotify, className: "spotifyArtistName"}, artist.name), 
-				React.createElement("div", {className: "spotifyArtistGenres"}, 
-					typeof artist.genres === 'undefined' ? '' : artist.genres.join(', '), ";"
-				)
+		var listOfArtists = this.state.artists.map(artist => React.createElement(
+			'div',
+			{ key: artist.name, className: 'spotifyArtist' },
+			React.createElement('img', { className: 'spotifyArtistImage', src: artist.images[0].url, alt: artist.name }),
+			React.createElement(
+				'a',
+				{ href: artist.external_urls.spotify, className: 'spotifyArtistName' },
+				artist.name
+			),
+			React.createElement(
+				'div',
+				{ className: 'spotifyArtistGenres' },
+				typeof artist.genres === 'undefined' ? '' : artist.genres.join(', '),
+				';'
 			)
+		));
+		return React.createElement(
+			'div',
+			{ style: { overflow: 'auto' }, className: 'spotifyTopArtists' },
+			'Top Played Artists',
+			listOfArtists
 		);
-		return (
-			React.createElement("div", {style: {overflow: 'auto'}, className: "spotifyTopArtists"}, 
-			"Top Played Artists", 
-				listOfArtists	
-			)
-		)
 	}
 
 }
 
-
 class SpotifyUser extends React.Component {
-	constructor(props){
+	constructor(props) {
 		super(props);
 		this.user = {
 			username: props.username,
 			avatar: props.avatar,
 			recently_played: props.recently_played
-		}
+		};
 		this.uuid = props.uuid;
 		this.key = props.uuid;
 		this.top_artists = props.artists;
@@ -45224,33 +45230,50 @@ class SpotifyUser extends React.Component {
 		var last_played;
 		var href;
 
-		if (typeof this.user.recently_played !== 'undefined' && 'items' in this.user.recently_played){
+		if (typeof this.user.recently_played !== 'undefined' && 'items' in this.user.recently_played) {
 			var track = this.user.recently_played.items[0].track;
 			last_played = track.name + ' - ' + track.artists[0].name;
 			href = track.external_urls.spotify;
 		}
 
-		return (
-			React.createElement("div", {className: "spotifyUser"}, 
-				React.createElement("div", {className: "spotifyHeader"}, 
-					React.createElement("img", {className: "spotifyAvatar", src: this.user.avatar, alt: this.user.username}), 
-					React.createElement("div", {className: "spotifyUserContent", style: {display:'inline-block'}}, 
-						React.createElement("div", {className: "spotifyUsername"}, this.user.username), 
-						React.createElement("div", {className: "spotifyLastPlayed"}, 
-							"Last Played: ", React.createElement("a", {href: href}, last_played)
+		return React.createElement(
+			'div',
+			{ className: 'spotifyUser' },
+			React.createElement(
+				'div',
+				{ className: 'spotifyHeader' },
+				React.createElement('img', { className: 'spotifyAvatar', src: this.user.avatar, alt: this.user.username }),
+				React.createElement(
+					'div',
+					{ className: 'spotifyUserContent', style: { display: 'inline-block' } },
+					React.createElement(
+						'div',
+						{ className: 'spotifyUsername' },
+						this.user.username
+					),
+					React.createElement(
+						'div',
+						{ className: 'spotifyLastPlayed' },
+						'Recently Played: ',
+						React.createElement(
+							'a',
+							{ href: href },
+							last_played
 						)
 					)
-				), 
-				React.createElement("div", {className: "spotifyStatistics"}, 
-						React.createElement(TopArtists, {artists: this.top_artists})
 				)
+			),
+			React.createElement(
+				'div',
+				{ className: 'spotifyStatistics' },
+				React.createElement(TopArtists, { artists: this.top_artists })
 			)
-		)
+		);
 	}
 }
 
 class UsersContainer extends React.Component {
-	constructor(props){
+	constructor(props) {
 		super(props);
 		this.state = {
 			self: props.self,
@@ -45262,39 +45285,62 @@ class UsersContainer extends React.Component {
 	componentDidMount() {
 		console.log('cpomonentn moutnetned!');
 		console.log(GLOBAL_SELF);
-		this.setState({self: GLOBAL_SELF});
+		this.setState({ self: GLOBAL_SELF });
 	}
 
-	componentWillUnmount(){
+	componentWillUnmount() {}
 
+	update(users) {
+		this.setState({ users: users });
 	}
 
-	update(users){
-		this.setState({users: users});
-	}
-
-	render(){
-		var listOfUsers = this.state.users.map((user) => 
-			React.createElement("div", {key: user.props.uuid}, user)
-		);
+	render() {
+		var listOfUsers = this.state.users.map(user => React.createElement(
+			'div',
+			{ key: user.props.uuid },
+			user
+		));
 		var authButton;
-		if (this.state.authenticated === true){
-			authButton = React.createElement("div", {className: "spotifyContainer", style: { display: 'flex'}}, 
-							React.createElement("div", {className: "authenticateRefreshButton"}, 
-								React.createElement("a", {href: "http://50.24.61.224:8000/login", style: { display: 'hidden'}}, " Refresh Spotify Statistics")
-							), 
-							React.createElement("div", {className: "spotifySelfContainer"}, this.state.self), ";"
-						)
+		if (this.state.authenticated === true) {
+			authButton = React.createElement(
+				'div',
+				{ className: 'spotifyContainer', style: { display: 'flex' } },
+				React.createElement(
+					'div',
+					{ className: 'authenticateRefreshButton' },
+					React.createElement(
+						'a',
+						{ href: 'http://50.24.61.224:8000/login', style: { display: 'hidden' } },
+						' Refresh Spotify Statistics'
+					)
+				),
+				React.createElement(
+					'div',
+					{ className: 'spotifySelfContainer' },
+					this.state.self
+				),
+				';'
+			);
 		} else {
-			authButton = React.createElement("div", {className: "authenticateButton"}, 
-				React.createElement("a", {href: "http://50.24.61.224:8000/login", style: { display: 'hidden'}}, " Link Spotify Statistics")
-			)
+			authButton = React.createElement(
+				'div',
+				{ className: 'authenticateButton' },
+				React.createElement(
+					'a',
+					{ href: 'http://50.24.61.224:8000/login', style: { display: 'hidden' } },
+					' Link Spotify Statistics'
+				)
+			);
 		}
-		return (
-		React.createElement("div", null, 
-			authButton, 
-			React.createElement("div", {className: "spotifyUsersContainer", style: { flexWrap: 'wrap'}}, listOfUsers)
-		)
+		return React.createElement(
+			'div',
+			null,
+			authButton,
+			React.createElement(
+				'div',
+				{ className: 'spotifyUsersContainer', style: { flexWrap: 'wrap' } },
+				listOfUsers
+			)
 		);
 	}
 }

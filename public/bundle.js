@@ -152,7 +152,7 @@ class SpotifyUser extends React.Component {
 					<div className='spotifyUserContent' style={{display:'inline-block'}}>
 						<div className='spotifyUsername'>{this.user.username}</div>
 						<div className='spotifyLastPlayed'>
-							Last Played: <a href={href}>{last_played}</a>
+							Recently Played: <a href={href}>{last_played}</a>
 						</div>
 					</div>
 				</div>
