@@ -49,7 +49,7 @@ firebase.database().ref('users').on('value', (user_list) => {
 			// ReactDOM.render(user_container, mount);
 		}
 		if (items_retrieved === items_needed){
-			user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
+			var user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
 			ReactDOM.render(user_container, mount);
 		}
 		// user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
