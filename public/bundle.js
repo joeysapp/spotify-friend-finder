@@ -28,7 +28,7 @@ firebase.database().ref('users').on('value', (user_list) => {
 	user_list.forEach(user_snapshot => {
 		var user = user_snapshot.val();
 		var uuid = user.uuid;
-		var username = user.user_info.id;
+		var username = user.user_info.display_name || user.user_info.id;
 		var avatar;
 		if (user.user_info.images){
 			avatar = user.user_info.images[0].url;
