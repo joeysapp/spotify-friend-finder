@@ -45420,7 +45420,7 @@ var UsersContainer = function (_React$Component3) {
 }(React.Component);
 
 var mount = document.querySelector('#spotifyUsers');
-var user_container = React.createElement(UsersContainer, { self: null, users: null, authenticated: typeof GLOBAL_UUID !== 'undefined' });
+var user_container = React.createElement(UsersContainer, { self: null, users: null, authenticated: typeof GLOBAL_UUID === 'undefined' });
 ReactDOM.render(user_container, mount);
 
 // var user_container = <UsersContainer self={GLOBAL_SELF} users={users} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
