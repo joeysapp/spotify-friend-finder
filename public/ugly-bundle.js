@@ -45166,11 +45166,11 @@ function getCookie(name) {
 }
 
 $(document).ready(function () {
-	if (document.cookie.indexOf('spotify_uuid') === -1 && getParameterByName('client_id') !== null) {
-		document.cookie = 'spotify_uuid=' + getParameterByName('client_id') + '; expires=Thu, 18 Dec 2013 12:00:00 UTC';
+	if (document.cookie.indexOf('spotify_uuid_0') === -1 && getParameterByName('client_id') !== null) {
+		document.cookie = 'spotify_uuid_0=' + getParameterByName('client_id') + '; expires=Thu, 18 Dec 2013 12:00:00 UTC';
 		GLOBAL_UUID = getParameterByName('client_id');
 	} else {
-		GLOBAL_UUID = getCookie('spotify_uuid');
+		GLOBAL_UUID = getCookie('spotify_uuid_0');
 	}
 });
 
