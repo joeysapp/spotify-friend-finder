@@ -45167,17 +45167,11 @@ function getCookie(name) {
 
 $(document).ready(function () {
 	if (document.cookie.indexOf('spotify_uuid') === -1 && getParameterByName('client_id') !== null) {
-		document.cookie = 'spotify_uuid=' + getParameterByName('client_id');
+		document.cookie = 'spotify_uuid=' + getParameterByName('client_id') + '; expires=Thu, 18 Dec 2013 12:00:00 UTC';
 		GLOBAL_UUID = getParameterByName('client_id');
 	} else {
 		GLOBAL_UUID = getCookie('spotify_uuid');
 	}
-
-	console.log('GLOBAL_UUID: ' + GLOBAL_UUID);
-	console.log('GLOBAL_SELF: ' + GLOBAL_SELF);
-
-	// lol
-
 });
 
 var TopArtists = function (_React$Component) {
@@ -45420,7 +45414,7 @@ var UsersContainer = function (_React$Component3) {
 }(React.Component);
 
 var mount = document.querySelector('#spotifyUsers');
-var user_container = React.createElement(UsersContainer, { self: null, users: null, authenticated: typeof GLOBAL_UUID !== 'undefined' });
+var user_container = React.createElement(UsersContainer, { self: null, users: null, authenticated: GLOBAL_UUID.length > 5 });
 ReactDOM.render(user_container, mount);
 
 // var user_container = <UsersContainer self={GLOBAL_SELF} users={users} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
