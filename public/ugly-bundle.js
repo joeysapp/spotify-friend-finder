@@ -45336,7 +45336,8 @@ var UsersContainer = function (_React$Component3) {
 			this.firebaseRef = firebase.database().ref('users');
 			console.log('firebaseRef');
 			console.log(this.firebaseRef);
-			this.firebaseCallback = this.firebaseRef.on('value', function (user_list) {
+			this.firebaseCallback = this.firebaseRef.on('value', function (user_list_snapshot) {
+				var user_list = user_list_snapshot.val();
 				console.log('hi');
 				console.log(user_list);
 				user_list.forEach(function (user_snapshot) {
