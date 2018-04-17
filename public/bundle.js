@@ -185,7 +185,11 @@ class UsersContainer extends React.Component {
 					var tmp_user = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
 					tmp_users.push(tmp_user);
 				} else {
-					this.setState({self: <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>});
+					this.setState({
+						authenticated: true,
+						self: <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>}
+					);
+					
 				}
 				this.setState({ users: tmp_users });
 			});
@@ -228,7 +232,7 @@ class UsersContainer extends React.Component {
 }
 
 var mount = document.querySelector('#spotifyUsers');
-var user_container = <UsersContainer self={null} users={null} authenticated={(GLOBAL_UUID.length > 5)}/>
+var user_container = <UsersContainer self={null} users={null} authenticated={false}/>
 ReactDOM.render(user_container, mount)
 
 
