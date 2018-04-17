@@ -45340,8 +45340,9 @@ var UsersContainer = function (_React$Component3) {
 					var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
 					var artists = user.artists;
 					var recently_played = user['recently-played'];
-					var tmp_user = React.createElement(SpotifyUser, { uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played });
+					console.log('uuid:' + uuid);
 					if (uuid !== GLOBAL_UUID) {
+						var tmp_user = React.createElement(SpotifyUser, { uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played });
 						tmp_users.push(tmp_user);
 					} else {
 						_this4.setState({ self: React.createElement(SpotifyUser, { uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played }) });

@@ -188,8 +188,9 @@ class UsersContainer extends React.Component {
 				var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
 				var artists = user.artists;
 				var recently_played = user['recently-played'];
-				var tmp_user = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
+				console.log('uuid:' + uuid);
 				if (uuid !== GLOBAL_UUID){
+					var tmp_user = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
 					tmp_users.push(tmp_user);
 				} else {
 					this.setState({self: <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>});
