@@ -178,8 +178,8 @@ class UsersContainer extends React.Component {
 	componentDidMount() {
 		console.log('UserContainer didMount');
 		var tmp_users = [];
-		this.firebaseRef = firebase.database().ref('/users');
-		this.firebaseCallback = this.firebaseRef.on('value', user_list => {
+		this.firebaseRef = firebase.database().ref('users');
+		this.firebaseCallback = this.firebaseRef.on('value', (user_list) => {
 			user_list.forEach(user_snapshot => {
 				var user = user_snapshot.val();
 				tmp_users.push(user);
@@ -190,7 +190,7 @@ class UsersContainer extends React.Component {
 	}
 
 	componentWillUnmount(){
-
+	    this.firebaseRef.off('value', this.firebaseCallback);
 	}
 
 	render(){

@@ -45331,7 +45331,7 @@ var UsersContainer = function (_React$Component3) {
 
 			console.log('UserContainer didMount');
 			var tmp_users = [];
-			this.firebaseRef = firebase.database().ref('/users');
+			this.firebaseRef = firebase.database().ref('users');
 			this.firebaseCallback = this.firebaseRef.on('value', function (user_list) {
 				user_list.forEach(function (user_snapshot) {
 					var user = user_snapshot.val();
@@ -45342,7 +45342,9 @@ var UsersContainer = function (_React$Component3) {
 		}
 	}, {
 		key: 'componentWillUnmount',
-		value: function componentWillUnmount() {}
+		value: function componentWillUnmount() {
+			this.firebaseRef.off('value', this.firebaseCallback);
+		}
 	}, {
 		key: 'render',
 		value: function render() {
