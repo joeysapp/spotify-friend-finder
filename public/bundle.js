@@ -172,7 +172,8 @@ class UsersContainer extends React.Component {
 		this.state = {
 			self: props.self,
 			users: props.users,
-			authenticated: props.authenticated
+			authenticated: props.authenticated,
+			hasLoaded: false
 		};
 	}
 
@@ -186,6 +187,7 @@ class UsersContainer extends React.Component {
 				tmp_users.push(user);
 				this.setState({ users: tmp_users });
 			});
+			this.setState({ hasLoaded: true });
 		});	
 	}
 
@@ -193,11 +195,14 @@ class UsersContainer extends React.Component {
 		this.firebaseRef.off('value', this.firebaseCallback);
 	}
 
-
 	render(){
-		var listOfUsers = this.state.users.map((user) => 
-			<div key={user.props.uuid}>{user}</div>
-		);
+		if (this.state.users != null){
+			var listOfUsers = this.state.users.map((user) => 
+				<div key={user.props.uuid}>{user}</div>
+			);
+		} else {
+			var listOfUseres = [];
+		}
 		var authButton;
 		if (this.state.authenticated === true){
 			authButton = <div className='spotifyContainer' style={{ display: 'flex' }}>

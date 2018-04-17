@@ -45320,7 +45320,8 @@ var UsersContainer = function (_React$Component3) {
 		_this3.state = {
 			self: props.self,
 			users: props.users,
-			authenticated: props.authenticated
+			authenticated: props.authenticated,
+			hasLoaded: false
 		};
 		return _this3;
 	}
@@ -45339,6 +45340,7 @@ var UsersContainer = function (_React$Component3) {
 					tmp_users.push(user);
 					_this4.setState({ users: tmp_users });
 				});
+				_this4.setState({ hasLoaded: true });
 			});
 		}
 	}, {
@@ -45349,13 +45351,17 @@ var UsersContainer = function (_React$Component3) {
 	}, {
 		key: 'render',
 		value: function render() {
-			var listOfUsers = this.state.users.map(function (user) {
-				return React.createElement(
-					'div',
-					{ key: user.props.uuid },
-					user
-				);
-			});
+			if (this.state.users != null) {
+				var listOfUsers = this.state.users.map(function (user) {
+					return React.createElement(
+						'div',
+						{ key: user.props.uuid },
+						user
+					);
+				});
+			} else {
+				var listOfUseres = [];
+			}
 			var authButton;
 			if (this.state.authenticated === true) {
 				authButton = React.createElement(
