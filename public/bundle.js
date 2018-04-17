@@ -30,8 +30,10 @@ function getCookie(name) {
 
 $(document).ready(() => {
 	if (getParameterByName('client_id') !== null){
+		console.log('i see that');
 		document.cookie = 'spotify_uuid_0='+getParameterByName('client_id');
-		GLOBAL_UUID = getParameterByName('client_id')
+		GLOBAL_UUID = getParameterByName('client_id');
+		console.log('set cookie to'+document.cookie);
 	} else {
 		GLOBAL_UUID = getCookie('spotify_uuid_0');
 	}
