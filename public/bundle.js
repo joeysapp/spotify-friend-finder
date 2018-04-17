@@ -201,7 +201,7 @@ class UsersContainer extends React.Component {
 				<div key={user.props.uuid}>{user}</div>
 			);
 		} else {
-			var listOfUseres = [];
+			var listOfUsers = [];
 		}
 		var authButton;
 		if (this.state.authenticated === true){

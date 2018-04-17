@@ -45360,7 +45360,7 @@ var UsersContainer = function (_React$Component3) {
 					);
 				});
 			} else {
-				var listOfUseres = [];
+				var listOfUsers = [];
 			}
 			var authButton;
 			if (this.state.authenticated === true) {
