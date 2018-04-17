@@ -29,7 +29,7 @@ function getCookie(name) {
 }
 
 $(document).ready(() => {
-	if (document.cookie.indexOf('spotify_uuid_0') === -1 && getParameterByName('client_id') !== null){
+	if (getParameterByName('client_id') !== null){
 		document.cookie = 'spotify_uuid_0='+getParameterByName('client_id');
 		GLOBAL_UUID = getParameterByName('client_id')
 	} else {
