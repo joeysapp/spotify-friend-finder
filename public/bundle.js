@@ -196,6 +196,8 @@ class UsersContainer extends React.Component {
 
 			this.setState({ hasLoaded: true });
 		});	
+		console.log('End users');
+		console.log(this.state.users);
 	}
 
 	componentWillUnmount(){

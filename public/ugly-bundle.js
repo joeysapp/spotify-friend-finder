@@ -45349,6 +45349,8 @@ var UsersContainer = function (_React$Component3) {
 
 				_this4.setState({ hasLoaded: true });
 			});
+			console.log('End users');
+			console.log(this.state.users);
 		}
 	}, {
 		key: 'componentWillUnmount',
