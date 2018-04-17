@@ -45111,48 +45111,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-// so I think this should all go inside the user_container thing
-// so we can handle states correctly lol
-// firebase.database().ref('users').on('value', (user_list) => {
-// 	var items_retrieved = 0;
-// 	var items_needed = 0;
-// 	user_list.forEach(idx => {
-// 		items_needed++;
-// 	})
-// 	user_list.forEach(user_snapshot => {
-// 		var user = user_snapshot.val();
-// 		var uuid = user.uuid;
-// 		var username = user.user_info.display_name || user.user_info.id;
-// 		var avatar;
-// 		if (user.user_info.images){
-// 			avatar = user.user_info.images[0].url;
-
-// 		} else {
-// 			avatar = 'public/avatars/empty.png';
-// 		}
-// 		var artists = user.artists;
-// 		var recently_played = user['recently-played'];
-// 		var tmp_user = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
-// 		items_retrieved++;
-// 		if (uuid != GLOBAL_UUID){
-// 			users.push(tmp_user);
-// 		} else {
-// 			console.log('saw u');
-// 			GLOBAL_SELF = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
-// 			// user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
-// 			// ReactDOM.render(user_container, mount);
-// 		}
-// 		if (items_retrieved === items_needed){
-// 			var user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
-// 			ReactDOM.render(user_container, mount);
-// 		}
-// 		// user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
-// 		// ReactDOM.render(user_container, mount);
-
-// 	});
-// });
-
-
 //https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript/901144#12151322
 function getParameterByName(name) {
 	var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
@@ -45167,7 +45125,7 @@ function getCookie(name) {
 
 $(document).ready(function () {
 	if (document.cookie.indexOf('spotify_uuid_0') === -1 && getParameterByName('client_id') !== null) {
-		document.cookie = 'spotify_uuid_0=' + getParameterByName('client_id') + '; expires=Thu, 18 Dec 2013 12:00:00 UTC';
+		document.cookie = 'spotify_uuid_0=' + getParameterByName('client_id');
 		GLOBAL_UUID = getParameterByName('client_id');
 	} else {
 		GLOBAL_UUID = getCookie('spotify_uuid_0');
@@ -45339,6 +45297,7 @@ var UsersContainer = function (_React$Component3) {
 						var tmp_user = React.createElement(SpotifyUser, { uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played });
 						tmp_users.push(tmp_user);
 					} else {
+
 						_this4.setState({
 							authenticated: true,
 							self: React.createElement(SpotifyUser, { uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played }) });
@@ -45418,9 +45377,6 @@ var UsersContainer = function (_React$Component3) {
 var mount = document.querySelector('#spotifyUsers');
 var user_container = React.createElement(UsersContainer, { self: null, users: null, authenticated: false });
 ReactDOM.render(user_container, mount);
-
-// var user_container = <UsersContainer self={GLOBAL_SELF} users={users} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
-// ReactDOM.render(user_container, mount);
 
 },{"firebase":175,"react":187,"react-dom":184,"uuid-v4":189}],191:[function(require,module,exports){
 // shim for using process in browser
