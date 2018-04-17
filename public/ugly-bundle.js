@@ -45178,9 +45178,6 @@ $(document).ready(function () {
 
 	// lol
 
-	window.setTimeout(function () {
-		console.log('hi');
-	}, 100);
 });
 
 var TopArtists = function (_React$Component) {
@@ -45332,19 +45329,18 @@ var UsersContainer = function (_React$Component3) {
 			var _this4 = this;
 
 			console.log('UserContainer didMount');
+
 			var tmp_users = [];
 			this.firebaseRef = firebase.database().ref('users');
 			this.firebaseCallback = this.firebaseRef.on('value', function (user_list) {
 				user_list.forEach(function (user_snapshot) {
 					var user = user_snapshot.val();
-					console.log(user);
 					var uuid = user.uuid;
 					var username = user.user_info.display_name || user.user_info.id;
 					var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
 					var artists = user.artists;
 					var recently_played = user['recently-played'];
 					var tmp_user = React.createElement(SpotifyUser, { uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played });
-					console.log(tmp_user);
 					tmp_users.push(tmp_user);
 					_this4.setState({ users: tmp_users });
 				});
@@ -45419,7 +45415,7 @@ var UsersContainer = function (_React$Component3) {
 }(React.Component);
 
 var mount = document.querySelector('#spotifyUsers');
-var user_container = React.createElement(UsersContainer, { self: null, users: null, authenticated: typeof GLOBAL_UUID !== 'undefined' });
+var user_container = React.createElement(UsersContainer, { self: null, users: null, authenticated: typeof GLOBAL_UUID === 'undefined' });
 ReactDOM.render(user_container, mount);
 
 // var user_container = <UsersContainer self={GLOBAL_SELF} users={users} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>

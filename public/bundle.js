@@ -85,9 +85,7 @@ $(document).ready(() => {
 
 	// lol
 
-	window.setTimeout(() => {
-		console.log('hi');
-	}, 100);
+
 });
 
 class TopArtists extends React.Component {
@@ -179,19 +177,18 @@ class UsersContainer extends React.Component {
 
 	componentDidMount() {
 		console.log('UserContainer didMount');
+
 		var tmp_users = [];
 		this.firebaseRef = firebase.database().ref('users');
 		this.firebaseCallback = this.firebaseRef.on('value', (user_list) => {
 			user_list.forEach(user_snapshot => {
 				var user = user_snapshot.val();
-				console.log(user);
 				var uuid = user.uuid;
 				var username = user.user_info.display_name || user.user_info.id;
 				var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
 				var artists = user.artists;
 				var recently_played = user['recently-played'];
 				var tmp_user = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
-				console.log(tmp_user);
 				tmp_users.push(tmp_user);
 				this.setState({ users: tmp_users });
 			});
@@ -234,7 +231,7 @@ class UsersContainer extends React.Component {
 }
 
 var mount = document.querySelector('#spotifyUsers');
-var user_container = <UsersContainer self={null} users={null} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
+var user_container = <UsersContainer self={null} users={null} authenticated={(typeof GLOBAL_UUID === 'undefined')}/>
 ReactDOM.render(user_container, mount)
 
 
