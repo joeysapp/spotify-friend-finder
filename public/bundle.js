@@ -189,8 +189,8 @@ class UsersContainer extends React.Component {
 				console.log(user_snapshot);
 				console.log('user');
 				var user = user_snapshot.val();
-				console.log(user);
-				tmp_users.push(user);
+				var tmp_user = <SpotifyUser uuid={user.user_info.uuid} username={user.user_info.username} avatar={user.user_info.avatar} artists={user.artists} recently_played={user.recently_played}/>;
+				tmp_users.push(tmp_user);
 				this.setState({ users: tmp_users });
 			});
 
@@ -207,7 +207,7 @@ class UsersContainer extends React.Component {
 	render(){
 		if (this.state.users != null){
 			var listOfUsers = this.state.users.map((user) => 
-				<div key={user.uuid}>{user}</div>
+				<div key={user.props.uuid}>{user}</div>
 			);
 		} else {
 			var listOfUsers = [];
