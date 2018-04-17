@@ -181,14 +181,17 @@ class UsersContainer extends React.Component {
 		console.log('UserContainer didMount');
 		var tmp_users = [];
 		this.firebaseRef = firebase.database().ref('users');
+		console.log('firebaseRef');
+		console.log(this.firebaseRef);
 		this.firebaseCallback = this.firebaseRef.on('value', (user_list) => {
+			console.log('hi');
+			console.log(user_list);
 			user_list.forEach(user_snapshot => {
 				var user = user_snapshot.val();
 				tmp_users.push(user);
 				this.setState({ users: tmp_users });
 			});
-			console.log('users: ');
-			console.log(this.state.users);
+
 			this.setState({ hasLoaded: true });
 		});	
 	}
