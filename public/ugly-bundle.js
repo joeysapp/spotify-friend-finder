@@ -45325,27 +45325,6 @@ var UsersContainer = function (_React$Component3) {
 	}
 
 	_createClass(UsersContainer, [{
-		key: 'componentDidMount',
-		value: function componentDidMount() {
-			var _this4 = this;
-
-			console.log('UserContainer didMount');
-			var tmp_users = [];
-			this.firebaseRef = firebase.database().ref('users');
-			this.firebaseCallback = this.firebaseRef.on('value', function (user_list) {
-				user_list.forEach(function (user_snapshot) {
-					var user = user_snapshot.val();
-					tmp_users.push(user);
-					_this4.setState({ users: tmp_users });
-				});
-			});
-		}
-	}, {
-		key: 'componentWillUnmount',
-		value: function componentWillUnmount() {
-			this.firebaseRef.off('value', this.firebaseCallback);
-		}
-	}, {
 		key: 'render',
 		value: function render() {
 			var listOfUsers = this.state.users.map(function (user) {
