@@ -190,16 +190,9 @@ class UsersContainer extends React.Component {
 				console.log('user');
 				var user = user_snapshot.val();
 
-				
 				var uuid = user.uuid;
 				var username = user.user_info.display_name || user.user_info.id;
-				var avatar;
-				if (user.user_info.images){
-					avatar = user.user_info.images[0].url;
-
-				} else {
-					avatar = 'public/avatars/empty.png';
-				}
+				var avatar = user.user_info.images[0].url || 'public/avatars/empty.png';
 				var artists = user.artists;
 				var recently_played = user['recently-played'];
 				var tmp_user = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
