@@ -19,44 +19,44 @@ firebase.initializeApp(config);
 
 // so I think this should all go inside the user_container thing
 // so we can handle states correctly lol
-firebase.database().ref('users').on('value', (user_list) => {
-	var items_retrieved = 0;
-	var items_needed = 0;
-	user_list.forEach(idx => {
-		items_needed++;
-	})
-	user_list.forEach(user_snapshot => {
-		var user = user_snapshot.val();
-		var uuid = user.uuid;
-		var username = user.user_info.display_name || user.user_info.id;
-		var avatar;
-		if (user.user_info.images){
-			avatar = user.user_info.images[0].url;
+// firebase.database().ref('users').on('value', (user_list) => {
+// 	var items_retrieved = 0;
+// 	var items_needed = 0;
+// 	user_list.forEach(idx => {
+// 		items_needed++;
+// 	})
+// 	user_list.forEach(user_snapshot => {
+// 		var user = user_snapshot.val();
+// 		var uuid = user.uuid;
+// 		var username = user.user_info.display_name || user.user_info.id;
+// 		var avatar;
+// 		if (user.user_info.images){
+// 			avatar = user.user_info.images[0].url;
 
-		} else {
-			avatar = 'public/avatars/empty.png';
-		}
-		var artists = user.artists;
-		var recently_played = user['recently-played'];
-		var tmp_user = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
-		items_retrieved++;
-		if (uuid != GLOBAL_UUID){
-			users.push(tmp_user);
-		} else {
-			console.log('saw u');
-			GLOBAL_SELF = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
-			// user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
-			// ReactDOM.render(user_container, mount);
-		}
-		if (items_retrieved === items_needed){
-			var user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
-			ReactDOM.render(user_container, mount);
-		}
-		// user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
-		// ReactDOM.render(user_container, mount);
+// 		} else {
+// 			avatar = 'public/avatars/empty.png';
+// 		}
+// 		var artists = user.artists;
+// 		var recently_played = user['recently-played'];
+// 		var tmp_user = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
+// 		items_retrieved++;
+// 		if (uuid != GLOBAL_UUID){
+// 			users.push(tmp_user);
+// 		} else {
+// 			console.log('saw u');
+// 			GLOBAL_SELF = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
+// 			// user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
+// 			// ReactDOM.render(user_container, mount);
+// 		}
+// 		if (items_retrieved === items_needed){
+// 			var user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
+// 			ReactDOM.render(user_container, mount);
+// 		}
+// 		// user_container = <UsersContainer users={users} self={GLOBAL_SELF} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
+// 		// ReactDOM.render(user_container, mount);
 
-	});
-});
+// 	});
+// });
 
 //https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript/901144#12151322
 function getParameterByName(name) {
@@ -125,6 +125,7 @@ class TopArtists extends React.Component {
 class SpotifyUser extends React.Component {
 	constructor(props){
 		super(props);
+		this.user = {};
 		this.user = {
 			username: props.username,
 			avatar: props.avatar,
@@ -175,17 +176,21 @@ class UsersContainer extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log('cpomonentn moutnetned!');
-		console.log(GLOBAL_SELF);
-		this.setState({self: GLOBAL_SELF});
+		console.log('UserContainer didMount');
+		var tmp_users = [];
+		this.firebaseRef = firebase.database().ref('/users');
+		this.firebaseCallback = this.firebaseRef.on('value', user_list => {
+			user_list.forEach(user_snapshot => {
+				var user = user_snapshot.val();
+				tmp_users.push(user);
+				this.setState({ users: tmp_users });
+			});
+		});
+		
 	}
 
 	componentWillUnmount(){
 
-	}
-
-	update(users){
-		this.setState({users: users});
 	}
 
 	render(){

@@ -45083,6 +45083,16 @@ exports.random = function() {
 
 
 },{}],190:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 var users = [];
 
 var GLOBAL_UUID = null;
@@ -45097,10 +45107,9 @@ var firebase = require('firebase');
 var config = {
 	apiKey: "AIzaSyCpSdQt0tWey4qV9ynPIyeAMhMTyiJaTO8",
 	authDomain: "joeysappgithub.firebaseapp.com",
-	databaseURL: "https://joeysappgithub.firebaseio.com",
+	databaseURL: "https://joeysappgithub.firebaseio.com"
 };
 firebase.initializeApp(config);
-
 
 // so I think this should all go inside the user_container thing
 // so we can handle states correctly lol
@@ -45155,154 +45164,242 @@ function getCookie(name) {
 	if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
-$(document).ready(() => {
-	if (document.cookie.indexOf('spotify_uuid') === -1 && getParameterByName('client_id') !== null){
-		document.cookie = 'spotify_uuid='+getParameterByName('client_id');
-		GLOBAL_UUID = getParameterByName('client_id')
+$(document).ready(function () {
+	if (document.cookie.indexOf('spotify_uuid') === -1 && getParameterByName('client_id') !== null) {
+		document.cookie = 'spotify_uuid=' + getParameterByName('client_id');
+		GLOBAL_UUID = getParameterByName('client_id');
 	} else {
 		GLOBAL_UUID = getCookie('spotify_uuid');
-
 	}
 
-	console.log('GLOBAL_UUID: '+GLOBAL_UUID);
-	console.log('GLOBAL_SELF: '+GLOBAL_SELF);
+	console.log('GLOBAL_UUID: ' + GLOBAL_UUID);
+	console.log('GLOBAL_SELF: ' + GLOBAL_SELF);
 
 	// lol
 
-	window.setTimeout(() => {
+	window.setTimeout(function () {
 		console.log('hi');
 	}, 100);
 });
 
-class TopArtists extends React.Component {
-	constructor(props){
-		super(props);
-		this.state = {
+var TopArtists = function (_React$Component) {
+	_inherits(TopArtists, _React$Component);
+
+	function TopArtists(props) {
+		_classCallCheck(this, TopArtists);
+
+		var _this = _possibleConstructorReturn(this, (TopArtists.__proto__ || Object.getPrototypeOf(TopArtists)).call(this, props));
+
+		_this.state = {
 			artists: props.artists.items
 		};
+		return _this;
 	}
 
-	render() {
-		var artistGenres = this.state.artists.map((artist) => {
-			React.createElement("div", {className: "spotifyArtistGenre"}, artist.genres)
-		});
+	_createClass(TopArtists, [{
+		key: 'render',
+		value: function render() {
+			var artistGenres = this.state.artists.map(function (artist) {
+				React.createElement(
+					'div',
+					{ className: 'spotifyArtistGenre' },
+					artist.genres
+				);
+			});
 
-		var listOfArtists = this.state.artists.map((artist) => 
-			React.createElement("div", {key: artist.name, className: "spotifyArtist"}, 
-				React.createElement("img", {className: "spotifyArtistImage", src: artist.images[0].url, alt: artist.name}), 
-				React.createElement("a", {href: artist.external_urls.spotify, className: "spotifyArtistName"}, artist.name), 
-				React.createElement("div", {className: "spotifyArtistGenres"}, 
-					typeof artist.genres === 'undefined' ? '' : artist.genres.join(', '), ";"
-				)
-			)
-		);
-		return (
-			React.createElement("div", {style: {overflow: 'auto'}, className: "spotifyTopArtists"}, 
-			"Top Played Artists", 
-				listOfArtists	
-			)
-		)
-	}
+			var listOfArtists = this.state.artists.map(function (artist) {
+				return React.createElement(
+					'div',
+					{ key: artist.name, className: 'spotifyArtist' },
+					React.createElement('img', { className: 'spotifyArtistImage', src: artist.images[0].url, alt: artist.name }),
+					React.createElement(
+						'a',
+						{ href: artist.external_urls.spotify, className: 'spotifyArtistName' },
+						artist.name
+					),
+					React.createElement(
+						'div',
+						{ className: 'spotifyArtistGenres' },
+						typeof artist.genres === 'undefined' ? '' : artist.genres.join(', '),
+						';'
+					)
+				);
+			});
+			return React.createElement(
+				'div',
+				{ style: { overflow: 'auto' }, className: 'spotifyTopArtists' },
+				'Top Played Artists',
+				listOfArtists
+			);
+		}
+	}]);
 
-}
+	return TopArtists;
+}(React.Component);
 
+var SpotifyUser = function (_React$Component2) {
+	_inherits(SpotifyUser, _React$Component2);
 
-class SpotifyUser extends React.Component {
-	constructor(props){
-		super(props);
-		this.user = {};
-		this.user = {
+	function SpotifyUser(props) {
+		_classCallCheck(this, SpotifyUser);
+
+		var _this2 = _possibleConstructorReturn(this, (SpotifyUser.__proto__ || Object.getPrototypeOf(SpotifyUser)).call(this, props));
+
+		_this2.user = {};
+		_this2.user = {
 			username: props.username,
 			avatar: props.avatar,
 			recently_played: props.recently_played
-		}
-		this.uuid = props.uuid;
-		this.key = props.uuid;
-		this.top_artists = props.artists;
+		};
+		_this2.uuid = props.uuid;
+		_this2.key = props.uuid;
+		_this2.top_artists = props.artists;
+		return _this2;
 	}
 
-	render() {
-		var last_played;
-		var href;
+	_createClass(SpotifyUser, [{
+		key: 'render',
+		value: function render() {
+			var last_played;
+			var href;
 
-		if (typeof this.user.recently_played !== 'undefined' && 'items' in this.user.recently_played){
-			var track = this.user.recently_played.items[0].track;
-			last_played = track.name + ' - ' + track.artists[0].name;
-			href = track.external_urls.spotify;
-		}
+			if (typeof this.user.recently_played !== 'undefined' && 'items' in this.user.recently_played) {
+				var track = this.user.recently_played.items[0].track;
+				last_played = track.name + ' - ' + track.artists[0].name;
+				href = track.external_urls.spotify;
+			}
 
-		return (
-			React.createElement("div", {className: "spotifyUser"}, 
-				React.createElement("div", {className: "spotifyHeader"}, 
-					React.createElement("img", {className: "spotifyAvatar", src: this.user.avatar, alt: this.user.username}), 
-					React.createElement("div", {className: "spotifyUserContent", style: {display:'inline-block'}}, 
-						React.createElement("div", {className: "spotifyUsername"}, this.user.username), 
-						React.createElement("div", {className: "spotifyLastPlayed"}, 
-							"Recently Played: ", React.createElement("a", {href: href}, last_played)
+			return React.createElement(
+				'div',
+				{ className: 'spotifyUser' },
+				React.createElement(
+					'div',
+					{ className: 'spotifyHeader' },
+					React.createElement('img', { className: 'spotifyAvatar', src: this.user.avatar, alt: this.user.username }),
+					React.createElement(
+						'div',
+						{ className: 'spotifyUserContent', style: { display: 'inline-block' } },
+						React.createElement(
+							'div',
+							{ className: 'spotifyUsername' },
+							this.user.username
+						),
+						React.createElement(
+							'div',
+							{ className: 'spotifyLastPlayed' },
+							'Recently Played: ',
+							React.createElement(
+								'a',
+								{ href: href },
+								last_played
+							)
 						)
 					)
-				), 
-				React.createElement("div", {className: "spotifyStatistics"}, 
-						React.createElement(TopArtists, {artists: this.top_artists})
+				),
+				React.createElement(
+					'div',
+					{ className: 'spotifyStatistics' },
+					React.createElement(TopArtists, { artists: this.top_artists })
 				)
-			)
-		)
-	}
-}
+			);
+		}
+	}]);
 
-class UsersContainer extends React.Component {
-	constructor(props){
-		super(props);
-		this.state = {
+	return SpotifyUser;
+}(React.Component);
+
+var UsersContainer = function (_React$Component3) {
+	_inherits(UsersContainer, _React$Component3);
+
+	function UsersContainer(props) {
+		_classCallCheck(this, UsersContainer);
+
+		var _this3 = _possibleConstructorReturn(this, (UsersContainer.__proto__ || Object.getPrototypeOf(UsersContainer)).call(this, props));
+
+		_this3.state = {
 			self: props.self,
 			users: props.users,
 			authenticated: props.authenticated
 		};
+		return _this3;
 	}
 
-	componentDidMount() {
-		console.log('UserContainer didMount');
-		var tmp_users = {};
-		this.firebaseRef = firebase.database().ref('users');
-		this.firebaseCallback = this.firebaseRef.on('value', user_list => {
-			user_list.forEach(user_snapshot => {
-				var user = user_snapshot.val();
-				tmp_users.push(user);
-				this.setState({ users: tmp_users });
+	_createClass(UsersContainer, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this4 = this;
+
+			console.log('UserContainer didMount');
+			var tmp_users = [];
+			this.firebaseRef = firebase.database().ref('/users');
+			this.firebaseCallback = this.firebaseRef.on('value', function (user_list) {
+				user_list.forEach(function (user_snapshot) {
+					var user = user_snapshot.val();
+					tmp_users.push(user);
+					_this4.setState({ users: tmp_users });
+				});
 			});
-		});
-		
-	}
-
-	componentWillUnmount(){
-
-	}
-
-	render(){
-		var listOfUsers = this.state.users.map((user) => 
-			React.createElement("div", {key: user.props.uuid}, user)
-		);
-		var authButton;
-		if (this.state.authenticated === true){
-			authButton = React.createElement("div", {className: "spotifyContainer", style: { display: 'flex'}}, 
-							React.createElement("div", {className: "authenticateRefreshButton"}, 
-								React.createElement("a", {href: "http://50.24.61.224:8000/login", style: { display: 'hidden'}}, " Refresh Spotify Statistics")
-							), 
-							React.createElement("div", {className: "spotifySelfContainer"}, this.state.self), ";"
-						)
-		} else {
-			authButton = React.createElement("div", {className: "authenticateButton"}, 
-				React.createElement("a", {href: "http://50.24.61.224:8000/login", style: { display: 'hidden'}}, " Link Spotify Statistics")
-			)
 		}
-		return (
-		React.createElement("div", null, 
-			authButton, 
-			React.createElement("div", {className: "spotifyUsersContainer", style: { flexWrap: 'wrap'}}, listOfUsers)
-		)
-		);
-	}
-}
+	}, {
+		key: 'componentWillUnmount',
+		value: function componentWillUnmount() {}
+	}, {
+		key: 'render',
+		value: function render() {
+			var listOfUsers = this.state.users.map(function (user) {
+				return React.createElement(
+					'div',
+					{ key: user.props.uuid },
+					user
+				);
+			});
+			var authButton;
+			if (this.state.authenticated === true) {
+				authButton = React.createElement(
+					'div',
+					{ className: 'spotifyContainer', style: { display: 'flex' } },
+					React.createElement(
+						'div',
+						{ className: 'authenticateRefreshButton' },
+						React.createElement(
+							'a',
+							{ href: 'http://50.24.61.224:8000/login', style: { display: 'hidden' } },
+							' Refresh Spotify Statistics'
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'spotifySelfContainer' },
+						this.state.self
+					),
+					';'
+				);
+			} else {
+				authButton = React.createElement(
+					'div',
+					{ className: 'authenticateButton' },
+					React.createElement(
+						'a',
+						{ href: 'http://50.24.61.224:8000/login', style: { display: 'hidden' } },
+						' Link Spotify Statistics'
+					)
+				);
+			}
+			return React.createElement(
+				'div',
+				null,
+				authButton,
+				React.createElement(
+					'div',
+					{ className: 'spotifyUsersContainer', style: { flexWrap: 'wrap' } },
+					listOfUsers
+				)
+			);
+		}
+	}]);
+
+	return UsersContainer;
+}(React.Component);
 
 var mount = document.querySelector('#spotifyUsers');
 
