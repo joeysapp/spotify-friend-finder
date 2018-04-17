@@ -181,29 +181,22 @@ class UsersContainer extends React.Component {
 		console.log('UserContainer didMount');
 		var tmp_users = [];
 		this.firebaseRef = firebase.database().ref('users');
-		console.log('firebaseRef');
-		console.log(this.firebaseRef);
 		this.firebaseCallback = this.firebaseRef.on('value', (user_list) => {
 			user_list.forEach(user_snapshot => {
-				console.log('user_snapshot');
-				console.log(user_snapshot);
-				console.log('user');
 				var user = user_snapshot.val();
-
+				console.log(user);
 				var uuid = user.uuid;
 				var username = user.user_info.display_name || user.user_info.id;
-				var avatar = user.user_info.images[0].url || 'public/avatars/empty.png';
+				var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
 				var artists = user.artists;
 				var recently_played = user['recently-played'];
 				var tmp_user = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
+				console.log(tmp_user);
 				tmp_users.push(tmp_user);
 				this.setState({ users: tmp_users });
 			});
-
 			this.setState({ hasLoaded: true });
 		});	
-		console.log('End users');
-		console.log(this.state.users);
 	}
 
 	componentWillUnmount(){
