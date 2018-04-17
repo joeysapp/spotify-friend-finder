@@ -189,7 +189,11 @@ class UsersContainer extends React.Component {
 				var artists = user.artists;
 				var recently_played = user['recently-played'];
 				var tmp_user = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
-				tmp_users.push(tmp_user);
+				if (uuid !== GLOBAL_UUID){
+					tmp_users.push(tmp_user);
+				} else {
+					this.setState({self: <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>});
+				}
 				this.setState({ users: tmp_users });
 			});
 			this.setState({ hasLoaded: true });
@@ -231,7 +235,7 @@ class UsersContainer extends React.Component {
 }
 
 var mount = document.querySelector('#spotifyUsers');
-var user_container = <UsersContainer self={null} users={null} authenticated={(typeof GLOBAL_UUID === 'undefined')}/>
+var user_container = <UsersContainer self={null} users={null} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
 ReactDOM.render(user_container, mount)
 
 

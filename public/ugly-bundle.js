@@ -45341,7 +45341,11 @@ var UsersContainer = function (_React$Component3) {
 					var artists = user.artists;
 					var recently_played = user['recently-played'];
 					var tmp_user = React.createElement(SpotifyUser, { uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played });
-					tmp_users.push(tmp_user);
+					if (uuid !== GLOBAL_UUID) {
+						tmp_users.push(tmp_user);
+					} else {
+						_this4.setState({ self: React.createElement(SpotifyUser, { uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played }) });
+					}
 					_this4.setState({ users: tmp_users });
 				});
 				_this4.setState({ hasLoaded: true });
@@ -45415,7 +45419,7 @@ var UsersContainer = function (_React$Component3) {
 }(React.Component);
 
 var mount = document.querySelector('#spotifyUsers');
-var user_container = React.createElement(UsersContainer, { self: null, users: null, authenticated: typeof GLOBAL_UUID === 'undefined' });
+var user_container = React.createElement(UsersContainer, { self: null, users: null, authenticated: typeof GLOBAL_UUID !== 'undefined' });
 ReactDOM.render(user_container, mount);
 
 // var user_container = <UsersContainer self={GLOBAL_SELF} users={users} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
