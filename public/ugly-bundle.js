@@ -45364,7 +45364,7 @@ var UsersContainer = function (_React$Component3) {
 				var listOfUsers = this.state.users.map(function (user) {
 					return React.createElement(
 						'div',
-						{ key: user.props.uuid },
+						{ key: user.uuid },
 						user
 					);
 				});
