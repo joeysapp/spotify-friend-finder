@@ -187,6 +187,8 @@ class UsersContainer extends React.Component {
 				tmp_users.push(user);
 				this.setState({ users: tmp_users });
 			});
+			console.log('users: ');
+			console.log(this.state.users);
 			this.setState({ hasLoaded: true });
 		});	
 	}

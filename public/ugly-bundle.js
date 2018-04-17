@@ -45340,6 +45340,8 @@ var UsersContainer = function (_React$Component3) {
 					tmp_users.push(user);
 					_this4.setState({ users: tmp_users });
 				});
+				console.log('users: ');
+				console.log(_this4.state.users);
 				_this4.setState({ hasLoaded: true });
 			});
 		}
