@@ -45342,7 +45342,18 @@ var UsersContainer = function (_React$Component3) {
 					console.log(user_snapshot);
 					console.log('user');
 					var user = user_snapshot.val();
-					var tmp_user = React.createElement(SpotifyUser, { uuid: user.user_info.uuid, username: user.user_info.username, avatar: user.user_info.avatar, artists: user.artists, recently_played: user.recently_played });
+
+					var uuid = user.uuid;
+					var username = user.user_info.display_name || user.user_info.id;
+					var avatar;
+					if (user.user_info.images) {
+						avatar = user.user_info.images[0].url;
+					} else {
+						avatar = 'public/avatars/empty.png';
+					}
+					var artists = user.artists;
+					var recently_played = user['recently-played'];
+					var tmp_user = React.createElement(SpotifyUser, { uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played });
 					tmp_users.push(tmp_user);
 					_this4.setState({ users: tmp_users });
 				});
