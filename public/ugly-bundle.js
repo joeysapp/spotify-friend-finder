@@ -45152,6 +45152,7 @@ firebase.initializeApp(config);
 // 	});
 // });
 
+
 //https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript/901144#12151322
 function getParameterByName(name) {
 	var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
@@ -45325,6 +45326,27 @@ var UsersContainer = function (_React$Component3) {
 	}
 
 	_createClass(UsersContainer, [{
+		key: 'componentDidMount',
+		value: function componentDidMount() {
+			var _this4 = this;
+
+			console.log('UserContainer didMount');
+			var tmp_users = [];
+			this.firebaseRef = firebase.database().ref('users');
+			this.firebaseCallback = this.firebaseRef.on('value', function (user_list) {
+				user_list.forEach(function (user_snapshot) {
+					var user = user_snapshot.val();
+					tmp_users.push(user);
+					_this4.setState({ users: tmp_users });
+				});
+			});
+		}
+	}, {
+		key: 'componentWillUnmount',
+		value: function componentWillUnmount() {
+			this.firebaseRef.off('value', this.firebaseCallback);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			var listOfUsers = this.state.users.map(function (user) {
@@ -45383,6 +45405,8 @@ var UsersContainer = function (_React$Component3) {
 }(React.Component);
 
 var mount = document.querySelector('#spotifyUsers');
+var user_container = React.createElement(UsersContainer, { self: null, users: null, authenticated: typeof GLOBAL_UUID !== 'undefined' });
+ReactDOM.render(user_container, mount);
 
 // var user_container = <UsersContainer self={GLOBAL_SELF} users={users} authenticated={(typeof GLOBAL_UUID !== 'undefined')}/>
 // ReactDOM.render(user_container, mount);
