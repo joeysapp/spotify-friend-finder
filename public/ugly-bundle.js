@@ -45336,16 +45336,13 @@ var UsersContainer = function (_React$Component3) {
 			this.firebaseRef = firebase.database().ref('users');
 			console.log('firebaseRef');
 			console.log(this.firebaseRef);
-			this.firebaseCallback = this.firebaseRef.on('value', function (user_list_snapshot) {
-				var user_list = user_list_snapshot;
-				console.log('user_list_snapshot');
-				console.log(user_list);
+			this.firebaseCallback = this.firebaseRef.on('value', function (user_list) {
 				user_list.forEach(function (user_snapshot) {
 					console.log('user_snapshot');
 					console.log(user_snapshot);
-					console.log('user_snapshot.val()');
-					console.log(user_snapshot.val());
+					console.log('user');
 					var user = user_snapshot.val();
+					console.log(user);
 					tmp_users.push(user);
 					_this4.setState({ users: tmp_users });
 				});
