@@ -109,7 +109,7 @@ class SpotifyUser extends React.Component {
 			collapsed: !this.props.isSelf,
 			isSelf: this.props.isSelf,
 			isAnon: this.props.isAnon,
-			firebase: false
+			firebase: true
 		}
 		// This binding is necessary to make `this` work in the callback
 		this.changeCollapse = this.changeCollapse.bind(this);
@@ -119,7 +119,6 @@ class SpotifyUser extends React.Component {
 	changeCollapse(e){
 		this.setState(prevState => ({
 			collapsed: !prevState.collapsed,
-			firebase: false
 		}));
 		console.log(this.state);
 	}

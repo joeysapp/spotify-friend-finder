@@ -45231,7 +45231,7 @@ var SpotifyUser = function (_React$Component2) {
 			collapsed: !_this2.props.isSelf,
 			isSelf: _this2.props.isSelf,
 			isAnon: _this2.props.isAnon,
-			firebase: false
+			firebase: true
 			// This binding is necessary to make `this` work in the callback
 		};_this2.changeCollapse = _this2.changeCollapse.bind(_this2);
 		_this2.changeAnon = _this2.changeAnon.bind(_this2);
@@ -45243,8 +45243,7 @@ var SpotifyUser = function (_React$Component2) {
 		value: function changeCollapse(e) {
 			this.setState(function (prevState) {
 				return {
-					collapsed: !prevState.collapsed,
-					firebase: false
+					collapsed: !prevState.collapsed
 				};
 			});
 			console.log(this.state);
