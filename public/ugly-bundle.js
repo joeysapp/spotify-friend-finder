@@ -45248,11 +45248,6 @@ var SpotifyUser = function (_React$Component2) {
 				};
 			});
 			console.log(this.state);
-			setTimeout(function () {
-				this.setState({ firebase: true });
-				console.log(this.state);
-				console.log('You pressed that button so you aren\'t allowed to query Firebase again for 1000ms');
-			}.bind(this), 1000);
 		}
 	}, {
 		key: 'changeAnon',
@@ -45263,6 +45258,11 @@ var SpotifyUser = function (_React$Component2) {
 				};
 			});
 			console.log(this.state);
+			setTimeout(function () {
+				this.setState({ firebase: true });
+				console.log(this.state);
+				console.log('You pressed that button so you aren\'t allowed to query Firebase again for 1000ms');
+			}.bind(this), 1000);
 		}
 	}, {
 		key: 'render',

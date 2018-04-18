@@ -122,11 +122,6 @@ class SpotifyUser extends React.Component {
 			firebase: false
 		}));
 		console.log(this.state);
-		setTimeout(function(){
-			this.setState({ firebase: true });
-			console.log(this.state);
-			console.log('You pressed that button so you aren\'t allowed to query Firebase again for 1000ms');
-		}.bind(this), 1000);
 	}
 
 	changeAnon(e){
@@ -134,6 +129,11 @@ class SpotifyUser extends React.Component {
 			isAnon: !prevState.isAnon
 		}));
 		console.log(this.state);
+		setTimeout(function(){
+			this.setState({ firebase: true });
+			console.log(this.state);
+			console.log('You pressed that button so you aren\'t allowed to query Firebase again for 1000ms');
+		}.bind(this), 1000);
 	}
 
 	render() {
