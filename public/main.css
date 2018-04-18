@@ -160,6 +160,9 @@ img {
 .spotifyUserOptionsContainer {
 	display:flex;
 	font-size: 1.8vh;
+	margin: 1vw;
+	padding: 1vw;
+	border: 1px solid black;
 	padding-left: 2vw;
 }
 
