@@ -45252,7 +45252,7 @@ var SpotifyUser = function (_React$Component2) {
 				this.setState({ firebase: true });
 				console.log(this.state);
 				console.log('You pressed that button so you aren\'t allowed to query Firebase again for 1000ms');
-			}, 1000);
+			}.bind(this), 1000);
 		}
 	}, {
 		key: 'changeAnon',
