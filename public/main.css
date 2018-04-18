@@ -116,7 +116,7 @@ img {
 }
 
 .spotifyContainer {
-	height:58vh;
+	height:auto;
 	flex-wrap: wrap;
 	display:flex;
 }
