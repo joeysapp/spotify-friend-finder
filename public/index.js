@@ -205,13 +205,14 @@ class UsersContainer extends React.Component {
 			user_list.forEach(user_snapshot => {
 				var user = user_snapshot.val();
 				var uuid = user.uuid;
+				var anon_status = (typeof user.anon_status === 'undefined') ? true : user.anon_status;
 				var username = user.user_info.display_name || user.user_info.id;
+				console.log(username, anon_status)
 				// 'Anonymously link statistics!'
 				var animal_type = intToAvailableAnimals(hashCode(uuid));
 				var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
 				var color = intToRGB(hashCode(uuid));
 
-				var anon_status = user.anon_status || true;
 				// Normal stuff. Toggle this via state perhaps? (button press!@!!!#12341234235)
 				// var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
 				var artists = user.artists;
