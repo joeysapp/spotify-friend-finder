@@ -45376,8 +45376,13 @@ var SpotifyUser = function (_React$Component2) {
 							),
 							React.createElement(
 								'div',
-								{ className: 'spotifyUserOptions' },
-								React.createElement('input', { name: 'toggleAnon', type: 'checkbox', checked: this.state.isAnon, onClick: this.changeAnon })
+								{ className: 'spotifyUserOptionsContainer' },
+								React.createElement(
+									'div',
+									{ className: 'spotifyUserOption' },
+									'Anonymous: ',
+									React.createElement('input', { name: 'toggleAnon', type: 'checkbox', checked: this.state.isAnon, onChange: this.changeAnon })
+								)
 							)
 						)
 					),

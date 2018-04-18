@@ -157,9 +157,10 @@ img {
 	padding-left: 2vw;
 }
 
-.spotifyUserOptions {
+.spotifyUserOptionsContainer {
+	display:flex;
 	font-size: 1.8vh;
-	padding-left: ;
+	padding-left: 2vw;
 }
 
 

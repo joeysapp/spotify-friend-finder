@@ -185,8 +185,10 @@ class SpotifyUser extends React.Component {
 							<div className='spotifyLastPlayed'>
 								Recently Played: <a href={href}>{last_played}</a>
 							</div>
-							<div className='spotifyUserOptions'>
-								<input name='toggleAnon' type='checkbox' checked={this.state.isAnon} onClick={this.changeAnon} />
+							<div className='spotifyUserOptionsContainer'>
+								<div className='spotifyUserOption'>
+									Anonymous: <input name='toggleAnon' type='checkbox' checked={this.state.isAnon} onChange={this.changeAnon} />
+								</div>
 							</div>
 						</div>
 					</div>
