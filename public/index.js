@@ -125,6 +125,7 @@ class SpotifyUser extends React.Component {
 	}
 
 	changeAnon(e){
+		console.log(this.state);
 		if (!this.state.firebase){
 			this.setState(prevState => ({
 				isAnon: !prevState.isAnon

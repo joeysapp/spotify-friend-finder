@@ -45252,6 +45252,7 @@ var SpotifyUser = function (_React$Component2) {
 	}, {
 		key: 'changeAnon',
 		value: function changeAnon(e) {
+			console.log(this.state);
 			if (!this.state.firebase) {
 				this.setState(function (prevState) {
 					return {
