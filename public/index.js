@@ -154,7 +154,7 @@ class SpotifyUser extends React.Component {
 		}
 
 		var username = !this.state.isAnon ? (<div className='spotifyUsername'> {this.user.username}</div>
-) : <div className='spotifyUsername'> {this.props.type}</div>
+) : <div className='spotifyUsername'>Anonymous {this.props.type}</div>
 
 		var col = this.props.color;
 		var divStyle = {
@@ -170,9 +170,9 @@ class SpotifyUser extends React.Component {
 		return (
 			<div className='spotifyUser'>
 				<div className='spotifyHeader'>
-					{username}
 					<img className='spotifyAvatar' src={this.props.avatar} style={divStyle} alt={this.user.username} />
 					<div className='spotifyUserContent' style={{display:'inline-block'}}>
+						{username}
 						<div className='spotifyLastPlayed'>
 							Recently Played: <a href={href}>{last_played}</a>
 						</div>
