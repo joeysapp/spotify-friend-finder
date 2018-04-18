@@ -153,6 +153,9 @@ class SpotifyUser extends React.Component {
 			href = track.external_urls.spotify;
 		}
 
+		var username = !this.state.isAnon ? (<div className='spotifyUsername'> {this.user.username}</div>
+) : <div className='spotifyUsername'> {this.props.animal_type}</div>
+
 		var col = this.props.color;
 		var divStyle = {
 			background: '#'+col
@@ -169,7 +172,7 @@ class SpotifyUser extends React.Component {
 				<div className='spotifyHeader'>
 					<img className='spotifyAvatar' src={this.props.avatar} style={divStyle} alt={this.user.username} />
 					<div className='spotifyUserContent' style={{display:'inline-block'}}>
-						<div className='spotifyUsername'> {this.user.username}</div>
+						{username}
 						<div className='spotifyLastPlayed'>
 							Recently Played: <a href={href}>{last_played}</a>
 						</div>
@@ -204,7 +207,8 @@ class UsersContainer extends React.Component {
 				var uuid = user.uuid;
 				var username = user.user_info.display_name || user.user_info.id;
 				// 'Anonymously link statistics!'
-				var avatar = 'public/icons/'+intToAvailableAnimals(hashCode(uuid))+'.png';
+				var animal_type = intToAvailableAnimals(hashCode(uuid));
+				var avatar = 'public/icons/'+animal_type+'.png';
 				var color = intToRGB(hashCode(uuid));
 
 				var anon_status = user.anon_status || true;
@@ -214,13 +218,13 @@ class UsersContainer extends React.Component {
 				var recently_played = user['recently-played'];
 				// console.log('User with uuid logged on: ' + uuid);
 				if (uuid !== GLOBAL_UUID){
-					var tmp_user = <SpotifyUser isAnon={anon_status} isSelf={false} uuid={uuid} username={username} color={color} avatar={avatar} artists={artists} recently_played={recently_played}/>;
+					var tmp_user = <SpotifyUser isAnon={anon_status} isSelf={false} uuid={uuid} username={username} color={color} type={animal_type} avatar={avatar} artists={artists} recently_played={recently_played}/>;
 					tmp_users.push(tmp_user);
 				} else {
 
 					this.setState({
 						authenticated: true,
-						self: <SpotifyUser isAnon={anon_status}isSelf={true} uuid={uuid} username={username} color={color} avatar={avatar} artists={artists} recently_played={recently_played}/>}
+						self: <SpotifyUser isAnon={anon_status}isSelf={true} uuid={uuid} username={username} color={color} type={animal_type} avatar={avatar} artists={artists} recently_played={recently_played}/>}
 					);
 					
 				}

@@ -45281,6 +45281,18 @@ var SpotifyUser = function (_React$Component2) {
 				href = track.external_urls.spotify;
 			}
 
+			var username = !this.state.isAnon ? React.createElement(
+				'div',
+				{ className: 'spotifyUsername' },
+				' ',
+				this.user.username
+			) : React.createElement(
+				'div',
+				{ className: 'spotifyUsername' },
+				' ',
+				this.props.animal_type
+			);
+
 			var col = this.props.color;
 			var divStyle = {
 				background: '#' + col
@@ -45310,12 +45322,7 @@ var SpotifyUser = function (_React$Component2) {
 					React.createElement(
 						'div',
 						{ className: 'spotifyUserContent', style: { display: 'inline-block' } },
-						React.createElement(
-							'div',
-							{ className: 'spotifyUsername' },
-							' ',
-							this.user.username
-						),
+						username,
 						React.createElement(
 							'div',
 							{ className: 'spotifyLastPlayed' },
@@ -45371,7 +45378,8 @@ var UsersContainer = function (_React$Component3) {
 					var uuid = user.uuid;
 					var username = user.user_info.display_name || user.user_info.id;
 					// 'Anonymously link statistics!'
-					var avatar = 'public/icons/' + intToAvailableAnimals(hashCode(uuid)) + '.png';
+					var animal_type = intToAvailableAnimals(hashCode(uuid));
+					var avatar = 'public/icons/' + animal_type + '.png';
 					var color = intToRGB(hashCode(uuid));
 
 					var anon_status = user.anon_status || true;
@@ -45381,13 +45389,13 @@ var UsersContainer = function (_React$Component3) {
 					var recently_played = user['recently-played'];
 					// console.log('User with uuid logged on: ' + uuid);
 					if (uuid !== GLOBAL_UUID) {
-						var tmp_user = React.createElement(SpotifyUser, { isAnon: anon_status, isSelf: false, uuid: uuid, username: username, color: color, avatar: avatar, artists: artists, recently_played: recently_played });
+						var tmp_user = React.createElement(SpotifyUser, { isAnon: anon_status, isSelf: false, uuid: uuid, username: username, color: color, type: animal_type, avatar: avatar, artists: artists, recently_played: recently_played });
 						tmp_users.push(tmp_user);
 					} else {
 
 						_this4.setState({
 							authenticated: true,
-							self: React.createElement(SpotifyUser, { isAnon: anon_status, isSelf: true, uuid: uuid, username: username, color: color, avatar: avatar, artists: artists, recently_played: recently_played }) });
+							self: React.createElement(SpotifyUser, { isAnon: anon_status, isSelf: true, uuid: uuid, username: username, color: color, type: animal_type, avatar: avatar, artists: artists, recently_played: recently_played }) });
 					}
 					_this4.setState({ users: tmp_users });
 				});
