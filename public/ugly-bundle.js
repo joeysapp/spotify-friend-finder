@@ -45253,19 +45253,17 @@ var SpotifyUser = function (_React$Component2) {
 		key: 'changeAnon',
 		value: function changeAnon(e) {
 			e.preventDefault();
-			if (this.state.firebase) {
+			if (!this.state.firebase) {
 				this.setState(function (prevState) {
 					return {
 						isAnon: !prevState.isAnon
 					};
 				});
-				console.log(this.state);
+				console.log(e);
+				// 10 second cooldown to write to firebase DB
 				setTimeout(function () {
 					this.setState({ firebase: true });
-					console.log(this.state);
-					console.log('You pressed that button so you aren\'t allowed to query Firebase again for 1000ms');
 				}.bind(this), 10000);
-				console.log('HELLO');
 			} else {
 				console.log('You are on a cooldown');
 			}
@@ -45390,7 +45388,7 @@ var SpotifyUser = function (_React$Component2) {
 							),
 							React.createElement(
 								'div',
-								{ className: 'spotifyUserOptionsContainer' },
+								{ className: 'spotifyUserOptionsContainer', style: { borderColor: '#' + this.props.color } },
 								React.createElement(
 									'div',
 									{ className: 'spotifyUserOption' },

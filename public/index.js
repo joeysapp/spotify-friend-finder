@@ -126,17 +126,15 @@ class SpotifyUser extends React.Component {
 
 	changeAnon(e){
 		e.preventDefault();
-		if (this.state.firebase){
+		if (!this.state.firebase){
 			this.setState(prevState => ({
 				isAnon: !prevState.isAnon
 			}));
-			console.log(this.state);
+			console.log(e);
+			// 10 second cooldown to write to firebase DB
 			setTimeout(function(){
 				this.setState({ firebase: true });
-				console.log(this.state);
-				console.log('You pressed that button so you aren\'t allowed to query Firebase again for 1000ms');
 			}.bind(this), 10000);
-			console.log('HELLO');
 		} else {
 			console.log('You are on a cooldown');
 		}
@@ -199,7 +197,7 @@ class SpotifyUser extends React.Component {
 							<div className='spotifyLastPlayed'>
 								Recently Played: <a href={href}>{last_played}</a>
 							</div>
-							<div className='spotifyUserOptionsContainer'>
+							<div className='spotifyUserOptionsContainer' style={{borderColor: '#'+this.props.color}}>
 								<div className='spotifyUserOption'>
 									Anonymous: <input name='toggleAnon' type='checkbox' checked={this.state.isAnon} onChange={this.changeAnon} />
 								</div>
