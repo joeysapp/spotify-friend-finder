@@ -45284,7 +45284,6 @@ var SpotifyUser = function (_React$Component2) {
 			var username = !this.state.isAnon ? React.createElement(
 				'div',
 				{ className: 'spotifyUsername' },
-				' ',
 				this.user.username
 			) : React.createElement(
 				'div',
@@ -45318,11 +45317,11 @@ var SpotifyUser = function (_React$Component2) {
 				React.createElement(
 					'div',
 					{ className: 'spotifyHeader' },
+					username,
 					React.createElement('img', { className: 'spotifyAvatar', src: this.props.avatar, style: divStyle, alt: this.user.username }),
 					React.createElement(
 						'div',
 						{ className: 'spotifyUserContent', style: { display: 'inline-block' } },
-						username,
 						React.createElement(
 							'div',
 							{ className: 'spotifyLastPlayed' },

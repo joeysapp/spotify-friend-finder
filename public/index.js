@@ -153,7 +153,7 @@ class SpotifyUser extends React.Component {
 			href = track.external_urls.spotify;
 		}
 
-		var username = !this.state.isAnon ? (<div className='spotifyUsername'> {this.user.username}</div>
+		var username = !this.state.isAnon ? (<div className='spotifyUsername'>{this.user.username}</div>
 ) : <div className='spotifyUsername'> {this.props.animal_type}</div>
 
 		var col = this.props.color;
@@ -170,9 +170,9 @@ class SpotifyUser extends React.Component {
 		return (
 			<div className='spotifyUser'>
 				<div className='spotifyHeader'>
+					{username}
 					<img className='spotifyAvatar' src={this.props.avatar} style={divStyle} alt={this.user.username} />
 					<div className='spotifyUserContent' style={{display:'inline-block'}}>
-						{username}
 						<div className='spotifyLastPlayed'>
 							Recently Played: <a href={href}>{last_played}</a>
 						</div>
