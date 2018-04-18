@@ -106,7 +106,8 @@ class SpotifyUser extends React.Component {
 		this.key = props.uuid;
 		this.top_artists = props.artists;
 		this.state = {
-			collapsed: true
+			collapsed: !this.props.isSelf,
+			isSelf: this.props.isSelf
 		}
 		// This binding is necessary to make `this` work in the callback
 		this.changeCollapse = this.changeCollapse.bind(this);
@@ -132,7 +133,7 @@ class SpotifyUser extends React.Component {
 		var divStyle = {
 			background: '#'+col
 		};
-		if (this.state.collapsed){
+		if (this.state.collapsed && !this.state.isSelf){
 			return (
 				<div className='spotifyUser'>
 					<div className='spotifyHeader'>
@@ -147,7 +148,7 @@ class SpotifyUser extends React.Component {
 					</div>
 				</div>
 			)
-		} else {
+		} else if (!this.state.collapsed && !this.state.isSelf){
 			return (
 				<div className='spotifyUser'>
 					<div className='spotifyHeader'>
@@ -165,6 +166,23 @@ class SpotifyUser extends React.Component {
 					</div>
 				</div>
 			)
+		} else if (this.state.isSelf){
+			return (
+				<div className='spotifyUser'>
+					<div className='spotifyHeader'>
+						<img className='spotifyAvatar' src={this.props.avatar} style={divStyle} alt={this.user.username} />
+						<div className='spotifyUserContent' style={{display:'inline-block'}}>
+							<div className='spotifyUsername'> {this.user.username}</div>
+							<div className='spotifyLastPlayed'>
+								Recently Played: <a href={href}>{last_played}</a>
+							</div>
+					</div>
+					</div>
+					<div className='spotifyStatistics'>
+							<TopArtists artists={this.top_artists} />
+					</div>
+				</div>
+			)			
 		}
 	}
 }
@@ -201,13 +219,13 @@ class UsersContainer extends React.Component {
 				var recently_played = user['recently-played'];
 				// console.log('User with uuid logged on: ' + uuid);
 				if (uuid !== GLOBAL_UUID){
-					var tmp_user = <SpotifyUser uuid={uuid} username={username} color={color} avatar={avatar} artists={artists} recently_played={recently_played}/>;
+					var tmp_user = <SpotifyUser isSelf={false} uuid={uuid} username={username} color={color} avatar={avatar} artists={artists} recently_played={recently_played}/>;
 					tmp_users.push(tmp_user);
 				} else {
 
 					this.setState({
 						authenticated: true,
-						self: <SpotifyUser uuid={uuid} username={username} color={color} avatar={avatar} artists={artists} recently_played={recently_played}/>}
+						self: <SpotifyUser isSelf={true} uuid={uuid} username={username} color={color} avatar={avatar} artists={artists} recently_played={recently_played}/>}
 					);
 					
 				}

@@ -45228,7 +45228,8 @@ var SpotifyUser = function (_React$Component2) {
 		_this2.key = props.uuid;
 		_this2.top_artists = props.artists;
 		_this2.state = {
-			collapsed: true
+			collapsed: !_this2.props.isSelf,
+			isSelf: _this2.props.isSelf
 			// This binding is necessary to make `this` work in the callback
 		};_this2.changeCollapse = _this2.changeCollapse.bind(_this2);
 		return _this2;
@@ -45259,7 +45260,7 @@ var SpotifyUser = function (_React$Component2) {
 			var divStyle = {
 				background: '#' + col
 			};
-			if (this.state.collapsed) {
+			if (this.state.collapsed && !this.state.isSelf) {
 				return React.createElement(
 					'div',
 					{ className: 'spotifyUser' },
@@ -45294,7 +45295,7 @@ var SpotifyUser = function (_React$Component2) {
 						)
 					)
 				);
-			} else {
+			} else if (!this.state.collapsed && !this.state.isSelf) {
 				return React.createElement(
 					'div',
 					{ className: 'spotifyUser' },
@@ -45325,6 +45326,41 @@ var SpotifyUser = function (_React$Component2) {
 								'button',
 								{ className: 'spotifyStatsButton', onClick: this.changeCollapse },
 								'Hide Statistics'
+							)
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'spotifyStatistics' },
+						React.createElement(TopArtists, { artists: this.top_artists })
+					)
+				);
+			} else if (this.state.isSelf) {
+				return React.createElement(
+					'div',
+					{ className: 'spotifyUser' },
+					React.createElement(
+						'div',
+						{ className: 'spotifyHeader' },
+						React.createElement('img', { className: 'spotifyAvatar', src: this.props.avatar, style: divStyle, alt: this.user.username }),
+						React.createElement(
+							'div',
+							{ className: 'spotifyUserContent', style: { display: 'inline-block' } },
+							React.createElement(
+								'div',
+								{ className: 'spotifyUsername' },
+								' ',
+								this.user.username
+							),
+							React.createElement(
+								'div',
+								{ className: 'spotifyLastPlayed' },
+								'Recently Played: ',
+								React.createElement(
+									'a',
+									{ href: href },
+									last_played
+								)
 							)
 						)
 					),
@@ -45382,13 +45418,13 @@ var UsersContainer = function (_React$Component3) {
 					var recently_played = user['recently-played'];
 					// console.log('User with uuid logged on: ' + uuid);
 					if (uuid !== GLOBAL_UUID) {
-						var tmp_user = React.createElement(SpotifyUser, { uuid: uuid, username: username, color: color, avatar: avatar, artists: artists, recently_played: recently_played });
+						var tmp_user = React.createElement(SpotifyUser, { isSelf: false, uuid: uuid, username: username, color: color, avatar: avatar, artists: artists, recently_played: recently_played });
 						tmp_users.push(tmp_user);
 					} else {
 
 						_this4.setState({
 							authenticated: true,
-							self: React.createElement(SpotifyUser, { uuid: uuid, username: username, color: color, avatar: avatar, artists: artists, recently_played: recently_played }) });
+							self: React.createElement(SpotifyUser, { isSelf: true, uuid: uuid, username: username, color: color, avatar: avatar, artists: artists, recently_played: recently_played }) });
 					}
 					_this4.setState({ users: tmp_users });
 				});
