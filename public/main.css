@@ -129,7 +129,9 @@ img {
 
 .spotifyStatsButton {
 	margin-left: 2vw;	
-	font-size: 1.8vw;
+	font-size: 1.8vh;
+	background-color: white;
+	border: 2px solid black;
 }
 
 .spotifyArtistImage {
@@ -142,7 +144,6 @@ img {
 .spotifyArtistName {
 	min-width: 40%;
 	padding-left: 2vw;
-
 }
 
 .spotifyArtistGenres {
@@ -154,7 +155,11 @@ img {
 	margin-left:auto;
 	margin-right:0;
 	padding-left: 2vw;
+}
 
+.spotifyUserOptions {
+	font-size: 1.8vh;
+	padding-left: ;
 }
 
 

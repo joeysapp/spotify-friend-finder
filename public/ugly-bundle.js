@@ -45229,9 +45229,11 @@ var SpotifyUser = function (_React$Component2) {
 		_this2.top_artists = props.artists;
 		_this2.state = {
 			collapsed: !_this2.props.isSelf,
-			isSelf: _this2.props.isSelf
+			isSelf: _this2.props.isSelf,
+			isAnon: _this2.props.isAnon
 			// This binding is necessary to make `this` work in the callback
 		};_this2.changeCollapse = _this2.changeCollapse.bind(_this2);
+		_this2.changeAnon = _this2.changeAnon.bind(_this2);
 		return _this2;
 	}
 
@@ -45243,6 +45245,16 @@ var SpotifyUser = function (_React$Component2) {
 					collapsed: !prevState.collapsed
 				};
 			});
+		}
+	}, {
+		key: 'changeAnon',
+		value: function changeAnon(e) {
+			this.setState(function (prevState) {
+				return {
+					isAnon: !prevState.isAnon
+				};
+			});
+			console.log(this.state);
 		}
 	}, {
 		key: 'render',
@@ -45289,8 +45301,8 @@ var SpotifyUser = function (_React$Component2) {
 							),
 							React.createElement(
 								'button',
-								{ className: 'spotifyStatsButton', onClick: this.changeCollapse },
-								'Show Statistics'
+								{ style: { backgroundColor: 'white' }, className: 'spotifyStatsButton', onClick: this.changeCollapse },
+								'Top Artists'
 							)
 						)
 					)
@@ -45324,8 +45336,8 @@ var SpotifyUser = function (_React$Component2) {
 							),
 							React.createElement(
 								'button',
-								{ className: 'spotifyStatsButton', onClick: this.changeCollapse },
-								'Hide Statistics'
+								{ style: divStyle, className: 'spotifyStatsButton', onClick: this.changeCollapse },
+								'Top Artists'
 							)
 						)
 					),
@@ -45361,12 +45373,12 @@ var SpotifyUser = function (_React$Component2) {
 									{ href: href },
 									last_played
 								)
+							),
+							React.createElement(
+								'div',
+								{ className: 'spotifyUserOptions' },
+								React.createElement('input', { name: 'toggleAnon', type: 'checkbox', checked: this.state.isAnon, onClick: this.changeAnon })
 							)
-						),
-						React.createElement(
-							'div',
-							{ className: 'spotifyUserOptions' },
-							'burp'
 						)
 					),
 					React.createElement(
@@ -45411,25 +45423,24 @@ var UsersContainer = function (_React$Component3) {
 					var user = user_snapshot.val();
 					var uuid = user.uuid;
 					var username = user.user_info.display_name || user.user_info.id;
-					var t = intToAvailableAnimals;
 					// 'Anonymously link statistics!'
 					var avatar = 'public/icons/' + intToAvailableAnimals(hashCode(uuid)) + '.png';
 					var color = intToRGB(hashCode(uuid));
-					console.log(avatar, color);
 
+					var anon_status = user.anon_status || true;
 					// Normal stuff. Toggle this via state perhaps? (button press!@!!!#12341234235)
 					// var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
 					var artists = user.artists;
 					var recently_played = user['recently-played'];
 					// console.log('User with uuid logged on: ' + uuid);
 					if (uuid !== GLOBAL_UUID) {
-						var tmp_user = React.createElement(SpotifyUser, { isSelf: false, uuid: uuid, username: username, color: color, avatar: avatar, artists: artists, recently_played: recently_played });
+						var tmp_user = React.createElement(SpotifyUser, { isAnon: anon_status, isSelf: false, uuid: uuid, username: username, color: color, avatar: avatar, artists: artists, recently_played: recently_played });
 						tmp_users.push(tmp_user);
 					} else {
 
 						_this4.setState({
 							authenticated: true,
-							self: React.createElement(SpotifyUser, { isSelf: true, uuid: uuid, username: username, color: color, avatar: avatar, artists: artists, recently_played: recently_played }) });
+							self: React.createElement(SpotifyUser, { isAnon: anon_status, isSelf: true, uuid: uuid, username: username, color: color, avatar: avatar, artists: artists, recently_played: recently_played }) });
 					}
 					_this4.setState({ users: tmp_users });
 				});

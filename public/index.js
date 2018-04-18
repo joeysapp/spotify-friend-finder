@@ -107,16 +107,25 @@ class SpotifyUser extends React.Component {
 		this.top_artists = props.artists;
 		this.state = {
 			collapsed: !this.props.isSelf,
-			isSelf: this.props.isSelf
+			isSelf: this.props.isSelf,
+			isAnon: this.props.isAnon,
 		}
 		// This binding is necessary to make `this` work in the callback
 		this.changeCollapse = this.changeCollapse.bind(this);
+		this.changeAnon = this.changeAnon.bind(this);
 	}
 
 	changeCollapse(e){
 		this.setState(prevState => ({
 			collapsed: !prevState.collapsed
 		}));
+	}
+
+	changeAnon(e){
+		this.setState(prevState => ({
+			isAnon: !prevState.isAnon
+		}));
+		console.log(this.state);
 	}
 
 	render() {
@@ -143,7 +152,7 @@ class SpotifyUser extends React.Component {
 							<div className='spotifyLastPlayed'>
 								Recently Played: <a href={href}>{last_played}</a>
 							</div>
-							<button className='spotifyStatsButton' onClick={this.changeCollapse}>Show Statistics</button>
+							<button style={{backgroundColor: 'white'}} className='spotifyStatsButton' onClick={this.changeCollapse}>Top Artists</button>
 						</div>
 					</div>
 				</div>
@@ -158,7 +167,7 @@ class SpotifyUser extends React.Component {
 							<div className='spotifyLastPlayed'>
 								Recently Played: <a href={href}>{last_played}</a>
 							</div>
-							<button className='spotifyStatsButton' onClick={this.changeCollapse}>Hide Statistics</button>
+							<button style={divStyle} className='spotifyStatsButton' onClick={this.changeCollapse}>Top Artists</button>
 					</div>
 					</div>
 					<div className='spotifyStatistics'>
@@ -176,9 +185,9 @@ class SpotifyUser extends React.Component {
 							<div className='spotifyLastPlayed'>
 								Recently Played: <a href={href}>{last_played}</a>
 							</div>
-						</div>
-						<div className='spotifyUserOptions'>
-						burp
+							<div className='spotifyUserOptions'>
+								<input name='toggleAnon' type='checkbox' checked={this.state.isAnon} onClick={this.changeAnon} />
+							</div>
 						</div>
 					</div>
 					<div className='spotifyStatistics'>
@@ -209,26 +218,24 @@ class UsersContainer extends React.Component {
 				var user = user_snapshot.val();
 				var uuid = user.uuid;
 				var username = user.user_info.display_name || user.user_info.id;
-				var t = intToAvailableAnimals
 				// 'Anonymously link statistics!'
 				var avatar = 'public/icons/'+intToAvailableAnimals(hashCode(uuid))+'.png';
 				var color = intToRGB(hashCode(uuid));
-				console.log(avatar, color);
 
-
+				var anon_status = user.anon_status || true;
 				// Normal stuff. Toggle this via state perhaps? (button press!@!!!#12341234235)
 				// var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
 				var artists = user.artists;
 				var recently_played = user['recently-played'];
 				// console.log('User with uuid logged on: ' + uuid);
 				if (uuid !== GLOBAL_UUID){
-					var tmp_user = <SpotifyUser isSelf={false} uuid={uuid} username={username} color={color} avatar={avatar} artists={artists} recently_played={recently_played}/>;
+					var tmp_user = <SpotifyUser isAnon={anon_status} isSelf={false} uuid={uuid} username={username} color={color} avatar={avatar} artists={artists} recently_played={recently_played}/>;
 					tmp_users.push(tmp_user);
 				} else {
 
 					this.setState({
 						authenticated: true,
-						self: <SpotifyUser isSelf={true} uuid={uuid} username={username} color={color} avatar={avatar} artists={artists} recently_played={recently_played}/>}
+						self: <SpotifyUser isAnon={anon_status}isSelf={true} uuid={uuid} username={username} color={color} avatar={avatar} artists={artists} recently_played={recently_played}/>}
 					);
 					
 				}
