@@ -45484,6 +45484,11 @@ var UsersContainer = function (_React$Component3) {
 			} else {
 				var listOfUsers = [];
 			}
+			var tmp = React.createElement(
+				'div',
+				{ className: 'spotifySelfContainer' },
+				this.state.self
+			);
 			var authButton;
 			if (this.state.authenticated === true) {
 				authButton = React.createElement(
@@ -45498,12 +45503,7 @@ var UsersContainer = function (_React$Component3) {
 							' Refresh Spotify Statistics'
 						)
 					),
-					React.createElement(
-						'div',
-						{ className: 'spotifySelfContainer' },
-						this.state.self
-					),
-					';'
+					tmp
 				);
 			} else {
 				authButton = React.createElement(

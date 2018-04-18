@@ -116,6 +116,8 @@ class SpotifyUser extends React.Component {
 		this.changeAnon = this.changeAnon.bind(this);
 	}
 
+
+
 	changeCollapse(e){
 		this.setState(prevState => ({
 			collapsed: !prevState.collapsed,
@@ -272,13 +274,14 @@ class UsersContainer extends React.Component {
 		} else {
 			var listOfUsers = [];
 		}
+		var tmp = <div className='spotifySelfContainer'>{this.state.self}</div>
 		var authButton;
         if (this.state.authenticated === true){
 			authButton = <div className='spotifyContainer' style={{ display: 'flex' }}>
 							<div className='authenticateRefreshButton'>
 								<a href='http://50.24.61.224:8000/login' style={{ display: 'hidden'}}> Refresh Spotify Statistics</a>
 							</div>
-							<div className='spotifySelfContainer'>{this.state.self}</div>;
+							{tmp}
 						</div>
 		} else {
 			authButton = <div className='authenticateButton'>
