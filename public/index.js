@@ -139,7 +139,7 @@ class SpotifyUser extends React.Component {
 		} else {
 			e.preventDefault();
 			e.stopPropagation();
-			console.log('You are on a cooldown');
+			alert('You are on a cooldown');
 		}
 	}
 

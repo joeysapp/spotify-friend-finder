@@ -45266,7 +45266,7 @@ var SpotifyUser = function (_React$Component2) {
 			} else {
 				e.preventDefault();
 				e.stopPropagation();
-				console.log('You are on a cooldown');
+				alert('You are on a cooldown');
 			}
 		}
 	}, {
