@@ -45252,17 +45252,23 @@ var SpotifyUser = function (_React$Component2) {
 	}, {
 		key: 'changeAnon',
 		value: function changeAnon(e) {
-			this.setState(function (prevState) {
-				return {
-					isAnon: !prevState.isAnon
-				};
-			});
-			console.log(this.state);
-			setTimeout(function () {
-				this.setState({ firebase: true });
+			e.preventDefault();
+			if (this.state.firebase) {
+				this.setState(function (prevState) {
+					return {
+						isAnon: !prevState.isAnon
+					};
+				});
 				console.log(this.state);
-				console.log('You pressed that button so you aren\'t allowed to query Firebase again for 1000ms');
-			}.bind(this), 1000);
+				setTimeout(function () {
+					this.setState({ firebase: true });
+					console.log(this.state);
+					console.log('You pressed that button so you aren\'t allowed to query Firebase again for 1000ms');
+				}.bind(this), 10000);
+				console.log('HELLO');
+			} else {
+				console.log('You are on a cooldown');
+			}
 		}
 	}, {
 		key: 'render',
