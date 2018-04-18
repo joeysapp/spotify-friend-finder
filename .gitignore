@@ -1,0 +1,6 @@
+node_modules/
+yarn*
+package-lock.json
+animal-chooser.js
+*.sublime-project
+*.sublime-workspace
