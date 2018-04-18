@@ -16,6 +16,27 @@ var config = {
 };
 firebase.initializeApp(config);
 
+// Animals!!
+// java String#hashCode
+function hashCode(str) {
+	var hash = 0;
+	for (var i = 0; i < str.length; i++) {
+		hash = str.charCodeAt(i) + ((hash << 5) - hash);
+	}
+	return hash;
+}
+
+function intToAvailableAnimals(i, callback){
+	var animal_list = ['Alligator', 'Anteater', 'Armadillo', 'Auroch', 'Axolotl', 'Badger', 'Bat', 'Beaver', 'Buffalo', 'Camel', 'Capybara', 'Chameleon', 'Cheetah', 'Chinchilla', 'Chipmunk', 'Chupacabra', 'Cormorant', 'Coyote', 'Crow', 'Dingo', 'Dinosaur', 'Dolphin', 'Duck', 'Elephant', 'Ferret', 'Fox', 'Frog', 'Giraffe', 'Gopher', 'Grizzly', 'Hedgehog', 'Hippo', 'Hyena', 'Ibex', 'Ifrit', 'Iguana', 'Jackal', 'Kangaroo', 'Koala', 'Kraken', 'Lemur', 'Leopard', 'Liger', 'Llama', 'Manatee', 'Mink', 'Monkey', 'Moose', 'Narwhal', 'Orangutan', 'Otter', 'Panda', 'Penguin', 'Platypus', 'Pumpkin', 'Python', 'Quagga', 'Rabbit', 'Raccoon', 'Rhino', 'Sheep', 'Shrew', 'Squirrel', 'Tiger', 'Turtle', 'Walrus', 'Wolf', 'Wolverine', 'Wombat'];
+	var idx = Math.abs(i % animal_list.length);
+	return animal_list[idx];
+}
+
+function intToRGB(i){
+	var c = (i & 0x00FFFFFF).toString(16).toUpperCase();
+	return "00000".substring(0, 6 - c.length) + c;
+}
+
 //https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript/901144#12151322
 function getParameterByName(name) {
 	var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
@@ -53,7 +74,7 @@ class TopArtists extends React.Component {
 		});
 
 		var listOfArtists = this.state.artists.map((artist) => 
-			<div key={artist.name } className='spotifyArtist'>
+			<div key={artist.name} className='spotifyArtist'>
 				<img className='spotifyArtistImage' src={artist.images[0].url} alt={artist.name} />
 				<a href={artist.external_urls.spotify} className='spotifyArtistName'>{artist.name}</a>
 				<div className='spotifyArtistGenres'>
@@ -84,6 +105,17 @@ class SpotifyUser extends React.Component {
 		this.uuid = props.uuid;
 		this.key = props.uuid;
 		this.top_artists = props.artists;
+		this.state = {
+			collapsed: true
+		}
+		// This binding is necessary to make `this` work in the callback
+		this.changeCollapse = this.changeCollapse.bind(this);
+	}
+
+	changeCollapse(e){
+		this.setState(prevState => ({
+			collapsed: !prevState.collapsed
+		}));
 	}
 
 	render() {
@@ -96,22 +128,44 @@ class SpotifyUser extends React.Component {
 			href = track.external_urls.spotify;
 		}
 
-		return (
-			<div className='spotifyUser'>
-				<div className='spotifyHeader'>
-					<img className='spotifyAvatar' src={this.user.avatar} alt={this.user.username} />
-					<div className='spotifyUserContent' style={{display:'inline-block'}}>
-						<div className='spotifyUsername'>{this.user.username}</div>
-						<div className='spotifyLastPlayed'>
-							Recently Played: <a href={href}>{last_played}</a>
+		var col = this.props.color;
+		var divStyle = {
+			background: '#'+col
+		};
+		if (this.state.collapsed){
+			return (
+				<div className='spotifyUser'>
+					<div className='spotifyHeader'>
+						<img className='spotifyAvatar' src={this.props.avatar} style={divStyle} alt={this.user.username} />
+						<div className='spotifyUserContent' style={{display:'inline-block'}}>
+							<div className='spotifyUsername'> {this.user.username}</div>
+							<div className='spotifyLastPlayed'>
+								Recently Played: <a href={href}>{last_played}</a>
+							</div>
+							<button className='spotifyStatsButton' onClick={this.changeCollapse}>Show Statistics</button>
 						</div>
 					</div>
 				</div>
-				<div className='spotifyStatistics'>
-						<TopArtists artists={this.top_artists} />
+			)
+		} else {
+			return (
+				<div className='spotifyUser'>
+					<div className='spotifyHeader'>
+						<img className='spotifyAvatar' src={this.props.avatar} style={divStyle} alt={this.user.username} />
+						<div className='spotifyUserContent' style={{display:'inline-block'}}>
+							<div className='spotifyUsername'> {this.user.username}</div>
+							<div className='spotifyLastPlayed'>
+								Recently Played: <a href={href}>{last_played}</a>
+							</div>
+							<button className='spotifyStatsButton' onClick={this.changeCollapse}>Hide Statistics</button>
+					</div>
+					</div>
+					<div className='spotifyStatistics'>
+							<TopArtists artists={this.top_artists} />
+					</div>
 				</div>
-			</div>
-		)
+			)
+		}
 	}
 }
 
@@ -127,8 +181,6 @@ class UsersContainer extends React.Component {
 	}
 
 	componentDidMount() {
-		console.log('UserContainer didMount');
-
 		var tmp_users = [];
 		this.firebaseRef = firebase.database().ref('users');
 		this.firebaseCallback = this.firebaseRef.on('value', (user_list) => {
@@ -136,18 +188,26 @@ class UsersContainer extends React.Component {
 				var user = user_snapshot.val();
 				var uuid = user.uuid;
 				var username = user.user_info.display_name || user.user_info.id;
-				var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
+				var t = intToAvailableAnimals
+				// 'Anonymously link statistics!'
+				var avatar = 'public/icons/'+intToAvailableAnimals(hashCode(uuid))+'.png';
+				var color = intToRGB(hashCode(uuid));
+				console.log(avatar, color);
+
+
+				// Normal stuff. Toggle this via state perhaps? (button press!@!!!#12341234235)
+				// var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
 				var artists = user.artists;
 				var recently_played = user['recently-played'];
-				console.log('uuid:' + uuid);
+				// console.log('User with uuid logged on: ' + uuid);
 				if (uuid !== GLOBAL_UUID){
-					var tmp_user = <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>;
+					var tmp_user = <SpotifyUser uuid={uuid} username={username} color={color} avatar={avatar} artists={artists} recently_played={recently_played}/>;
 					tmp_users.push(tmp_user);
 				} else {
 
 					this.setState({
 						authenticated: true,
-						self: <SpotifyUser uuid={uuid} username={username} avatar={avatar} artists={artists} recently_played={recently_played}/>}
+						self: <SpotifyUser uuid={uuid} username={username} color={color} avatar={avatar} artists={artists} recently_played={recently_played}/>}
 					);
 					
 				}
@@ -170,7 +230,7 @@ class UsersContainer extends React.Component {
 			var listOfUsers = [];
 		}
 		var authButton;
-		if (this.state.authenticated === true){
+        if (this.state.authenticated === true){
 			authButton = <div className='spotifyContainer' style={{ display: 'flex' }}>
 							<div className='authenticateRefreshButton'>
 								<a href='http://50.24.61.224:8000/login' style={{ display: 'hidden'}}> Refresh Spotify Statistics</a>

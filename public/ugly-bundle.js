@@ -45111,6 +45111,27 @@ var config = {
 };
 firebase.initializeApp(config);
 
+// Animals!!
+// java String#hashCode
+function hashCode(str) {
+	var hash = 0;
+	for (var i = 0; i < str.length; i++) {
+		hash = str.charCodeAt(i) + ((hash << 5) - hash);
+	}
+	return hash;
+}
+
+function intToAvailableAnimals(i, callback) {
+	var animal_list = ['Alligator', 'Anteater', 'Armadillo', 'Auroch', 'Axolotl', 'Badger', 'Bat', 'Beaver', 'Buffalo', 'Camel', 'Capybara', 'Chameleon', 'Cheetah', 'Chinchilla', 'Chipmunk', 'Chupacabra', 'Cormorant', 'Coyote', 'Crow', 'Dingo', 'Dinosaur', 'Dolphin', 'Duck', 'Elephant', 'Ferret', 'Fox', 'Frog', 'Giraffe', 'Gopher', 'Grizzly', 'Hedgehog', 'Hippo', 'Hyena', 'Ibex', 'Ifrit', 'Iguana', 'Jackal', 'Kangaroo', 'Koala', 'Kraken', 'Lemur', 'Leopard', 'Liger', 'Llama', 'Manatee', 'Mink', 'Monkey', 'Moose', 'Narwhal', 'Orangutan', 'Otter', 'Panda', 'Penguin', 'Platypus', 'Pumpkin', 'Python', 'Quagga', 'Rabbit', 'Raccoon', 'Rhino', 'Sheep', 'Shrew', 'Squirrel', 'Tiger', 'Turtle', 'Walrus', 'Wolf', 'Wolverine', 'Wombat'];
+	var idx = Math.abs(i % animal_list.length);
+	return animal_list[idx];
+}
+
+function intToRGB(i) {
+	var c = (i & 0x00FFFFFF).toString(16).toUpperCase();
+	return "00000".substring(0, 6 - c.length) + c;
+}
+
 //https://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript/901144#12151322
 function getParameterByName(name) {
 	var match = RegExp('[?&]' + name + '=([^&]*)').exec(window.location.search);
@@ -45206,10 +45227,23 @@ var SpotifyUser = function (_React$Component2) {
 		_this2.uuid = props.uuid;
 		_this2.key = props.uuid;
 		_this2.top_artists = props.artists;
+		_this2.state = {
+			collapsed: true
+			// This binding is necessary to make `this` work in the callback
+		};_this2.changeCollapse = _this2.changeCollapse.bind(_this2);
 		return _this2;
 	}
 
 	_createClass(SpotifyUser, [{
+		key: 'changeCollapse',
+		value: function changeCollapse(e) {
+			this.setState(function (prevState) {
+				return {
+					collapsed: !prevState.collapsed
+				};
+			});
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			var last_played;
@@ -45221,39 +45255,86 @@ var SpotifyUser = function (_React$Component2) {
 				href = track.external_urls.spotify;
 			}
 
-			return React.createElement(
-				'div',
-				{ className: 'spotifyUser' },
-				React.createElement(
+			var col = this.props.color;
+			var divStyle = {
+				background: '#' + col
+			};
+			if (this.state.collapsed) {
+				return React.createElement(
 					'div',
-					{ className: 'spotifyHeader' },
-					React.createElement('img', { className: 'spotifyAvatar', src: this.user.avatar, alt: this.user.username }),
+					{ className: 'spotifyUser' },
 					React.createElement(
 						'div',
-						{ className: 'spotifyUserContent', style: { display: 'inline-block' } },
+						{ className: 'spotifyHeader' },
+						React.createElement('img', { className: 'spotifyAvatar', src: this.props.avatar, style: divStyle, alt: this.user.username }),
 						React.createElement(
 							'div',
-							{ className: 'spotifyUsername' },
-							this.user.username
-						),
-						React.createElement(
-							'div',
-							{ className: 'spotifyLastPlayed' },
-							'Recently Played: ',
+							{ className: 'spotifyUserContent', style: { display: 'inline-block' } },
 							React.createElement(
-								'a',
-								{ href: href },
-								last_played
+								'div',
+								{ className: 'spotifyUsername' },
+								' ',
+								this.user.username
+							),
+							React.createElement(
+								'div',
+								{ className: 'spotifyLastPlayed' },
+								'Recently Played: ',
+								React.createElement(
+									'a',
+									{ href: href },
+									last_played
+								)
+							),
+							React.createElement(
+								'button',
+								{ className: 'spotifyStatsButton', onClick: this.changeCollapse },
+								'Show Statistics'
 							)
 						)
 					)
-				),
-				React.createElement(
+				);
+			} else {
+				return React.createElement(
 					'div',
-					{ className: 'spotifyStatistics' },
-					React.createElement(TopArtists, { artists: this.top_artists })
-				)
-			);
+					{ className: 'spotifyUser' },
+					React.createElement(
+						'div',
+						{ className: 'spotifyHeader' },
+						React.createElement('img', { className: 'spotifyAvatar', src: this.props.avatar, style: divStyle, alt: this.user.username }),
+						React.createElement(
+							'div',
+							{ className: 'spotifyUserContent', style: { display: 'inline-block' } },
+							React.createElement(
+								'div',
+								{ className: 'spotifyUsername' },
+								' ',
+								this.user.username
+							),
+							React.createElement(
+								'div',
+								{ className: 'spotifyLastPlayed' },
+								'Recently Played: ',
+								React.createElement(
+									'a',
+									{ href: href },
+									last_played
+								)
+							),
+							React.createElement(
+								'button',
+								{ className: 'spotifyStatsButton', onClick: this.changeCollapse },
+								'Hide Statistics'
+							)
+						)
+					),
+					React.createElement(
+						'div',
+						{ className: 'spotifyStatistics' },
+						React.createElement(TopArtists, { artists: this.top_artists })
+					)
+				);
+			}
 		}
 	}]);
 
@@ -45282,8 +45363,6 @@ var UsersContainer = function (_React$Component3) {
 		value: function componentDidMount() {
 			var _this4 = this;
 
-			console.log('UserContainer didMount');
-
 			var tmp_users = [];
 			this.firebaseRef = firebase.database().ref('users');
 			this.firebaseCallback = this.firebaseRef.on('value', function (user_list) {
@@ -45291,18 +45370,25 @@ var UsersContainer = function (_React$Component3) {
 					var user = user_snapshot.val();
 					var uuid = user.uuid;
 					var username = user.user_info.display_name || user.user_info.id;
-					var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
+					var t = intToAvailableAnimals;
+					// 'Anonymously link statistics!'
+					var avatar = 'public/icons/' + intToAvailableAnimals(hashCode(uuid)) + '.png';
+					var color = intToRGB(hashCode(uuid));
+					console.log(avatar, color);
+
+					// Normal stuff. Toggle this via state perhaps? (button press!@!!!#12341234235)
+					// var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
 					var artists = user.artists;
 					var recently_played = user['recently-played'];
-					console.log('uuid:' + uuid);
+					// console.log('User with uuid logged on: ' + uuid);
 					if (uuid !== GLOBAL_UUID) {
-						var tmp_user = React.createElement(SpotifyUser, { uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played });
+						var tmp_user = React.createElement(SpotifyUser, { uuid: uuid, username: username, color: color, avatar: avatar, artists: artists, recently_played: recently_played });
 						tmp_users.push(tmp_user);
 					} else {
 
 						_this4.setState({
 							authenticated: true,
-							self: React.createElement(SpotifyUser, { uuid: uuid, username: username, avatar: avatar, artists: artists, recently_played: recently_played }) });
+							self: React.createElement(SpotifyUser, { uuid: uuid, username: username, color: color, avatar: avatar, artists: artists, recently_played: recently_played }) });
 					}
 					_this4.setState({ users: tmp_users });
 				});

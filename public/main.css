@@ -47,7 +47,7 @@ img {
 .spotifyUser {
 	border: 3px solid black;
 	width: 100vw;
-	height: 50vh;
+	height: auto;
 	margin: 1vh;
 	padding: 1vh;
 	background:white;
@@ -125,6 +125,11 @@ img {
 	display: flex;
 	margin:1vh;
 	align-items: center;
+}
+
+.spotifyStatsButton {
+	margin-left: 2vw;	
+	font-size: 1.8vw;
 }
 
 .spotifyArtistImage {
