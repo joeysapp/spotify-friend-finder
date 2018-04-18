@@ -45230,7 +45230,8 @@ var SpotifyUser = function (_React$Component2) {
 		_this2.state = {
 			collapsed: !_this2.props.isSelf,
 			isSelf: _this2.props.isSelf,
-			isAnon: _this2.props.isAnon
+			isAnon: _this2.props.isAnon,
+			firebase: false
 			// This binding is necessary to make `this` work in the callback
 		};_this2.changeCollapse = _this2.changeCollapse.bind(_this2);
 		_this2.changeAnon = _this2.changeAnon.bind(_this2);
@@ -45242,9 +45243,16 @@ var SpotifyUser = function (_React$Component2) {
 		value: function changeCollapse(e) {
 			this.setState(function (prevState) {
 				return {
-					collapsed: !prevState.collapsed
+					collapsed: !prevState.collapsed,
+					firebase: false
 				};
 			});
+			console.log(this.state);
+			setTimeout(function () {
+				this.setState({ firebase: true });
+				console.log(this.state);
+				console.log('You pressed that button so you aren\'t allowed to query Firebase again for 1000ms');
+			}, 1000);
 		}
 	}, {
 		key: 'changeAnon',

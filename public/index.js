@@ -109,6 +109,7 @@ class SpotifyUser extends React.Component {
 			collapsed: !this.props.isSelf,
 			isSelf: this.props.isSelf,
 			isAnon: this.props.isAnon,
+			firebase: false
 		}
 		// This binding is necessary to make `this` work in the callback
 		this.changeCollapse = this.changeCollapse.bind(this);
@@ -117,8 +118,15 @@ class SpotifyUser extends React.Component {
 
 	changeCollapse(e){
 		this.setState(prevState => ({
-			collapsed: !prevState.collapsed
+			collapsed: !prevState.collapsed,
+			firebase: false
 		}));
+		console.log(this.state);
+		setTimeout(function(){
+			this.setState({ firebase: true });
+			console.log(this.state);
+			console.log('You pressed that button so you aren\'t allowed to query Firebase again for 1000ms');
+		}, 1000);
 	}
 
 	changeAnon(e){
