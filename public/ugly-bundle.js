@@ -45284,12 +45284,13 @@ var SpotifyUser = function (_React$Component2) {
 			var username = !this.state.isAnon ? React.createElement(
 				'div',
 				{ className: 'spotifyUsername' },
+				' ',
 				this.user.username
 			) : React.createElement(
 				'div',
 				{ className: 'spotifyUsername' },
 				' ',
-				this.props.animal_type
+				this.props.type
 			);
 
 			var col = this.props.color;

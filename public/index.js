@@ -153,8 +153,8 @@ class SpotifyUser extends React.Component {
 			href = track.external_urls.spotify;
 		}
 
-		var username = !this.state.isAnon ? (<div className='spotifyUsername'>{this.user.username}</div>
-) : <div className='spotifyUsername'> {this.props.animal_type}</div>
+		var username = !this.state.isAnon ? (<div className='spotifyUsername'> {this.user.username}</div>
+) : <div className='spotifyUsername'> {this.props.type}</div>
 
 		var col = this.props.color;
 		var divStyle = {
