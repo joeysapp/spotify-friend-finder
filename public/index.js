@@ -152,14 +152,14 @@ class SpotifyUser extends React.Component {
 			last_played = track.name + ' - ' + track.artists[0].name;
 			href = track.external_urls.spotify;
 		}
-
-		var username = !this.state.isAnon ? (<div className='spotifyUsername'> {this.user.username}</div>
-) : <div className='spotifyUsername'>Anonymous {this.props.type}</div>
-
 		var col = this.props.color;
 		var divStyle = {
 			background: '#'+col
 		};
+		var animal_type_url = "public/icons/"+this.props.type+".png";
+		var username = !this.state.isAnon ? (<div className='spotifyUsername'> {this.user.username}</div>
+) : <div className='spotifyUsername'>Anonymous {this.props.type}</div>
+		var avatar = !this.state.isAnon ? (<img className='spotifyAvatar' src={this.props.avatar} style={divStyle} alt={this.user.username} />) : (<img className='spotifyAvatar' src={animal_type_url} style={divStyle}/>);
 		var selfOrStats = !this.state.isSelf ? (<button style={divStyle} className='spotifyStatsButton' onClick={this.changeCollapse}>Top Artists</button>) : (
 										<div className='spotifyUserOptionsContainer' style={{borderColor: '#'+this.props.color}}>
 								<div className='spotifyUserOption'>
@@ -170,7 +170,7 @@ class SpotifyUser extends React.Component {
 		return (
 			<div className='spotifyUser'>
 				<div className='spotifyHeader'>
-					<img className='spotifyAvatar' src={this.props.avatar} style={divStyle} alt={this.user.username} />
+					{avatar}
 					<div className='spotifyUserContent' style={{display:'inline-block'}}>
 						{username}
 						<div className='spotifyLastPlayed'>
@@ -208,7 +208,7 @@ class UsersContainer extends React.Component {
 				var username = user.user_info.display_name || user.user_info.id;
 				// 'Anonymously link statistics!'
 				var animal_type = intToAvailableAnimals(hashCode(uuid));
-				var avatar = 'public/icons/'+animal_type+'.png';
+				var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
 				var color = intToRGB(hashCode(uuid));
 
 				var anon_status = user.anon_status || true;

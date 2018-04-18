@@ -45280,7 +45280,11 @@ var SpotifyUser = function (_React$Component2) {
 				last_played = track.name + ' - ' + track.artists[0].name;
 				href = track.external_urls.spotify;
 			}
-
+			var col = this.props.color;
+			var divStyle = {
+				background: '#' + col
+			};
+			var animal_type_url = "public/icons/" + this.props.type + ".png";
 			var username = !this.state.isAnon ? React.createElement(
 				'div',
 				{ className: 'spotifyUsername' },
@@ -45292,11 +45296,7 @@ var SpotifyUser = function (_React$Component2) {
 				'Anonymous ',
 				this.props.type
 			);
-
-			var col = this.props.color;
-			var divStyle = {
-				background: '#' + col
-			};
+			var avatar = !this.state.isAnon ? React.createElement('img', { className: 'spotifyAvatar', src: this.props.avatar, style: divStyle, alt: this.user.username }) : React.createElement('img', { className: 'spotifyAvatar', src: animal_type_url, style: divStyle });
 			var selfOrStats = !this.state.isSelf ? React.createElement(
 				'button',
 				{ style: divStyle, className: 'spotifyStatsButton', onClick: this.changeCollapse },
@@ -45318,7 +45318,7 @@ var SpotifyUser = function (_React$Component2) {
 				React.createElement(
 					'div',
 					{ className: 'spotifyHeader' },
-					React.createElement('img', { className: 'spotifyAvatar', src: this.props.avatar, style: divStyle, alt: this.user.username }),
+					avatar,
 					React.createElement(
 						'div',
 						{ className: 'spotifyUserContent', style: { display: 'inline-block' } },
@@ -45379,7 +45379,7 @@ var UsersContainer = function (_React$Component3) {
 					var username = user.user_info.display_name || user.user_info.id;
 					// 'Anonymously link statistics!'
 					var animal_type = intToAvailableAnimals(hashCode(uuid));
-					var avatar = 'public/icons/' + animal_type + '.png';
+					var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
 					var color = intToRGB(hashCode(uuid));
 
 					var anon_status = user.anon_status || true;
