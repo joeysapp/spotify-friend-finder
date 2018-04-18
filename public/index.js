@@ -125,7 +125,6 @@ class SpotifyUser extends React.Component {
 	}
 
 	changeAnon(e){
-		e.preventDefault();
 		if (!this.state.firebase){
 			this.setState(prevState => ({
 				isAnon: !prevState.isAnon
@@ -136,6 +135,7 @@ class SpotifyUser extends React.Component {
 				this.setState({ firebase: true });
 			}.bind(this), 10000);
 		} else {
+			e.preventDefault();
 			console.log('You are on a cooldown');
 		}
 	}

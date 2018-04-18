@@ -45252,7 +45252,6 @@ var SpotifyUser = function (_React$Component2) {
 	}, {
 		key: 'changeAnon',
 		value: function changeAnon(e) {
-			e.preventDefault();
 			if (!this.state.firebase) {
 				this.setState(function (prevState) {
 					return {
@@ -45265,6 +45264,7 @@ var SpotifyUser = function (_React$Component2) {
 					this.setState({ firebase: true });
 				}.bind(this), 10000);
 			} else {
+				e.preventDefault();
 				console.log('You are on a cooldown');
 			}
 		}
