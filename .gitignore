@@ -4,3 +4,4 @@ package-lock.json
 animal-chooser.js
 *.sublime-project
 *.sublime-workspace
+*/.DS_store
