@@ -45285,127 +45285,56 @@ var SpotifyUser = function (_React$Component2) {
 			var divStyle = {
 				background: '#' + col
 			};
-			if (this.state.collapsed && !this.state.isSelf) {
-				return React.createElement(
+			var selfOrStats = !this.state.isSelf ? React.createElement(
+				'button',
+				{ style: divStyle, className: 'spotifyStatsButton', onClick: this.changeCollapse },
+				'Top Artists'
+			) : React.createElement(
+				'div',
+				{ className: 'spotifyUserOptionsContainer', style: { borderColor: '#' + this.props.color } },
+				React.createElement(
 					'div',
-					{ className: 'spotifyUser' },
+					{ className: 'spotifyUserOption' },
+					'Anonymous: ',
+					React.createElement('input', { name: 'toggleAnon', type: 'checkbox', checked: this.state.isAnon, onChange: this.changeAnon })
+				)
+			);
+			var topArtists = !this.state.collapsed ? React.createElement(TopArtists, { artists: this.top_artists }) : '';
+			return React.createElement(
+				'div',
+				{ className: 'spotifyUser' },
+				React.createElement(
+					'div',
+					{ className: 'spotifyHeader' },
+					React.createElement('img', { className: 'spotifyAvatar', src: this.props.avatar, style: divStyle, alt: this.user.username }),
 					React.createElement(
 						'div',
-						{ className: 'spotifyHeader' },
-						React.createElement('img', { className: 'spotifyAvatar', src: this.props.avatar, style: divStyle, alt: this.user.username }),
+						{ className: 'spotifyUserContent', style: { display: 'inline-block' } },
 						React.createElement(
 							'div',
-							{ className: 'spotifyUserContent', style: { display: 'inline-block' } },
-							React.createElement(
-								'div',
-								{ className: 'spotifyUsername' },
-								' ',
-								this.user.username
-							),
-							React.createElement(
-								'div',
-								{ className: 'spotifyLastPlayed' },
-								'Recently Played: ',
-								React.createElement(
-									'a',
-									{ href: href },
-									last_played
-								)
-							),
-							React.createElement(
-								'button',
-								{ style: { backgroundColor: 'white' }, className: 'spotifyStatsButton', onClick: this.changeCollapse },
-								'Top Artists'
-							)
-						)
-					)
-				);
-			} else if (!this.state.collapsed && !this.state.isSelf) {
-				return React.createElement(
-					'div',
-					{ className: 'spotifyUser' },
-					React.createElement(
-						'div',
-						{ className: 'spotifyHeader' },
-						React.createElement('img', { className: 'spotifyAvatar', src: this.props.avatar, style: divStyle, alt: this.user.username }),
+							{ className: 'spotifyUsername' },
+							' ',
+							this.user.username
+						),
 						React.createElement(
 							'div',
-							{ className: 'spotifyUserContent', style: { display: 'inline-block' } },
+							{ className: 'spotifyLastPlayed' },
+							'Recently Played: ',
 							React.createElement(
-								'div',
-								{ className: 'spotifyUsername' },
-								' ',
-								this.user.username
-							),
-							React.createElement(
-								'div',
-								{ className: 'spotifyLastPlayed' },
-								'Recently Played: ',
-								React.createElement(
-									'a',
-									{ href: href },
-									last_played
-								)
-							),
-							React.createElement(
-								'button',
-								{ style: divStyle, className: 'spotifyStatsButton', onClick: this.changeCollapse },
-								'Top Artists'
+								'a',
+								{ href: href },
+								last_played
 							)
-						)
-					),
-					React.createElement(
-						'div',
-						{ className: 'spotifyStatistics' },
-						React.createElement(TopArtists, { artists: this.top_artists })
+						),
+						selfOrStats
 					)
-				);
-			} else if (this.state.isSelf) {
-				return React.createElement(
+				),
+				React.createElement(
 					'div',
-					{ className: 'spotifyUser' },
-					React.createElement(
-						'div',
-						{ className: 'spotifyHeader' },
-						React.createElement('img', { className: 'spotifyAvatar', src: this.props.avatar, style: divStyle, alt: this.user.username }),
-						React.createElement(
-							'div',
-							{ className: 'spotifyUserContent', style: { display: 'inline-block' } },
-							React.createElement(
-								'div',
-								{ className: 'spotifyUsername' },
-								' ',
-								this.user.username
-							),
-							React.createElement(
-								'div',
-								{ className: 'spotifyLastPlayed' },
-								'Recently Played: ',
-								React.createElement(
-									'a',
-									{ href: href },
-									last_played
-								)
-							),
-							React.createElement(
-								'div',
-								{ className: 'spotifyUserOptionsContainer', style: { borderColor: '#' + this.props.color } },
-								React.createElement(
-									'div',
-									{ className: 'spotifyUserOption' },
-									'Anonymous: ',
-									React.createElement('input', { name: 'toggleAnon', type: 'checkbox', checked: this.state.isAnon, onChange: this.changeAnon })
-								)
-							)
-						)
-					),
-					React.createElement(
-						'div',
-						{ className: 'spotifyStatistics' },
-						React.createElement(TopArtists, { artists: this.top_artists })
-					)
-				);
-			}
+					{ className: 'spotifyStatistics' },
+					topArtists
+				)
+			);
 		}
 	}]);
 

@@ -157,62 +157,30 @@ class SpotifyUser extends React.Component {
 		var divStyle = {
 			background: '#'+col
 		};
-		if (this.state.collapsed && !this.state.isSelf){
-			return (
-				<div className='spotifyUser'>
-					<div className='spotifyHeader'>
-						<img className='spotifyAvatar' src={this.props.avatar} style={divStyle} alt={this.user.username} />
-						<div className='spotifyUserContent' style={{display:'inline-block'}}>
-							<div className='spotifyUsername'> {this.user.username}</div>
-							<div className='spotifyLastPlayed'>
-								Recently Played: <a href={href}>{last_played}</a>
-							</div>
-							<button style={{backgroundColor: 'white'}} className='spotifyStatsButton' onClick={this.changeCollapse}>Top Artists</button>
-						</div>
-					</div>
-				</div>
-			)
-		} else if (!this.state.collapsed && !this.state.isSelf){
-			return (
-				<div className='spotifyUser'>
-					<div className='spotifyHeader'>
-						<img className='spotifyAvatar' src={this.props.avatar} style={divStyle} alt={this.user.username} />
-						<div className='spotifyUserContent' style={{display:'inline-block'}}>
-							<div className='spotifyUsername'> {this.user.username}</div>
-							<div className='spotifyLastPlayed'>
-								Recently Played: <a href={href}>{last_played}</a>
-							</div>
-							<button style={divStyle} className='spotifyStatsButton' onClick={this.changeCollapse}>Top Artists</button>
-					</div>
-					</div>
-					<div className='spotifyStatistics'>
-							<TopArtists artists={this.top_artists} />
-					</div>
-				</div>
-			)
-		} else if (this.state.isSelf){
-			return (
-				<div className='spotifyUser'>
-					<div className='spotifyHeader'>
-						<img className='spotifyAvatar' src={this.props.avatar} style={divStyle} alt={this.user.username} />
-						<div className='spotifyUserContent' style={{display:'inline-block'}}>
-							<div className='spotifyUsername'> {this.user.username}</div>
-							<div className='spotifyLastPlayed'>
-								Recently Played: <a href={href}>{last_played}</a>
-							</div>
-							<div className='spotifyUserOptionsContainer' style={{borderColor: '#'+this.props.color}}>
+		var selfOrStats = !this.state.isSelf ? (<button style={divStyle} className='spotifyStatsButton' onClick={this.changeCollapse}>Top Artists</button>) : (
+										<div className='spotifyUserOptionsContainer' style={{borderColor: '#'+this.props.color}}>
 								<div className='spotifyUserOption'>
 									Anonymous: <input name='toggleAnon' type='checkbox' checked={this.state.isAnon} onChange={this.changeAnon} />
 								</div>
-							</div>
+							</div>);
+		var topArtists = !this.state.collapsed ? <TopArtists artists={this.top_artists} /> : '';
+		return (
+			<div className='spotifyUser'>
+				<div className='spotifyHeader'>
+					<img className='spotifyAvatar' src={this.props.avatar} style={divStyle} alt={this.user.username} />
+					<div className='spotifyUserContent' style={{display:'inline-block'}}>
+						<div className='spotifyUsername'> {this.user.username}</div>
+						<div className='spotifyLastPlayed'>
+							Recently Played: <a href={href}>{last_played}</a>
 						</div>
-					</div>
-					<div className='spotifyStatistics'>
-							<TopArtists artists={this.top_artists} />
-					</div>
+						{selfOrStats}
 				</div>
-			)			
-		}
+				</div>
+				<div className='spotifyStatistics'>
+						{topArtists}
+				</div>
+			</div>
+		)
 	}
 }
 
