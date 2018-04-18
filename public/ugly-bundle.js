@@ -45362,6 +45362,11 @@ var SpotifyUser = function (_React$Component2) {
 									last_played
 								)
 							)
+						),
+						React.createElement(
+							'div',
+							{ className: 'spotifyUserOptions' },
+							'burp'
 						)
 					),
 					React.createElement(

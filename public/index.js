@@ -176,7 +176,10 @@ class SpotifyUser extends React.Component {
 							<div className='spotifyLastPlayed'>
 								Recently Played: <a href={href}>{last_played}</a>
 							</div>
-					</div>
+						</div>
+						<div className='spotifyUserOptions'>
+						burp
+						</div>
 					</div>
 					<div className='spotifyStatistics'>
 							<TopArtists artists={this.top_artists} />
