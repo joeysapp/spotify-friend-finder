@@ -130,7 +130,7 @@ class SpotifyUser extends React.Component {
 			this.setState(prevState => ({
 				isAnon: !prevState.isAnon
 			}));
-			console.log(e);
+			console.log(e.type);
 			// 10 second cooldown to write to firebase DB
 			setTimeout(function(){
 				this.setState({ firebase: true });
