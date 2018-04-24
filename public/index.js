@@ -268,13 +268,13 @@ class UsersContainer extends React.Component {
 			});
 
 			tmp = _.sortBy(this.state.users, [function(o) {
-				var consoleString = o.props.username + ' has ' || o.props.user_info.id + ' has ';
+				var consoleString = o.props.username + ' has ';
 				var artistsString = '';
 				var sim_count = 0;
 				o.props.artists.items.map(artist => {
 					if (sa.includes(artist.id)){
 						sim_count++;
-						artistsString += +'	- ' + artist.name + '\n';
+						artistsString += ('\t' + artist.name + '\n');
 					}
 				});
 				if (sim_count > 0){

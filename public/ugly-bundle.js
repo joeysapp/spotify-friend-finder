@@ -62538,13 +62538,13 @@ var UsersContainer = function (_React$Component3) {
 				});
 
 				tmp = _.sortBy(this.state.users, [function (o) {
-					var consoleString = o.props.username + ' has ' || o.props.user_info.id + ' has ';
+					var consoleString = o.props.username + ' has ';
 					var artistsString = '';
 					var sim_count = 0;
 					o.props.artists.items.map(function (artist) {
 						if (sa.includes(artist.id)) {
 							sim_count++;
-							artistsString += +'	- ' + artist.name + '\n';
+							artistsString += '\t' + artist.name + '\n';
 						}
 					});
 					if (sim_count > 0) {
