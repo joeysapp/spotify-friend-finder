@@ -62531,7 +62531,6 @@ var UsersContainer = function (_React$Component3) {
 			var sa = [];
 			var tmp;
 			console.log(this.state.self);
-			var consoleString = this.state.self.props.username + ' has ' || this.state.self.user_info.id + ' has ';
 
 			if (e.target.value === 'artists') {
 				this.state.self.props.artists.items.map(function (artist) {
@@ -62539,14 +62538,18 @@ var UsersContainer = function (_React$Component3) {
 				});
 
 				tmp = _.sortBy(this.state.users, [function (o) {
+					var consoleString = o.props.username + ' has ' || o.props.user_info.id + ' has ';
+					var artistsString = '';
 					var sim_count = 0;
 					o.props.artists.items.map(function (artist) {
 						if (sa.includes(artist.id)) {
 							sim_count++;
-							consoleString += artist.name + ', ';
+							artistsString += +'	- ' + artist.name + '\n';
 						}
 					});
-					console.log(consoleString + ', ' + sim_count + ' artists in common with you');
+					if (sim_count > 0) {
+						console.log(consoleString + sim_count + ' artists in common with you.\n' + artistsString);
+					}
 					return -sim_count;
 				}]);
 			} else if (e.target.value === 'random') {
