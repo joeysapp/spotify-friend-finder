@@ -77,7 +77,10 @@ class TopArtists extends React.Component {
 		var listOfArtists = this.state.artists.map((artist) => 
 			<div key={artist.name} className='spotifyArtist'>
 				<img className='spotifyArtistImage' src={artist.images[0].url} alt={artist.name} />
+				
 				<a href={artist.external_urls.spotify} className='spotifyArtistName'>{artist.name}</a>
+				
+
 				<div className='spotifyArtistGenres'>
 					{typeof artist.genres === 'undefined' ? '' : artist.genres.join(', ')};
 				</div>
@@ -117,18 +120,14 @@ class SpotifyUser extends React.Component {
 		this.changeAnon = this.changeAnon.bind(this);
 	}
 
-
-
 	changeCollapse(e){
 		this.setState(prevState => ({
 			collapsed: !prevState.collapsed,
 		}));
-		console.log(this.state);
 	}
 
 	changeAnon(e){
 		var anonStatus;
-		console.log(this.state, e);
 		if (this.state.firebase){
 			this.setState(prevState => ({
 				isAnon: !prevState.isAnon,
@@ -141,10 +140,8 @@ class SpotifyUser extends React.Component {
 				firebaseRef.once('value', function(snapshot){
 					var tmp = snapshot.val();
 					if (tmp.anon_status === null){
-						console.log('never seen u b4 changeAnon');
 						firebaseRef.push({	anon_status: anonStatus	});
 					} else {
-						console.log('seen u b4 changeAnon');
 						firebaseRef.update({ anon_status: anonStatus	});
 					}
 				});
@@ -224,7 +221,6 @@ class UsersContainer extends React.Component {
 
 				var anon_status = (typeof user.anon_status === 'undefined') ? true : user.anon_status;
 				var username = user.user_info.display_name || user.user_info.id;
-				console.log(username, anon_status)
 				// 'Anonymously link statistics!'
 				var animal_type = intToAvailableAnimals(hashCode(uuid));
 				var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
@@ -275,7 +271,7 @@ class UsersContainer extends React.Component {
 				}
 			});
 			console.log(sim_count);
-			return sim_count;
+			return -sim_count;
 		}]);
 		this.setState({
 			sortingMethod: e.target.value,
@@ -306,8 +302,8 @@ class UsersContainer extends React.Component {
 									Sort similar users by:
 									<div className='select-container'>	
 										<select value={this.state.sortingMethod} onChange={this.handleSort}>
-											<option value='artists'>Artists</option>
-											<option value='genres'>Genres</option>
+											<option value='artists'>Artists1</option>
+											<option value='artists'>Artists2</option>
 										</select>
 									</div>
 									</label>

@@ -62348,13 +62348,11 @@ var SpotifyUser = function (_React$Component2) {
 					collapsed: !prevState.collapsed
 				};
 			});
-			console.log(this.state);
 		}
 	}, {
 		key: 'changeAnon',
 		value: function changeAnon(e) {
 			var anonStatus;
-			console.log(this.state, e);
 			if (this.state.firebase) {
 				this.setState(function (prevState) {
 					return {
@@ -62369,10 +62367,8 @@ var SpotifyUser = function (_React$Component2) {
 					firebaseRef.once('value', function (snapshot) {
 						var tmp = snapshot.val();
 						if (tmp.anon_status === null) {
-							console.log('never seen u b4 changeAnon');
 							firebaseRef.push({ anon_status: anonStatus });
 						} else {
-							console.log('seen u b4 changeAnon');
 							firebaseRef.update({ anon_status: anonStatus });
 						}
 					});
@@ -62496,7 +62492,6 @@ var UsersContainer = function (_React$Component3) {
 
 					var anon_status = typeof user.anon_status === 'undefined' ? true : user.anon_status;
 					var username = user.user_info.display_name || user.user_info.id;
-					console.log(username, anon_status);
 					// 'Anonymously link statistics!'
 					var animal_type = intToAvailableAnimals(hashCode(uuid));
 					var avatar = user.user_info.images ? user.user_info.images[0].url : 'public/avatars/empty.png';
@@ -62534,12 +62529,10 @@ var UsersContainer = function (_React$Component3) {
 	}, {
 		key: 'handleSort',
 		value: function handleSort(e) {
-			console.log(this.state.self.props.artists.items);
 			var sa = [];
 			this.state.self.props.artists.items.map(function (artist) {
 				sa.push(artist.id);
 			});
-
 			var tmp2 = _.sortBy(this.state.users, [function (o) {
 				var sim_count = 0;
 				o.props.artists.items.map(function (artist) {
@@ -62548,9 +62541,8 @@ var UsersContainer = function (_React$Component3) {
 					}
 				});
 				console.log(sim_count);
-				return sim_count;
+				return -sim_count;
 			}]);
-			tmp2.reverse();
 			this.setState({
 				sortingMethod: e.target.value,
 				users: tmp2
@@ -62609,12 +62601,12 @@ var UsersContainer = function (_React$Component3) {
 										React.createElement(
 											'option',
 											{ value: 'artists' },
-											'Artists'
+											'Artists1'
 										),
 										React.createElement(
 											'option',
-											{ value: 'genres' },
-											'Genres'
+											{ value: 'artists' },
+											'Artists2'
 										)
 									)
 								)
