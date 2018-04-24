@@ -45251,7 +45251,8 @@ var SpotifyUser = function (_React$Component2) {
 	}, {
 		key: 'changeAnon',
 		value: function changeAnon(e) {
-			console.log(this.state);
+			var anonStatus;
+			console.log(this.state, e);
 			if (this.state.firebase) {
 				this.setState(function (prevState) {
 					return {
@@ -45259,10 +45260,22 @@ var SpotifyUser = function (_React$Component2) {
 						firebase: false
 					};
 				});
+				anonStatus = !this.state.isAnon;
 				// 10 second cooldown to write to firebase DB
 				setTimeout(function () {
+					var firebaseRef = firebase.database().ref('users/').child(this.props.uuid);
+					firebaseRef.once('value', function (snapshot) {
+						var tmp = snapshot.val();
+						if (tmp.anon_status === null) {
+							console.log('never seen u b4 changeAnon');
+							firebaseRef.push({ anon_status: anonStatus });
+						} else {
+							console.log('seen u b4 changeAnon');
+							firebaseRef.update({ anon_status: anonStatus });
+						}
+					});
 					this.setState({ firebase: true });
-				}.bind(this), 10000);
+				}.bind(this), 1000);
 			} else {
 				e.preventDefault();
 				e.stopPropagation();
@@ -45357,9 +45370,9 @@ var UsersContainer = function (_React$Component3) {
 		var _this3 = _possibleConstructorReturn(this, (UsersContainer.__proto__ || Object.getPrototypeOf(UsersContainer)).call(this, props));
 
 		_this3.state = {
-			self: props.self,
-			users: props.users,
-			authenticated: props.authenticated,
+			self: _this3.props.self,
+			users: [],
+			authenticated: _this3.props.authenticated,
 			hasLoaded: false
 		};
 		return _this3;
@@ -45370,12 +45383,13 @@ var UsersContainer = function (_React$Component3) {
 		value: function componentDidMount() {
 			var _this4 = this;
 
-			var tmp_users = [];
 			this.firebaseRef = firebase.database().ref('users');
 			this.firebaseCallback = this.firebaseRef.on('value', function (user_list) {
+				var tmp_users = [];
 				user_list.forEach(function (user_snapshot) {
 					var user = user_snapshot.val();
 					var uuid = user.uuid;
+
 					var anon_status = typeof user.anon_status === 'undefined' ? true : user.anon_status;
 					var username = user.user_info.display_name || user.user_info.id;
 					console.log(username, anon_status);
@@ -45391,15 +45405,20 @@ var UsersContainer = function (_React$Component3) {
 					// console.log('User with uuid logged on: ' + uuid);
 					if (uuid !== GLOBAL_UUID) {
 						var tmp_user = React.createElement(SpotifyUser, { isAnon: anon_status, isSelf: false, uuid: uuid, username: username, color: color, type: animal_type, avatar: avatar, artists: artists, recently_played: recently_played });
+						// Otherwise we add duplicates. find fix cause this 
+						// disables the live nature of the app
+						// if (this.state.users === []){
 						tmp_users.push(tmp_user);
+						// }
 					} else {
 
 						_this4.setState({
 							authenticated: true,
 							self: React.createElement(SpotifyUser, { isAnon: anon_status, isSelf: true, uuid: uuid, username: username, color: color, type: animal_type, avatar: avatar, artists: artists, recently_played: recently_played }) });
 					}
-					_this4.setState({ users: tmp_users });
 				});
+				console.log('length: ' + tmp_users.length);
+				_this4.setState({ users: tmp_users });
 				_this4.setState({ hasLoaded: true });
 			});
 		}
@@ -45456,7 +45475,7 @@ var UsersContainer = function (_React$Component3) {
 			}
 			return React.createElement(
 				'div',
-				null,
+				{ key: uuidv4() },
 				authButton,
 				React.createElement(
 					'div',
@@ -45471,7 +45490,7 @@ var UsersContainer = function (_React$Component3) {
 }(React.Component);
 
 var mount = document.querySelector('#spotifyUsers');
-var user_container = React.createElement(UsersContainer, { self: null, users: null, authenticated: false });
+var user_container = React.createElement(UsersContainer, { self: null, authenticated: false });
 ReactDOM.render(user_container, mount);
 
 },{"firebase":175,"react":187,"react-dom":184,"uuid-v4":189}],191:[function(require,module,exports){

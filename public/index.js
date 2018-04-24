@@ -126,16 +126,29 @@ class SpotifyUser extends React.Component {
 	}
 
 	changeAnon(e){
-		console.log(this.state);
+		var anonStatus;
+		console.log(this.state, e);
 		if (this.state.firebase){
 			this.setState(prevState => ({
 				isAnon: !prevState.isAnon,
 				firebase: false
 			}));
+			anonStatus = !this.state.isAnon;
 			// 10 second cooldown to write to firebase DB
 			setTimeout(function(){
+				var firebaseRef = firebase.database().ref('users/').child(this.props.uuid);
+				firebaseRef.once('value', function(snapshot){
+					var tmp = snapshot.val();
+					if (tmp.anon_status === null){
+						console.log('never seen u b4 changeAnon');
+						firebaseRef.push({	anon_status: anonStatus	});
+					} else {
+						console.log('seen u b4 changeAnon');
+						firebaseRef.update({ anon_status: anonStatus	});
+					}
+				});
 				this.setState({ firebase: true });
-			}.bind(this), 10000);
+			}.bind(this), 1000);
 		} else {
 			e.preventDefault();
 			e.stopPropagation();
@@ -191,20 +204,21 @@ class UsersContainer extends React.Component {
 	constructor(props){
 		super(props);
 		this.state = {
-			self: props.self,
-			users: props.users,
-			authenticated: props.authenticated,
+			self: this.props.self,
+			users: [],
+			authenticated: this.props.authenticated,
 			hasLoaded: false
 		};
 	}
 
 	componentDidMount() {
-		var tmp_users = [];
 		this.firebaseRef = firebase.database().ref('users');
 		this.firebaseCallback = this.firebaseRef.on('value', (user_list) => {
+			var tmp_users = [];
 			user_list.forEach(user_snapshot => {
 				var user = user_snapshot.val();
 				var uuid = user.uuid;
+
 				var anon_status = (typeof user.anon_status === 'undefined') ? true : user.anon_status;
 				var username = user.user_info.display_name || user.user_info.id;
 				console.log(username, anon_status)
@@ -220,7 +234,11 @@ class UsersContainer extends React.Component {
 				// console.log('User with uuid logged on: ' + uuid);
 				if (uuid !== GLOBAL_UUID){
 					var tmp_user = <SpotifyUser isAnon={anon_status} isSelf={false} uuid={uuid} username={username} color={color} type={animal_type} avatar={avatar} artists={artists} recently_played={recently_played}/>;
-					tmp_users.push(tmp_user);
+					// Otherwise we add duplicates. find fix cause this 
+					// disables the live nature of the app
+					// if (this.state.users === []){
+						tmp_users.push(tmp_user);
+					// }
 				} else {
 
 					this.setState({
@@ -229,8 +247,10 @@ class UsersContainer extends React.Component {
 					);
 					
 				}
-				this.setState({ users: tmp_users });
+
 			});
+			console.log('length: '+tmp_users.length);
+			this.setState({ users: tmp_users });
 			this.setState({ hasLoaded: true });
 		});	
 	}
@@ -261,15 +281,15 @@ class UsersContainer extends React.Component {
 				<a href='http://50.24.61.224:8000/login' style={{ display: 'hidden'}}> Link Spotify Statistics</a>
 			</div>
 		}
-		return (
-		<div>
-			{authButton}
-			<div className='spotifyUsersContainer' style={{ flexWrap: 'wrap'}}>{listOfUsers}</div>
-		</div>
+			return (
+			<div key={uuidv4()}>
+				{authButton}
+				<div className='spotifyUsersContainer' style={{ flexWrap: 'wrap'}}>{listOfUsers}</div>
+			</div>
 		);
 	}
 }
 
 var mount = document.querySelector('#spotifyUsers');
-var user_container = <UsersContainer self={null} users={null} authenticated={false}/>
+var user_container = <UsersContainer self={null} authenticated={false}/>
 ReactDOM.render(user_container, mount)
