@@ -45460,7 +45460,34 @@ var UsersContainer = function (_React$Component3) {
 							' Refresh Spotify Statistics'
 						)
 					),
-					tmp
+					tmp,
+					React.createElement(
+						'div',
+						{ className: 'spotifyCompareButtons' },
+						React.createElement(
+							'form',
+							null,
+							React.createElement(
+								'label',
+								null,
+								'Sort similar users by:',
+								React.createElement(
+									'select',
+									{ value: this.state.sorting_method, onChange: this.handleSort },
+									React.createElement(
+										'option',
+										{ value: 'artists' },
+										'Artists'
+									),
+									React.createElement(
+										'option',
+										{ value: 'genres' },
+										'Genres'
+									)
+								)
+							)
+						)
+					)
 				);
 			} else {
 				authButton = React.createElement(

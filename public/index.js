@@ -275,6 +275,17 @@ class UsersContainer extends React.Component {
 								<a href='http://50.24.61.224:8000/login' style={{ display: 'hidden'}}> Refresh Spotify Statistics</a>
 							</div>
 							{tmp}
+							<div className='spotifyCompareButtons'>
+								<form>
+									<label>
+									Sort similar users by:
+									<select value={this.state.sorting_method} onChange={this.handleSort}>
+										<option value='artists'>Artists</option>
+										<option value='genres'>Genres</option>
+									</select>
+									</label>
+								</form>
+							</div>
 						</div>
 		} else {
 			authButton = <div className='authenticateButton'>
