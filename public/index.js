@@ -172,7 +172,7 @@ class SpotifyUser extends React.Component {
 ) : <div className='spotifyUsername'>Anonymous {this.props.type}</div>
 		var avatar = !this.state.isAnon ? (<img className='spotifyAvatar' src={this.props.avatar} style={divStyle} alt={this.user.username} />) : (<img className='spotifyAvatar' src={animal_type_url} style={divStyle}/>);
 		var selfOrStats = !this.state.isSelf ? (<button style={divStyle} className='spotifyStatsButton' onClick={this.changeCollapse}>Top Artists</button>) : (
-										<div className='spotifyUserOptionsContainer' style={{borderColor: '#'+this.props.color}}>
+										<div className='spotifyUserOptionsContainer'>
 								<div className='spotifyUserOption'>
 									Anonymous: <input name='toggleAnon' type='checkbox' checked={this.state.isAnon} onChange={this.changeAnon} />
 								</div>
@@ -248,7 +248,6 @@ class UsersContainer extends React.Component {
 				}
 
 			});
-			console.log('length: '+tmp_users.length);
 			this.setState({ users: tmp_users });
 			this.setState({ hasLoaded: true });
 		});	

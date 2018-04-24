@@ -62414,7 +62414,7 @@ var SpotifyUser = function (_React$Component2) {
 				'Top Artists'
 			) : React.createElement(
 				'div',
-				{ className: 'spotifyUserOptionsContainer', style: { borderColor: '#' + this.props.color } },
+				{ className: 'spotifyUserOptionsContainer' },
 				React.createElement(
 					'div',
 					{ className: 'spotifyUserOption' },
@@ -62516,7 +62516,6 @@ var UsersContainer = function (_React$Component3) {
 							self: React.createElement(SpotifyUser, { isAnon: anon_status, isSelf: true, uuid: uuid, username: username, color: color, type: animal_type, avatar: avatar, artists: artists, recently_played: recently_played }) });
 					}
 				});
-				console.log('length: ' + tmp_users.length);
 				_this4.setState({ users: tmp_users });
 				_this4.setState({ hasLoaded: true });
 			});

@@ -157,12 +157,17 @@ img {
 	padding-left: 2vw;
 }
 
+.spotifyUserOption {
+
+}
+
 .spotifyUserOptionsContainer {
 	display:flex;
 	font-size: 1.8vh;
 	margin: 1vw;
 	padding: 1vw;
-	border: 1px solid black;
+	border-width: 2px;
+	border-style: solid;
 	padding-left: 2vw;
 }
 
