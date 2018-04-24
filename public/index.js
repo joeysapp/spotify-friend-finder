@@ -259,22 +259,29 @@ class UsersContainer extends React.Component {
 
 	handleSort(e){
 		var sa = [];
-		this.state.self.props.artists.items.map(artist => {
-			sa.push(artist.id);
-		});
-		var tmp2 = _.sortBy(this.state.users, [function(o) {
-			var sim_count = 0;
-			o.props.artists.items.map(artist => {
-				if (sa.includes(artist.id)){
-					sim_count++;
-				}
+		var tmp;
+
+		if (e.target.value === 'artists'){
+			this.state.self.props.artists.items.map(artist => {
+				sa.push(artist.id);
 			});
-			console.log(sim_count);
-			return -sim_count;
-		}]);
+
+			tmp = _.sortBy(this.state.users, [function(o) {
+				var sim_count = 0;
+				o.props.artists.items.map(artist => {
+					if (sa.includes(artist.id)){
+						sim_count++;
+					}
+				});
+				console.log(sim_count);
+				return -sim_count;
+			}]);
+		} else if (e.target.value === 'random'){
+			tmp = _.shuffle(this.state.users);
+		}
 		this.setState({
 			sortingMethod: e.target.value,
-			users: tmp2,
+			users: tmp,
 		});
 
 	}
@@ -301,8 +308,8 @@ class UsersContainer extends React.Component {
 									Sort similar users by:
 									<div className='select-container'>	
 										<select value={this.state.sortingMethod} onChange={this.handleSort}>
-											<option value='artists'>Artists1</option>
-											<option value='artists'>Artists2</option>
+											<option value='artists'>Artists</option>
+											<option value='random'>Random</option>
 										</select>
 									</div>
 									</label>

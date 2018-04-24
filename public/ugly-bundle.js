@@ -62529,22 +62529,29 @@ var UsersContainer = function (_React$Component3) {
 		key: 'handleSort',
 		value: function handleSort(e) {
 			var sa = [];
-			this.state.self.props.artists.items.map(function (artist) {
-				sa.push(artist.id);
-			});
-			var tmp2 = _.sortBy(this.state.users, [function (o) {
-				var sim_count = 0;
-				o.props.artists.items.map(function (artist) {
-					if (sa.includes(artist.id)) {
-						sim_count++;
-					}
+			var tmp;
+
+			if (e.target.value === 'artists') {
+				this.state.self.props.artists.items.map(function (artist) {
+					sa.push(artist.id);
 				});
-				console.log(sim_count);
-				return -sim_count;
-			}]);
+
+				tmp = _.sortBy(this.state.users, [function (o) {
+					var sim_count = 0;
+					o.props.artists.items.map(function (artist) {
+						if (sa.includes(artist.id)) {
+							sim_count++;
+						}
+					});
+					console.log(sim_count);
+					return -sim_count;
+				}]);
+			} else if (e.target.value === 'random') {
+				tmp = _.shuffle(this.state.users);
+			}
 			this.setState({
 				sortingMethod: e.target.value,
-				users: tmp2
+				users: tmp
 			});
 		}
 	}, {
@@ -62600,12 +62607,12 @@ var UsersContainer = function (_React$Component3) {
 										React.createElement(
 											'option',
 											{ value: 'artists' },
-											'Artists1'
+											'Artists'
 										),
 										React.createElement(
 											'option',
-											{ value: 'artists' },
-											'Artists2'
+											{ value: 'random' },
+											'Random'
 										)
 									)
 								)
