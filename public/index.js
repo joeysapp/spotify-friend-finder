@@ -7,6 +7,7 @@ var React = require('react');
 var ReactDOM = require('react-dom');
 
 var uuidv4 = require('uuid-v4');
+var _ = require('lodash');
 
 var firebase = require('firebase');
 var config = {
@@ -207,8 +208,10 @@ class UsersContainer extends React.Component {
 			self: this.props.self,
 			users: [],
 			authenticated: this.props.authenticated,
-			hasLoaded: false
+			hasLoaded: false,
+			sortingMethod: 'artists'
 		};
+		this.handleSort = this.handleSort.bind(this);
 	}
 
 	componentDidMount() {
@@ -259,6 +262,28 @@ class UsersContainer extends React.Component {
 		this.firebaseRef.off('value', this.firebaseCallback);
 	}
 
+	handleSort(e){
+		var sa = [];
+		this.state.self.props.artists.items.map(artist => {
+			sa.push(artist.id);
+		});
+		var tmp2 = _.sortBy(this.state.users, [function(o) {
+			var sim_count = 0;
+			o.props.artists.items.map(artist => {
+				if (sa.includes(artist.id)){
+					sim_count++;
+				}
+			});
+			console.log(sim_count);
+			return sim_count;
+		}]);
+		this.setState({
+			sortingMethod: e.target.value,
+			users: tmp2,
+		});
+
+	}
+
 	render(){
 		if (this.state.users != null){
 			var listOfUsers = this.state.users.map((user) => 
@@ -279,10 +304,12 @@ class UsersContainer extends React.Component {
 								<form>
 									<label>
 									Sort similar users by:
-									<select value={this.state.sorting_method} onChange={this.handleSort}>
-										<option value='artists'>Artists</option>
-										<option value='genres'>Genres</option>
-									</select>
+									<div className='select-container'>	
+										<select value={this.state.sortingMethod} onChange={this.handleSort}>
+											<option value='artists'>Artists</option>
+											<option value='genres'>Genres</option>
+										</select>
+									</div>
 									</label>
 								</form>
 							</div>
