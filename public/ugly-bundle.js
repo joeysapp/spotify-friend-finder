@@ -62530,6 +62530,8 @@ var UsersContainer = function (_React$Component3) {
 		value: function handleSort(e) {
 			var sa = [];
 			var tmp;
+			console.log(this.state.self);
+			var consoleString = this.state.self.props.username + ' has ' || this.state.self.user_info.id + ' has ';
 
 			if (e.target.value === 'artists') {
 				this.state.self.props.artists.items.map(function (artist) {
@@ -62541,9 +62543,10 @@ var UsersContainer = function (_React$Component3) {
 					o.props.artists.items.map(function (artist) {
 						if (sa.includes(artist.id)) {
 							sim_count++;
+							consoleString += artist.name + ', ';
 						}
 					});
-					console.log(sim_count);
+					console.log(consoleString + ', ' + sim_count + ' artists in common with you');
 					return -sim_count;
 				}]);
 			} else if (e.target.value === 'random') {
