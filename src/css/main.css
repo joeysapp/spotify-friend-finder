@@ -1,0 +1,69 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  /*font-family: Inconsolata;*/
+  background-color: rgb(41, 41, 41) !important;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+h1 {
+  margin: 0;
+}
+
+button {
+  border-radius: 1em;
+  width: 3em;
+  height: 3em;
+}
+
+.btn {
+  border-radius: 50% !important;
+}
+
+#header {
+  display: flex;
+}
+
+#content {
+  margin: auto;
+
+  overflow: hidden;
+  box-sizing: border-box;
+  border: 5px solid black;
+  margin: 5vmin;
+  padding: 5vmin;
+  background-color: white;
+
+  height: 90vh;
+}
+
+#container {
+  width: 100%;
+  text-align: center;
+  word-break: break-all;
+  line-height: 24px;
+  font-size: 24px;
+  white-space:pre-wrap;
+  padding-top: 3vmin;
+}
+
+#id {
+  font-size: 32px;
+  padding: 1em;
+}
+#id-hash {
+  font-size: 32px;
+  padding: 1em;
+  
+}
+
+#r {
+  display: flex;
+}
+
+#divisor {
+  
+
+}
+

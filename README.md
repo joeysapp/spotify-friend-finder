@@ -5,5 +5,8 @@ Full-stack Javascript web-app utilizing client-server for OAuth 2.0 calls to the
 React + Spotify OAuth
 
 # Build
-````browserify public/bundle.js -t [ babelify --presets [ es2015 react ] ] | uglifyjs -c -m > public/ugly-bundle.js
+```browserify public/bundle.js -t [ babelify --presets [ es2015 react ] ] | uglifyjs -c -m > public/ugly-bundle.js
 ```
+
+# Server 
+Server can be found in ../SpotifyAuthTokenListener, a boilerplate node application listening for Spotify API callbacks.
